@@ -2,12 +2,14 @@ from typing import no_type_check_decorator
 
 
 def generar_fichas():
-    return [["D",False],["D",False],["s",False],["s",False]]
+    return [["D",True],["D",False],["s",False],["s",False]]
 
 def mostrar_las_fichas(fichas):
-    for ficha in fichas:
-        if ficha[1]:
-            print('[{}]'.format(ficha[0]))
+    for i in range(len(fichas)):
+        if fichas[i][1]:
+            print('[{}]'.format(fichas[i][0]))
+        else:
+            print('[{}]'.format(i+1))
     pass
 
 def input_usuario():
