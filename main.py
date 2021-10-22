@@ -2,6 +2,8 @@ def generar_fichas():
     return [["D",True],["D",False],["s",False],["s",False]]
 
 def mostrar_las_fichas(fichas):
+    #Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha.
+    #hecho por Luca Salluzzi
     for i in range(len(fichas)):
         if fichas[i][1]:
              print(f'[{fichas[i][0]}]')
