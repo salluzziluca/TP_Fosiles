@@ -7,7 +7,7 @@ def generar_fichas():
 def mostrar_las_fichas(fichas):
     for ficha in fichas:
         if ficha[1]:
-            print('[{}]'.format(ficha[0]))
+            print(f'[{ficha[0]}]')
     pass
 
 def input_usuario():
@@ -22,4 +22,3 @@ def main():
       #  fichas=mostrar_las_fichas()
        # no_parar=ganasteinterrogacion()
 main()
-
