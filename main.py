@@ -6,9 +6,9 @@ def mostrar_las_fichas(fichas):
     #hecho por Luca Salluzzi
     for i in range(len(fichas)):
         if fichas[i][1]:
-             print(f'[{fichas[i][0]}]')
+             print(f'[{fichas[i][0]}]', end=" ")
         else:
-            print(f'[{i+1}]')
+            print(f'[{i+1}]',  end=" ")
     pass
 
 def input_usuario():
