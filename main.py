@@ -2,15 +2,23 @@ def generar_fichas():
     return [["D",True],["D",False],["s",False],["s",False]]
 
 def mostrar_las_fichas(fichas):
-    #Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha.
+    #Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Si esta ficha es la ultima de todas, se imprime distinto para que haya un salto de linea ante un proximo print
     #hecho por Luca Salluzzi
     for i in range(len(fichas)):
+        
         if fichas[i][1]:
-             print(f'[{fichas[i][0]}]', end=" ")
+            if i != (len(fichas)-1):
+                print(f'[{fichas[i][0]}]', end=' ')
+                
+            else:
+                print(f'[{fichas[i][0]}]')
         else:
-            print(f'[{i+1}]',  end=" ")
-    pass
-
+            if i != (len(fichas)-1):
+                print(f'[{i+1}]', end=' ')
+                
+            else:
+                print(f'[{i+1}]')
+                
 def input_usuario():
     #pide al usuario un ingreso numerico, devuelve ese numero.
     pass
@@ -28,7 +36,7 @@ def acierto():
     pass
 
 
-def turno(fichas):
+"""def turno(fichas):
     # define una ronda de selección de fichas. Devuelve la lista con el par de ELECCIONES y los ingresos realizados.
     # Hecho por Oriz, Conti, Zarza.
     fichas2=fichas
@@ -41,19 +49,19 @@ def turno(fichas):
         mostrar_las_fichas(fichas2)
         n+=1
 
-    return fichas2,ingresos
+    return fichas2,ingresos"""
         
 def main():
     #Incluye un ciclo donde transcurre todo el juego.
     # Hecho por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
-    no_parar=True
+    #no_parar=True
     fichas=generar_fichas()
     mostrar_las_fichas(fichas) 
-    while no_parar:
+    """while no_parar:
         fichas2,ingresos=turno(fichas)
         if acierto(fichas,ingresos):
             fichas=fichas2
 
-        no_parar=ganasteinterrogacion(fichas)
+        no_parar=ganasteinterrogacion(fichas)"""
 
 main()
