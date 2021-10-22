@@ -1,13 +1,11 @@
-
-
 POS_BOOL=1
 
 def generar_fichas():
     return [["D",False],["D",False],["s",False],["s",False]]
 
 def mostrar_las_fichas(fichas):
-    #Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Si esta ficha es la ultima de todas, se imprime distinto para que haya un salto de linea ante un proximo print
-    #hecho por Luca Salluzzi
+    # Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Si esta ficha es la ultima de todas, se imprime distinto para que haya un salto de linea ante un proximo print
+    # Hecha por Luca Salluzzi
     for i in range(len(fichas)):
         
         if fichas[i][1]:
@@ -24,27 +22,37 @@ def mostrar_las_fichas(fichas):
                 print(f'[{i+1}]')
                 
 def input_usuario():
-    #pide al usuario un ingreso numerico, devuelve ese numero.
+    # Pide al usuario un ingreso numerico, devuelve ese numero.
+    # Hecha por
     pass
 
-def ganasteinterrogacion():
-    #Determina si el juego terminó, el nombre de la función es provisional.
-    pass
+def revisar_si_ganaste(fichas):
+    # Determina si el juego terminó, comprobando que todas las fichas esten "volteadas".
+    # Hecha por Agustín Conti
+    ganar=True
+    pos_maxima=len(fichas)-1
+    i=0
+    while ganar and i <=pos_maxima:
+        if not fichas[i][POS_BOOL]:
+            ganar=False
+        i+=1    
+    return ganar
 
 def cambiar(fichas,ingreso):
-    #Omar Oriz
-    #recibe una lista de fichas y un input y devuelve la lista cambiada con la ficha (de pos. ingreso-1) volteada.
+    # Recibe una lista de fichas y un input y devuelve la lista cambiada con la ficha (de pos. ingreso-1) volteada.
+    # Hecha por Omar Oriz
     fichas[ingreso-1][POS_BOOL]=True
     return fichas
 
 def acierto():
-    #Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
+    # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
+    # Hecha por
     pass
 
 
 def turno(fichas):
-    # define una ronda de selección de fichas. Devuelve la lista con el par de ELECCIONES y los ingresos realizados.
-    # Hecho por Oriz, Conti, Zarza.
+    # Define una ronda de selección de fichas. Devuelve la lista con el par de ELECCIONES y los ingresos realizados.
+    # Hecha por Oriz, Conti, Zarza.
     fichas2=fichas
     n=0
     ingresos=[]
@@ -58,8 +66,8 @@ def turno(fichas):
     return fichas2,ingresos
         
 def main():
-    #Incluye un ciclo donde transcurre todo el juego.
-    # Hecho por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
+    # Incluye un ciclo donde transcurre todo el juego.
+    # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
     juego_terminado=False
     fichas=generar_fichas()
     mostrar_las_fichas(fichas) 
@@ -68,6 +76,6 @@ def main():
         if acierto(fichas,ingresos):
             fichas=fichas2
 
-        juego_terminado=ganasteinterrogacion(fichas)
+        juego_terminado=revisar_si_ganaste(fichas)
 
 main()
