@@ -1,8 +1,7 @@
-# TP_Fosiles
-Un cambio
-Otro cambio
-Otro cambio a
-#otro coment
-Carpincho
-perro salchicha
-ssss
+
+Bueno, a partir de ahora el readme queda prolijo para pinchar comentarios pertinentes.
+
+Función mostrarfichas() Terminada.
+Función turno()  Terminada.
+Función Cambiar() Terminada.
+Creado el archivo pruebas auxiliares así no cambian el main cuando quieren probar su función y lo commitean.
