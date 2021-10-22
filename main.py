@@ -1,5 +1,9 @@
+
+
+POS_BOOL=1
+
 def generar_fichas():
-    return [["D",True],["D",False],["s",False],["s",False]]
+    return [["D",False],["D",False],["s",False],["s",False]]
 
 def mostrar_las_fichas(fichas):
     #Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Si esta ficha es la ultima de todas, se imprime distinto para que haya un salto de linea ante un proximo print
@@ -27,16 +31,18 @@ def ganasteinterrogacion():
     #Determina si el juego terminó, el nombre de la función es provisional.
     pass
 
-def cambiar():
-    #recibe una lista de fichas y un input y devuelve la lista cambiada con la ficha volteada.
-    pass
+def cambiar(fichas,ingreso):
+    #Omar Oriz
+    #recibe una lista de fichas y un input y devuelve la lista cambiada con la ficha (de pos. ingreso-1) volteada.
+    fichas[ingreso-1][POS_BOOL]=True
+    return fichas
 
 def acierto():
     #Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
     pass
 
 
-"""def turno(fichas):
+def turno(fichas):
     # define una ronda de selección de fichas. Devuelve la lista con el par de ELECCIONES y los ingresos realizados.
     # Hecho por Oriz, Conti, Zarza.
     fichas2=fichas
@@ -49,7 +55,7 @@ def acierto():
         mostrar_las_fichas(fichas2)
         n+=1
 
-    return fichas2,ingresos"""
+    return fichas2,ingresos
         
 def main():
     #Incluye un ciclo donde transcurre todo el juego.
@@ -57,11 +63,11 @@ def main():
     #no_parar=True
     fichas=generar_fichas()
     mostrar_las_fichas(fichas) 
-    """while no_parar:
+    while no_parar:
         fichas2,ingresos=turno(fichas)
         if acierto(fichas,ingresos):
             fichas=fichas2
 
-        no_parar=ganasteinterrogacion(fichas)"""
+        no_parar=ganasteinterrogacion(fichas)
 
 main()
