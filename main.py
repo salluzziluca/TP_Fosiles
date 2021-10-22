@@ -23,7 +23,9 @@ def mostrar_las_fichas(fichas):
                 
 def input_usuario():
     # Pide al usuario un ingreso numerico, devuelve ese numero.
-    # Hecha por
+    # Hecha por Zarza
+    primera_posicion=int(input("1° Posición: "))
+    segunda_posicion=int(input("2° Posición: "))
     pass
 
 def revisar_si_ganaste(fichas):
