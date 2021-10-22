@@ -60,14 +60,14 @@ def turno(fichas):
 def main():
     #Incluye un ciclo donde transcurre todo el juego.
     # Hecho por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
-    #no_parar=True
+    juego_terminado=False
     fichas=generar_fichas()
     mostrar_las_fichas(fichas) 
-    while no_parar:
+    while not juego_terminado:
         fichas2,ingresos=turno(fichas)
         if acierto(fichas,ingresos):
             fichas=fichas2
 
-        no_parar=ganasteinterrogacion(fichas)
+        juego_terminado=ganasteinterrogacion(fichas)
 
 main()
