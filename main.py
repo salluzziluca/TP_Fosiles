@@ -1,13 +1,12 @@
 def generar_fichas():
-    #genera y devuelve un listado de Fichas para comenzar el juego.
-    return [["D",False],["D",False],["s",False],["s",False]]
+    return [["D",True],["D",False],["s",False],["s",False]]
 
 def mostrar_las_fichas(fichas):
-    # muestra por pantalla el estado actual de las fichas en el juego.
-    #Salluzzi
-    for ficha in fichas:
-        if ficha[1]:
-            print(f'[{ficha[0]}]')
+    for i in range(len(fichas)):
+        if fichas[i][1]:
+             print(f'[{fichas[i][0]}]')
+        else:
+            print(f'[{i+1}]')
     pass
 
 def input_usuario():
