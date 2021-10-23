@@ -7,7 +7,7 @@ def generar_fichas():
     return [["D",False],["D",False],["s",False],["s",False]]
 
 def mostrar_fichas(fichas):
-    # Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Si esta ficha es la ultima de todas, se imprime distinto para que haya un salto de linea ante un proximo print
+    # Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Luego, se ejecuta un salto de linea
     # Hecha por Luca Salluzzi, Omar
     n_posicion = 1
     for ficha in fichas:
