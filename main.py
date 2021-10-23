@@ -31,7 +31,7 @@ def revisar_si_ganaste(fichas):
     pos_maxima=len(fichas)-1
     i=0
     while ganar and i <=pos_maxima:
-        if not fichas[i][POS_BOOL]:
+        if not fichas[i][POSICION_BOOL]:
             ganar=False
         i+=1    
     return ganar
@@ -39,7 +39,7 @@ def revisar_si_ganaste(fichas):
 def cambiar(fichas,ingreso):
     # Recibe una lista de fichas y un input y devuelve la lista cambiada con la ficha (de pos. ingreso-1) volteada.
     # Hecha por Omar Oriz
-    fichas[ingreso-1][POS_BOOL]=True
+    fichas[ingreso-1][POSICION_BOOL]=True
     return fichas
 
 def acierto():
