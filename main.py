@@ -1,4 +1,8 @@
+from Pruebas_auxiliares import POS_LETRA
+
+
 POS_BOOL=1
+POS_LETRA = 0
 
 def generar_fichas():
     return [["D",False],["D",False],["s",False],["s",False]]

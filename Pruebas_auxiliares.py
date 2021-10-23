@@ -1,3 +1,5 @@
+POSICION_BOOL = 1
+POSICION_LETRA = 0
 """
 lista_prueba=[["D",False],["D",False],["s",False],["s",False]]
 ingreso_in=2
@@ -11,7 +13,7 @@ def cambiar(fichas,ingreso):
     return fichas
 print(cambiar(lista_prueba,ingreso_in))
 """
-"""
+
 def mostrar_las_fichas(fichas):
     #Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Si esta ficha es la ultima de todas, se imprime distinto para que haya un salto de linea ante un proximo print
     #hecho por Luca Salluzzi
@@ -29,11 +31,10 @@ def mostrar_las_fichas(fichas):
                 
             else:
                 print(f'[{i+1}]')
-"""
 
-"""
-POS_BOOL = 1
-POS_LETRA=0
+
+
+
 lista_prueba=[["D",False],["D",True],["s",False],["s",False]]
 
 def mostrar_las_fichas(fichas):
@@ -42,12 +43,21 @@ def mostrar_las_fichas(fichas):
     n_posicion=1
     for ficha in fichas:
 
-        if ficha[POS_BOOL]:
-            print(f'[{ficha[POS_LETRA]}]', end=' ')
+        if ficha[POSICION_BOOL]:
+            print(f'[{ficha[POSICION_LETRA]}]', end=' ')
         else:
             print(f'[{n_posicion}]', end=' ')
         n_posicion+=1
     print('\n')
 
 mostrar_las_fichas(lista_prueba)
-"""
+
+fichas =[["D",False],["D",False],["s",False],["s",False]]
+ingresos = [3,2]
+def acierto(fichas, ingresos):
+    # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
+    # Hecha por
+    if fichas[ingresos[0]-1][POSICION_LETRA]== fichas[ingresos[1]-1][POSICION_LETRA]:
+        
+    
+    pass
