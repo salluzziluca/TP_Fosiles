@@ -58,7 +58,14 @@ ingresos = [3,2]
 def acierto(fichas, ingresos):
     # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
     # Hecha por
-    if fichas[ingresos[0]-1][POSICION_LETRA]== fichas[ingresos[1]-1][POSICION_LETRA]:
+    if fichas[ingresos[INGRESO1]-1][POSICION_LETRA] == fichas[ingresos[INGRESO2]-1][POSICION_LETRA]:
+        verificar = True
+    else:
+        verificar = False
+    
+    return verificar
+    
+def acierto(fichas, ingresos)
         
     
     pass"""

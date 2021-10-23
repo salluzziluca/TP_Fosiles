@@ -46,12 +46,8 @@ def cambiar(fichas,ingreso):
 
 def acierto(fichas, ingresos):
     # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
-    # Hecha por
-    if fichas[ingresos[INGRESO1]-1][POSICION_LETRA] == fichas[ingresos[INGRESO2]-1][POSICION_LETRA]:
-        verificar = True
-    else:
-        verificar = False
-    return verificar
+    # Hecha por Lucas Osorio y Valentina Nieto
+    return fichas[ingresos[INGRESO1]-1][POSICION_LETRA] == fichas[ingresos[INGRESO2]-1][POSICION_LETRA]
     
 
 
