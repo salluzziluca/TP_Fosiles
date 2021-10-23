@@ -1,5 +1,7 @@
 POSICION_BOOL=1
 POSICION_LETRA = 0
+INGRESO1 = 0
+INGRESO2 = 1
 
 def generar_fichas():
     return [["D",False],["D",False],["s",False],["s",False]]
@@ -42,10 +44,15 @@ def cambiar(fichas,ingreso):
     fichas[ingreso-1][POSICION_BOOL]=True
     return fichas
 
-def acierto():
+def acierto(fichas, ingresos):
     # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
     # Hecha por
-    pass
+    if fichas[ingresos[INGRESO1]-1][POSICION_LETRA] == fichas[ingresos[INGRESO2]-1][POSICION_LETRA]:
+        verificar = True
+    else:
+        verificar = False
+    return verificar
+    
 
 
 def turno(fichas):
