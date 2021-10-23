@@ -1,29 +1,21 @@
-from Pruebas_auxiliares import POS_LETRA
-
-
-POS_BOOL=1
-POS_LETRA = 0
+POSICION_BOOL=1
+POSICION_LETRA = 0
 
 def generar_fichas():
     return [["D",False],["D",False],["s",False],["s",False]]
 
-def mostrar_las_fichas(fichas):
+def mostrar_fichas(fichas):
     # Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Si esta ficha es la ultima de todas, se imprime distinto para que haya un salto de linea ante un proximo print
-    # Hecha por Luca Salluzzi
-    for i in range(len(fichas)):
-        
-        if fichas[i][1]:
-            if i != (len(fichas)-1):
-                print(f'[{fichas[i][0]}]', end=' ')
-                
-            else:
-                print(f'[{fichas[i][0]}]')
+    # Hecha por Luca Salluzzi, Omar
+    n_posicion = 1
+    for ficha in fichas:
+
+        if ficha[POSICION_BOOL]:
+            print(f'[{ficha[POSICION_LETRA]}]', end=' ')
         else:
-            if i != (len(fichas)-1):
-                print(f'[{i+1}]', end=' ')
-                
-            else:
-                print(f'[{i+1}]')
+            print(f'[{n_posicion}]', end=' ')
+        n_posicion+=1
+    print('\n')
                 
 def input_usuario():
     # Pide al usuario un ingreso numerico, devuelve ese numero.
@@ -66,7 +58,7 @@ def turno(fichas):
         input1=input_usuario()
         ingresos.append(input1)
         fichas2=cambiar(fichas2,input1)
-        mostrar_las_fichas(fichas2)
+        mostrar_fichas(fichas2)
         n+=1
 
     return fichas2,ingresos
@@ -76,7 +68,7 @@ def main():
     # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
     juego_terminado=False
     fichas=generar_fichas()
-    mostrar_las_fichas(fichas) 
+    mostrar_fichas(fichas) 
     while not juego_terminado:
         fichas2,ingresos=turno(fichas)
         if acierto(fichas,ingresos):
