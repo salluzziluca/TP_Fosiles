@@ -67,7 +67,6 @@ def turno(fichas):
         ingresos.append(input1)
         fichas2=cambiar(fichas2,input1)
         mostrar_fichas(fichas2)
-
         n+=1
 
     return fichas2,ingresos

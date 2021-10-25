@@ -1,45 +1,10 @@
 from main import INGRESO1, INGRESO2
 
-
 POSICION_BOOL = 1
 POSICION_LETRA = 0
-"""
-lista_prueba=[["D",False],["D",False],["s",False],["s",False]]
-ingreso_in=2
-
-POS_BOOL = 1
-
-def cambiar(fichas,ingreso):
-    #Omar Oriz
-    #recibe una lista de fichas y un input y devuelve la lista cambiada con la ficha (de pos. ingreso-1) volteada.
-    fichas[ingreso-1][POS_BOOL]=True
-    return fichas
-print(cambiar(lista_prueba,ingreso_in))
-"""
-
-"""def mostrar_las_fichas(fichas):
-    #Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Si esta ficha es la ultima de todas, se imprime distinto para que haya un salto de linea ante un proximo print
-    #hecho por Luca Salluzzi
-    for i in range(len(fichas)):
-        
-        if fichas[i][1]:
-            if i != (len(fichas)-1):
-                print(f'[{fichas[i][0]}]', end=' ')
-                
-            else:
-                print(f'[{fichas[i][0]}]')
-        else:
-            if i != (len(fichas)-1):
-                print(f'[{i+1}]', end=' ')
-                
-            else:
-                print(f'[{i+1}]')
-
-"""
-
 
 lista_prueba=[["D",False],["D",True],["s",False],["s",False]]
-
+"""
 def mostrar_las_fichas(fichas):
     #Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha.
     #hecho por Luca Salluzzi, O.Oriz.
@@ -52,9 +17,9 @@ def mostrar_las_fichas(fichas):
             print(f'[{n_posicion}]', end=' ')
         n_posicion+=1
     print('\n')
-    print('perro')
-
 mostrar_las_fichas(lista_prueba)
+"""
+
 
 """fichas =[["D",False],["D",False],["s",False],["s",False]]
 ingresos = [3,2]
@@ -68,11 +33,7 @@ def acierto(fichas, ingresos):
     
     return verificar
     
-def acierto(fichas, ingresos)
-        
-    
-    pass"""
-
+"""
 """
 def voltear_ficha_para_abajo(fichas,ingresos):
 
@@ -80,3 +41,47 @@ def voltear_ficha_para_abajo(fichas,ingresos):
     fichas[(ingresos[INGRESO2]-1)][POSICION_BOOL]=False
     return fichas
 """
+
+
+################################################################### BOCETO VALIDACION ##################
+def input_usuario(fichas2):
+    # Pide al usuario un ingreso numerico, devuelve ese numero.
+    # Hecha por Camila Zarza, Oriz.
+    entero=False
+    while not entero:
+        try:
+            posicion=int(input("Posición: "))
+            if validacion(posicion,fichas2):
+                entero=True
+        except ValueError:
+            print ('Valor inválido.')
+        except TypeError:
+            print ('Valor inválido.')
+    return posicion
+
+def validacion(input_realizado,fichas):
+    #recibe el input numérico del usuario y la lista de fichas actualizada, devuelve un bool
+    # Dependiendo si es una pos correcta, y si la ficha no está boca arriba.
+    # Hecho por Omar Oriz.
+    return ((input_realizado-1) in range(len(fichas)-1) and fichas[input_realizado-1][POSICION_BOOL] != True)
+
+        
+            
+def turno(fichas):
+    # Define una ronda de selección de fichas. Devuelve la lista con el par de ELECCIONES y los ingresos realizados.
+    # Hecha por Oriz, Conti, Zarza.
+    fichas2=fichas
+    n=0
+    print('Nuevo turno, Sus fichas:')
+    mostrar_fichas(fichas)
+    ingresos=[]
+    while n<2:
+        input1=input_usuario(fichas2)
+        ingresos.append(input1)
+        fichas2=cambiar(fichas2,input1)
+        mostrar_fichas(fichas2)
+
+        n+=1
+
+    return fichas2,ingresos
+#############################################################################################
