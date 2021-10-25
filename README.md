@@ -11,3 +11,5 @@ Creada la función voltear_fichas_para_abajo() para que si las elecciones no son
 Incorporado un print que indica si hay un acierto.
 Incorporado un print que indica si  termina el juego.
 Queda emprolijar los mensajes por pantalla.
+
+boceto de la validación en auxiliares.
