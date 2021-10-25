@@ -1,3 +1,6 @@
+from main import INGRESO1, INGRESO2
+
+
 POSICION_BOOL = 1
 POSICION_LETRA = 0
 """
@@ -69,3 +72,11 @@ def acierto(fichas, ingresos)
         
     
     pass"""
+
+"""
+def voltear_ficha_para_abajo(fichas,ingresos):
+
+    fichas[(ingresos[INGRESO1]-1)][POSICION_BOOL]=False
+    fichas[(ingresos[INGRESO2]-1)][POSICION_BOOL]=False
+    return fichas
+"""

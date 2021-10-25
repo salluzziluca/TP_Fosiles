@@ -37,30 +37,37 @@ def revisar_si_ganaste(fichas):
         i+=1    
     return ganar
 
-def cambiar(fichas,ingreso):
-    # Recibe una lista de fichas y un input y devuelve la lista cambiada con la ficha (de pos. ingreso-1) volteada.
-    # Hecha por Omar Oriz
-    fichas[ingreso-1][POSICION_BOOL]=True
-    return fichas
+def cambiar(lista_fichas,ingreso):
+    # Recibe una lista de fichas y un input y devuelve la lista cambiada con la ficha (de pos. ingreso-1) volteada boca arriba.
+    # Hecha por Omar Oriz.
+    lista_fichas[ingreso-1][POSICION_BOOL]=True
+    return lista_fichas
+def voltear_fichas_para_abajo(lista_fichas,ingresos):
+    # Recibe una lista de fichas y una lista de inputs y devuelve la lista con esas fichas boca abajo.
+    # Hecha por Omar Oriz.
+    lista_fichas[(ingresos[INGRESO1]-1)][POSICION_BOOL]=False
+    lista_fichas[(ingresos[INGRESO2]-1)][POSICION_BOOL]=False
+    return lista_fichas
 
 def acierto(fichas, ingresos):
     # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
     # Hecha por Lucas Osorio y Valentina Nieto
     return fichas[ingresos[INGRESO1]-1][POSICION_LETRA] == fichas[ingresos[INGRESO2]-1][POSICION_LETRA]
     
-
-
 def turno(fichas):
     # Define una ronda de selección de fichas. Devuelve la lista con el par de ELECCIONES y los ingresos realizados.
     # Hecha por Oriz, Conti, Zarza.
     fichas2=fichas
     n=0
+    print('Nuevo turno, Sus fichas:')
+    mostrar_fichas(fichas)
     ingresos=[]
     while n<2:
         input1=input_usuario()
         ingresos.append(input1)
         fichas2=cambiar(fichas2,input1)
         mostrar_fichas(fichas2)
+
         n+=1
 
     return fichas2,ingresos
@@ -74,8 +81,13 @@ def main():
     while not juego_terminado:
         fichas2,ingresos=turno(fichas)
         if acierto(fichas,ingresos):
+            print('Acierto!')
             fichas=fichas2
+        else:
+            fichas=voltear_fichas_para_abajo(fichas,ingresos)
 
         juego_terminado=revisar_si_ganaste(fichas)
+        if juego_terminado:
+            print('Fin del juego!')
 
 main()
