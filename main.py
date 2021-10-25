@@ -24,7 +24,6 @@ def input_usuario():
     # Hecha por Camila Zarza
     posicion=int(input("Posición: "))
     return posicion
-    pass
 
 def revisar_si_ganaste(fichas):
     # Determina si el juego terminó, comprobando que todas las fichas esten "volteadas".
