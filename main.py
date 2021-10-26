@@ -19,11 +19,28 @@ def mostrar_fichas(fichas):
         n_posicion+=1
     print('\n')
                 
-def input_usuario():
+def input_usuario(fichas2):
     # Pide al usuario un ingreso numerico, devuelve ese numero.
-    # Hecha por Camila Zarza
-    posicion=int(input("Posición: "))
+    # Hecha por Camila Zarza, Oriz.
+    entero=False
+    while not entero:
+        try:
+            posicion=int(input("Posición: "))
+            if validacion(posicion,fichas2):
+                entero=True
+            else:
+                print('Número ingresado inválido.')
+        except ValueError:
+            print ('Valor inválido.')
+        except TypeError:
+            print ('Valor inválido.')
     return posicion
+
+def validacion(input_realizado,fichas):
+    #recibe el input numérico del usuario y la lista de fichas actualizada, devuelve un bool
+    # Dependiendo si es una pos correcta, y si la ficha no está boca arriba.
+    # Hecho por Omar Oriz.
+    return ((input_realizado-1) in range(len(fichas)) and fichas[input_realizado-1][POSICION_BOOL] != True)
 
 def revisar_si_ganaste(fichas):
     # Determina si el juego terminó, comprobando que todas las fichas esten "volteadas".
@@ -37,11 +54,12 @@ def revisar_si_ganaste(fichas):
         i+=1    
     return ganar
 
-def cambiar(lista_fichas,ingreso):
+def voltear_ficha(lista_fichas,ingreso):
     # Recibe una lista de fichas y un input y devuelve la lista cambiada con la ficha (de pos. ingreso-1) volteada boca arriba.
     # Hecha por Omar Oriz.
     lista_fichas[ingreso-1][POSICION_BOOL]=True
     return lista_fichas
+
 def voltear_fichas_para_abajo(lista_fichas,ingresos):
     # Recibe una lista de fichas y una lista de inputs y devuelve la lista con esas fichas boca abajo.
     # Hecha por Omar Oriz.
@@ -63,9 +81,9 @@ def turno(fichas):
     mostrar_fichas(fichas)
     ingresos=[]
     while n<2:
-        input1=input_usuario()
+        input1=input_usuario(fichas2)
         ingresos.append(input1)
-        fichas2=cambiar(fichas2,input1)
+        fichas2=voltear_ficha(fichas2,input1)
         mostrar_fichas(fichas2)
         n+=1
 
