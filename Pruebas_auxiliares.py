@@ -44,6 +44,7 @@ def voltear_ficha_para_abajo(fichas,ingresos):
 
 
 ################################################################### BOCETO VALIDACION ##################
+"""
 def input_usuario(fichas2):
     # Pide al usuario un ingreso numerico, devuelve ese numero.
     # Hecha por Camila Zarza, Oriz.
@@ -84,4 +85,5 @@ def turno(fichas):
         n+=1
 
     return fichas2,ingresos
+"""
 #############################################################################################
