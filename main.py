@@ -4,19 +4,25 @@ INGRESO1 = 0
 INGRESO2 = 1
 
 def generar_fichas():
-    return [["D",False],["D",False],["s",False],["s",False]]
+    return [["D",False],["D",False],["s",False],["s",False],["J",False],["J",False],["y",False],["y",False]]
 
 def mostrar_fichas(fichas):
     # Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Luego, se ejecuta un salto de linea
-    # Hecha por Luca Salluzzi, Omar
+    # cada cuarta posicion y al final del ciclo.
+    # Hecha por Luca Salluzzi, Omar, Lucas, Conti.
     n_posicion = 1
+    contador=0
     for ficha in fichas:
-
+        if contador==4:
+            print('\n')
+            contador=0
         if ficha[POSICION_BOOL]:
             print(f'[{ficha[POSICION_LETRA]}]', end=' ')
         else:
             print(f'[{n_posicion}]', end=' ')
+        
         n_posicion+=1
+        contador+=1
     print('\n')
                 
 def input_usuario(fichas2):
@@ -92,11 +98,13 @@ def turno(fichas):
 def main():
     # Incluye un ciclo donde transcurre todo el juego.
     # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
+    intentos=0
     juego_terminado=False
     fichas=generar_fichas()
     mostrar_fichas(fichas) 
     while not juego_terminado:
         fichas2,ingresos=turno(fichas)
+        intentos+=1
         if acierto(fichas,ingresos):
             print('Acierto!')
             fichas=fichas2
@@ -106,5 +114,6 @@ def main():
         juego_terminado=revisar_si_ganaste(fichas)
         if juego_terminado:
             print('Fin del juego!')
+            print(f"Le llevó {intentos} intentos")
 
 main()
