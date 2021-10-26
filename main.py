@@ -1,10 +1,28 @@
+import random, time
+
 POSICION_BOOL=1
 POSICION_LETRA = 0
 INGRESO1 = 0
 INGRESO2 = 1
 
+def mensaje_final(tiempo_inicial,intentos):
+    # Recibe el tiempo inicial e intentos e imprime el fin del juego con la cantidad de intentos y el tiempo empleado.
+    # Hecha por Lucas, Omar y Conti.
+    print('Fin del juego!')
+    print(f"Le llevó {intentos} intentos")
+    print(f"Tardó {int(time.time() - tiempo_inicial)} segundos")
+
 def generar_fichas():
-    return [["D",False],["D",False],["s",False],["s",False],["J",False],["J",False],["y",False],["y",False]]
+    # Genera una lista de fichas y las devuelve en posiciones aleatorias.
+    # Hecha por Lucas, Omar y Conti.
+    lista=[
+    ["D",False],["D",False],["E",False],["E",False],
+    ["J",False],["J",False],["Y",False],["Y",False],
+    ["A",False],["A",False],["G",False],["G",False],
+    ["X",False],["X",False],["V",False],["V",False]
+    ]
+    random.shuffle(lista)
+    return lista
 
 def mostrar_fichas(fichas):
     # Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Luego, se ejecuta un salto de linea
@@ -94,10 +112,11 @@ def turno(fichas):
         n+=1
 
     return fichas2,ingresos
-        
+
 def main():
     # Incluye un ciclo donde transcurre todo el juego.
     # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
+    tiempo_inicio=time.time()
     intentos=0
     juego_terminado=False
     fichas=generar_fichas()
@@ -112,8 +131,9 @@ def main():
             fichas=voltear_fichas_para_abajo(fichas,ingresos)
 
         juego_terminado=revisar_si_ganaste(fichas)
+
         if juego_terminado:
-            print('Fin del juego!')
-            print(f"Le llevó {intentos} intentos")
+            mensaje_final(tiempo_inicio, intentos)
+            
 
 main()
