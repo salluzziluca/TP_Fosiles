@@ -13,3 +13,11 @@ Incorporado un print que indica si  termina el juego.
 Queda emprolijar los mensajes por pantalla.
 
 boceto de la validación en auxiliares.
+
+Se testeó y aprobó la etapa 2
+Se testeó y aprobó la etapa 3
+Se testeó y aprobó la etapa 4
+
+Terminadas las etapas 2,3,4. 
+
+Queda por pensar la etapa 5.
