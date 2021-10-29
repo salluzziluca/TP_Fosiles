@@ -104,8 +104,8 @@ def cambiar_jugador(jugador_anterior_pos,lista_jugadores):
     return jugador_siguiente
 
 def revisar_ganador(diccionario, jugadores):
-    # Evalúa aciertos e intentos y devuelve al jugador jugador_ganador.
-    # Hecha por Osorio y Salluzzi
+    # Evalúa aciertos e intentos y devuelve al jugador ganador.
+    # Hecha por Osorio y Salluzzi.
     jugador_1 = jugadores[0]
     jugador_2 = jugadores[1]
     if diccionario[jugador_1][ACIERTOS] > diccionario[jugador_2][ACIERTOS]:
@@ -125,8 +125,8 @@ def revisar_ganador(diccionario, jugadores):
     pass
 
 def mensaje_final(tiempo_inicial, jugador_ganador):
-    # Recibe el tiempo inicial e intentos e imprime el fin del juego con la cantidad de intentos y el tiempo empleado.
-    # Hecha por Lucas, Omar y Conti.
+    # Recibe el tiempo inicial y el jugador ganador. Imprime cuanto duró el juego y quien fue el que que ganó. Contempla el caso de empate
+    # Hecha por Osorio, Omar, Conti, Salluzzi.
     print('Fin del juego!')
     print(f"El juego duró {int(time.time() - tiempo_inicial)} segundos")
     if jugador_ganador != 'empate':
