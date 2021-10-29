@@ -8,12 +8,6 @@ INTENTOS= 0
 ACIERTOS=1
 TURNO_ACTIVO=2
 
-def mensaje_final(tiempo_inicial,intentos):
-    # Recibe el tiempo inicial e intentos e imprime el fin del juego con la cantidad de intentos y el tiempo empleado.
-    # Hecha por Lucas, Omar y Conti.
-    print('Fin del juego!')
-    print(f"Le llevó {intentos} intentos")
-    print(f"Tardó {int(time.time() - tiempo_inicial)} segundos")
 
 def generar_fichas():
     # Genera una lista_jugadores de fichas y las devuelve en posiciones aleatorias.
@@ -109,10 +103,35 @@ def cambiar_jugador(jugador_anterior_pos,lista_jugadores):
     
     return jugador_siguiente
 
-def revisar_ganador():
-    # Revisa quien gana y devuelve el ganador
+def revisar_ganador(diccionario, jugadores):
+    # Evalúa aciertos e intentos y devuelve al jugador ganador.
+    # Hecha por Osorio y Salluzzi
+    jugador_1 = jugadores[0]
+    jugador_2 = jugadores[1]
+    if diccionario[jugador_1][ACIERTOS] > diccionario[jugador_2][ACIERTOS]:
+        jugador_ganador = jugador_1
+    
+    elif diccionario[jugador_1][ACIERTOS] < diccionario[jugador_2][ACIERTOS]:
+        jugador_ganador = jugador_2
+    
+    else:
+        if diccionario[jugador_1][INTENTOS] < diccionario[jugador_2][INTENTOS]:
+            jugador_ganador = jugador_1
+        elif diccionario[jugador_1][ACIERTOS] > diccionario[jugador_2][ACIERTOS]:
+            jugador_ganador = jugador_2
+        #TODO Desarollar empate 
+        # else:
+        #   empate
+    return jugador_ganador
     pass
 
+def mensaje_final(tiempo_inicial,intentos):
+    # Recibe el tiempo inicial e intentos e imprime el fin del juego con la cantidad de intentos y el tiempo empleado.
+    # Hecha por Lucas, Omar y Conti.
+    print('Fin del juego!')
+    print(f"Le llevó {intentos} intentos")
+    print(f"El juego duró {int(time.time() - tiempo_inicial)} segundos")
+    
 def acierto(fichas, ingresos):
     # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
     # Hecha por Lucas Osorio y Valentina Nieto
@@ -162,7 +181,7 @@ def main():
         juego_terminado=revisar_si_ganaste(fichas)
 
         if juego_terminado:
-            ganador = revisar_ganador(dict_jugadores[jugador][INTENTOS],dict_jugadores[jugador][ACIERTOS],orden_jugadores)
+            ganador = revisar_ganador(dict_jugadores,orden_jugadores)
             mensaje_final(tiempo_inicio, dict_jugadores[jugador][INTENTOS],dict_jugadores[jugador][ACIERTOS],jugador)
         
         
