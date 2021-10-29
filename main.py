@@ -122,7 +122,6 @@ def revisar_ganador(diccionario, jugadores):
         else:
             jugador_ganador = 'empate'
     return jugador_ganador
-    pass
 
 def mensaje_final(tiempo_inicial, jugador_ganador):
     # Recibe el tiempo inicial y el jugador ganador. Imprime cuanto duró el juego y quien fue el que que ganó. Contempla el caso de empate
@@ -161,7 +160,7 @@ def main():
     # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
     tiempo_inicio=time.time()
     dict_jugadores={"Juan": [0,0], "Pedro": [0,0]}
-    orden_jugadores=dict_jugadores.keys()
+    orden_jugadores=list(dict_jugadores.keys())
     jugador= elegir_primero(orden_jugadores)
     
     juego_terminado=False
