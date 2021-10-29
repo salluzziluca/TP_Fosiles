@@ -1,9 +1,12 @@
 import random, time
 
-POSICION_BOOL=1
 POSICION_LETRA = 0
+POSICION_BOOL=1
 INGRESO1 = 0
 INGRESO2 = 1
+INTENTOS= 0
+ACIERTOS=1
+TURNO_ACTIVO=2
 
 def mensaje_final(tiempo_inicial,intentos):
     # Recibe el tiempo inicial e intentos e imprime el fin del juego con la cantidad de intentos y el tiempo empleado.
@@ -42,7 +45,7 @@ def mostrar_fichas(fichas):
         n_posicion+=1
         contador+=1
     print('\n')
-                
+               
 def input_usuario(fichas2):
     # Pide al usuario un ingreso numerico, devuelve ese numero.
     # Hecha por Camila Zarza, Oriz.
@@ -91,6 +94,12 @@ def voltear_fichas_para_abajo(lista_fichas,ingresos):
     lista_fichas[(ingresos[INGRESO2]-1)][POSICION_BOOL]=False
     return lista_fichas
 
+def elegir_primero():
+    pass
+
+def cambiar_jugador():
+    pass
+
 def acierto(fichas, ingresos):
     # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
     # Hecha por Lucas Osorio y Valentina Nieto
@@ -117,23 +126,30 @@ def main():
     # Incluye un ciclo donde transcurre todo el juego.
     # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
     tiempo_inicio=time.time()
-    intentos=0
+    dict_jugadores={"Juan": [0,0,False], "Pedro": [0,0,False]}
+    jugador= elegir_primero(dict_jugadores)
     juego_terminado=False
     fichas=generar_fichas()
     mostrar_fichas(fichas) 
     while not juego_terminado:
+        
         fichas2,ingresos=turno(fichas)
-        intentos+=1
+        dict_jugadores[jugador][INTENTOS]+=1
+
         if acierto(fichas,ingresos):
             print('Acierto!')
+            dict_jugadores[jugador][ACIERTOS]+=1
             fichas=fichas2
         else:
             fichas=voltear_fichas_para_abajo(fichas,ingresos)
+            cambiar_jugador(dict_jugadores)
 
         juego_terminado=revisar_si_ganaste(fichas)
 
         if juego_terminado:
             mensaje_final(tiempo_inicio, intentos)
+        
+        
             
 
 main()
