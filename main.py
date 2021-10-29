@@ -104,7 +104,7 @@ def cambiar_jugador(jugador_anterior_pos,lista_jugadores):
     return jugador_siguiente
 
 def revisar_ganador(diccionario, jugadores):
-    # Evalúa aciertos e intentos y devuelve al jugador ganador.
+    # Evalúa aciertos e intentos y devuelve al jugador jugador_ganador.
     # Hecha por Osorio y Salluzzi
     jugador_1 = jugadores[0]
     jugador_2 = jugadores[1]
@@ -117,20 +117,22 @@ def revisar_ganador(diccionario, jugadores):
     else:
         if diccionario[jugador_1][INTENTOS] < diccionario[jugador_2][INTENTOS]:
             jugador_ganador = jugador_1
-        elif diccionario[jugador_1][ACIERTOS] > diccionario[jugador_2][ACIERTOS]:
+        elif diccionario[jugador_1][INTENTOS] > diccionario[jugador_2][INTENTOS]:
             jugador_ganador = jugador_2
-        #TODO Desarollar empate 
-        # else:
-        #   empate
+        else:
+            jugador_ganador = 'empate'
     return jugador_ganador
     pass
 
-def mensaje_final(tiempo_inicial,intentos):
+def mensaje_final(tiempo_inicial, jugador_ganador):
     # Recibe el tiempo inicial e intentos e imprime el fin del juego con la cantidad de intentos y el tiempo empleado.
     # Hecha por Lucas, Omar y Conti.
     print('Fin del juego!')
-    print(f"Le llevó {intentos} intentos")
     print(f"El juego duró {int(time.time() - tiempo_inicial)} segundos")
+    if jugador_ganador != 'empate':
+        print(f'El/la jugador_ganador/a es {jugador_ganador}')
+    else:
+        print(f'El juego terminó en {jugador_ganador}')
     
 def acierto(fichas, ingresos):
     # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
@@ -181,8 +183,8 @@ def main():
         juego_terminado=revisar_si_ganaste(fichas)
 
         if juego_terminado:
-            ganador = revisar_ganador(dict_jugadores,orden_jugadores)
-            mensaje_final(tiempo_inicio, dict_jugadores[jugador][INTENTOS],dict_jugadores[jugador][ACIERTOS],jugador)
+            jugador_ganador = revisar_ganador(dict_jugadores,orden_jugadores)
+            mensaje_final(tiempo_inicio, jugador_ganador)
         
         
             
