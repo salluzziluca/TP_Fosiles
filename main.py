@@ -166,4 +166,4 @@ def solicitar_nombre():
     Boton=Button(raiz, text="Enviar",command = lambda: acierto(jugador_1_entry.get(),jugador_2_entry.get()))
     Boton.pack()
     raiz.mainloop()
-    solicitar_nombre() 
+    solicitar_nombre()  
