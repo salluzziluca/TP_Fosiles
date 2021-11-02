@@ -167,4 +167,3 @@ def solicitar_nombre():
     Boton.pack()
     raiz.mainloop()
     solicitar_nombre() 
-
