@@ -142,27 +142,29 @@ main()
 from tkinter import*
 
 def solicitar_nombre():
+    #Solicita el ingreso de los nombres de los Jugadores
+    #Hecho por Valentina Nieto y Camila Zarza
     raiz= Tk()
     raiz.title("Fosiles Memotest")
     raiz.resizable(0,0)
-#raiz.iconbitmap()
+    #raiz.iconbitmap()
     raiz.geometry("300x150")
     raiz.config(bg="yellow")
-#frame
+    #frame
     miFrame=Frame(raiz)
     miFrame.pack(padx=10, pady=20)
     miFrame.config(cursor="heart")
-#jugadores j1
+    #jugadores j1
     jugador_1=Label(miFrame, text="Primer Jugador: ")
     jugador_1.grid(row=0,column=0, padx=10, pady=10)
     jugador_1_entry=Entry(miFrame)
     jugador_1_entry.grid(row=0,column=1,padx=10, pady=10)
-#j2
+    #j2
     jugador_2=Label(miFrame, text="Segundo Jugador: ")
     jugador_2.grid(row=1,column=0,padx=10, pady=10)
     jugador_2_entry=Entry(miFrame)
     jugador_2_entry.grid(row=1,column=1,padx=10, pady=10)
-#Boton
+    #Boton
     Boton=Button(raiz, text="Enviar",command = lambda: acierto(jugador_1_entry.get(),jugador_2_entry.get()))
     Boton.pack()
     raiz.mainloop()
