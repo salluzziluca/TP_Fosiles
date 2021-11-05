@@ -159,8 +159,8 @@ def main():
     # Incluye un ciclo donde transcurre todo el juego.
     # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
     tiempo_inicio=time.time()
-    dict_jugadores={"Juan": [0,0], "Pedro": [0,0]}
-    orden_jugadores=list(dict_jugadores.keys())
+    dict_jugadores={"Juan": [0,0], "Pedro": [0,0]}#Este dicc. hay que formarlo con la list de abajo.
+    orden_jugadores=list(dict_jugadores.keys()) #Pasar del input del tkinter a la lista orden_jugadores 
     jugador= elegir_primero(orden_jugadores)
     
     juego_terminado=False
