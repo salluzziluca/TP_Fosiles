@@ -96,7 +96,7 @@ def elegir_primero(orden_jugadores):
 def cambiar_jugador(jugador_anterior_pos,lista_jugadores):
     # Devuelve el siguiente jugador en la lista de jugadores
     # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi
-    if jugador_anterior_pos != len(lista_jugadores):
+    if jugador_anterior_pos != (len(lista_jugadores)-1):
         jugador_siguiente= lista_jugadores[jugador_anterior_pos+1]
     else:
         jugador_siguiente= lista_jugadores[0]
@@ -138,12 +138,12 @@ def acierto(fichas, ingresos):
     # Hecha por Lucas Osorio y Valentina Nieto
     return fichas[ingresos[INGRESO1]-1][POSICION_LETRA] == fichas[ingresos[INGRESO2]-1][POSICION_LETRA]
     
-def turno(fichas):
+def turno(fichas, jugador):
     # Define una ronda de selección de fichas. Devuelve la lista_jugadores con el par de ELECCIONES y los ingresos realizados.
     # Hecha por Oriz, Conti, Zarza.
     fichas2=fichas
     n=0
-    print('Nuevo turno, Sus fichas:')
+    print(f'Nuevo turno, {jugador}, Sus fichas:')
     mostrar_fichas(fichas)
     ingresos=[]
     while n<2:
@@ -168,7 +168,7 @@ def main():
     mostrar_fichas(fichas) 
     while not juego_terminado:
         
-        fichas2,ingresos=turno(fichas)
+        fichas2,ingresos=turno(fichas, jugador)
         dict_jugadores[jugador][INTENTOS]+=1
 
         if acierto(fichas,ingresos):
