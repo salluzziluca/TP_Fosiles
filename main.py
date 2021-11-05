@@ -104,35 +104,32 @@ def cambiar_jugador(jugador_anterior_pos,lista_jugadores):
     return jugador_siguiente
 
 def revisar_ganador(diccionario, jugadores):
-    # Evalúa aciertos e intentos y devuelve al jugador jugador_ganador.
+    # Evalúa aciertos e intentos y devuelve al jugador resultado.
     # Hecha por Osorio y Salluzzi
-    jugador_1 = jugadores[0]
-    jugador_2 = jugadores[1]
-    if diccionario[jugador_1][ACIERTOS] > diccionario[jugador_2][ACIERTOS]:
-        jugador_ganador = jugador_1
-    
-    elif diccionario[jugador_1][ACIERTOS] < diccionario[jugador_2][ACIERTOS]:
-        jugador_ganador = jugador_2
-    
+    aciertos_j1, intentos_j1= diccionario[jugadores[0]][ACIERTOS], diccionario[jugadores[0]][INTENTOS]
+    aciertos_j2, intentos_j2 = diccionario[jugadores[1]][ACIERTOS], diccionario[jugadores[1]][INTENTOS]
+    if  aciertos_j1 > aciertos_j2 :
+        resultado = jugadores[0]
+    elif aciertos_j1 < aciertos_j2:
+        resultado = jugadores[1]
     else:
-        if diccionario[jugador_1][INTENTOS] < diccionario[jugador_2][INTENTOS]:
-            jugador_ganador = jugador_1
-        elif diccionario[jugador_1][INTENTOS] > diccionario[jugador_2][INTENTOS]:
-            jugador_ganador = jugador_2
+        if intentos_j1 < intentos_j2:
+            resultado = jugadores[0]
+        elif intentos_j1 > intentos_j2:
+            resultado = jugadores[1]
         else:
-            jugador_ganador = 'empate'
-    return jugador_ganador
-    pass
+            resultado = 'empate'
+    return resultado
 
-def mensaje_final(tiempo_inicial, jugador_ganador):
+def mensaje_final(tiempo_inicial, resultado):
     # Recibe el tiempo inicial e intentos e imprime el fin del juego con la cantidad de intentos y el tiempo empleado.
     # Hecha por Lucas, Omar y Conti.
     print('Fin del juego!')
     print(f"El juego duró {int(time.time() - tiempo_inicial)} segundos")
-    if jugador_ganador != 'empate':
-        print(f'El/la jugador_ganador/a es {jugador_ganador}')
+    if resultado != 'empate':
+        print(f'El/la resultado/a es {resultado}')
     else:
-        print(f'El juego terminó en {jugador_ganador}')
+        print(f'El juego terminó en {resultado}')
     
 def acierto(fichas, ingresos):
     # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
@@ -183,8 +180,8 @@ def main():
         juego_terminado=revisar_si_ganaste(fichas)
 
         if juego_terminado:
-            jugador_ganador = revisar_ganador(dict_jugadores,orden_jugadores)
-            mensaje_final(tiempo_inicio, jugador_ganador)
+            resultado = revisar_ganador(dict_jugadores,orden_jugadores)
+            mensaje_final(tiempo_inicio, resultado)
         
         
             
