@@ -217,6 +217,9 @@ def solicitar_nombre():
     jugador_2_entry.grid(row=1,column=1,padx=10, pady=10)
     #Boton
     Boton=Button(raiz, text="Enviar",command = lambda: acierto(jugador_1_entry.get(),jugador_2_entry.get()))
+    if not acierto:
+        return main
+    CloseBoton=Button(raiz, text="Comenzar", command=raiz.destroy)
     Boton.pack()
     raiz.mainloop()
-    solicitar_nombre()  
+    solicitar_nombre()
