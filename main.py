@@ -1,5 +1,5 @@
 import random, time
-from tkinter import*
+from tkinter import *
 
 POSICION_LETRA = 0
 POSICION_BOOL=1
@@ -97,7 +97,7 @@ def elegir_primero(orden_jugadores):
 def cambiar_jugador(jugador_anterior_pos,lista_jugadores):
     # Devuelve el siguiente jugador en la lista de jugadores
     # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi
-    if jugador_anterior_pos != len(lista_jugadores):
+    if jugador_anterior_pos != (len(lista_jugadores)-1):
         jugador_siguiente= lista_jugadores[jugador_anterior_pos+1]
     else:
         jugador_siguiente= lista_jugadores[0]
@@ -105,52 +105,44 @@ def cambiar_jugador(jugador_anterior_pos,lista_jugadores):
     return jugador_siguiente
 
 def revisar_ganador(diccionario, jugadores):
-    # Evalúa aciertos e intentos y devuelve al jugador ganador.
-    # Hecha por Osorio y Salluzzi.
-    jugador_1 = jugadores[0]
-    jugador_2 = jugadores[1]
-    if diccionario[jugador_1][ACIERTOS] > diccionario[jugador_2][ACIERTOS]:
-        jugador_ganador = jugador_1
-    
-    elif diccionario[jugador_1][ACIERTOS] < diccionario[jugador_2][ACIERTOS]:
-        jugador_ganador = jugador_2
-    
+    # Evalúa aciertos e intentos y devuelve al jugador resultado.
+    # Hecha por Osorio y Salluzzi
+    aciertos_j1, intentos_j1= diccionario[jugadores[0]][ACIERTOS], diccionario[jugadores[0]][INTENTOS]
+    aciertos_j2, intentos_j2 = diccionario[jugadores[1]][ACIERTOS], diccionario[jugadores[1]][INTENTOS]
+    if  aciertos_j1 > aciertos_j2 :
+        resultado = jugadores[0]
+    elif aciertos_j1 < aciertos_j2:
+        resultado = jugadores[1]
     else:
-        if diccionario[jugador_1][INTENTOS] < diccionario[jugador_2][INTENTOS]:
-            jugador_ganador = jugador_1
-        elif diccionario[jugador_1][INTENTOS] > diccionario[jugador_2][INTENTOS]:
-            jugador_ganador = jugador_2
+        if intentos_j1 < intentos_j2:
+            resultado = jugadores[0]
+        elif intentos_j1 > intentos_j2:
+            resultado = jugadores[1]
         else:
-            jugador_ganador = 'empate'
-    return jugador_ganador
+            resultado = 'empate'
+    return resultado
 
-def mensaje_final(tiempo_inicial, jugador_ganador):
-    # Recibe el tiempo inicial y el jugador ganador. Imprime cuanto duró el juego y quien fue el que que ganó. Contempla el caso de empate
-    # Hecha por Osorio, Omar, Conti, Salluzzi.
+def mensaje_final(tiempo_inicial, resultado):
+    # Recibe el tiempo inicial e intentos e imprime el fin del juego con la cantidad de intentos y el tiempo empleado.
+    # Hecha por Lucas, Omar y Conti.
     print('Fin del juego!')
     print(f"El juego duró {int(time.time() - tiempo_inicial)} segundos")
-    if jugador_ganador != 'empate':
-        print(f'El/la jugador_ganador/a es {jugador_ganador}')
+    if resultado != 'empate':
+        print(f'El/la resultado/a es {resultado}')
     else:
-        print(f'El juego terminó en {jugador_ganador}')
+        print(f'El juego terminó en {resultado}')
     
 def acierto(fichas, ingresos):
     # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
     # Hecha por Lucas Osorio y Valentina Nieto
     return fichas[ingresos[INGRESO1]-1][POSICION_LETRA] == fichas[ingresos[INGRESO2]-1][POSICION_LETRA]
-
-def registrar_jugadores(jugador1,jugador2,dict_jugadores):
-    #recibe el nombre de los jugadores ingresado en la interfaz. los ingresa en dict_jugadores.
-    dict_jugadores[jugador1] = [0,0]
-    dict_jugadores[jugador2] = [0,0]
-    return None
     
-def turno(fichas):
+def turno(fichas, jugador):
     # Define una ronda de selección de fichas. Devuelve la lista_jugadores con el par de ELECCIONES y los ingresos realizados.
     # Hecha por Oriz, Conti, Zarza.
     fichas2=fichas
     n=0
-    print('Nuevo turno, Sus fichas:')
+    print(f'Nuevo turno, {jugador}, Sus fichas:')
     mostrar_fichas(fichas)
     ingresos=[]
     while n<2:
@@ -162,44 +154,9 @@ def turno(fichas):
 
     return fichas2,ingresos
 
-
-def main():
-    # Incluye un ciclo donde transcurre todo el juego.
-    # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
-    tiempo_inicio=time.time()
-    dict_jugadores={}
-    solicitar_nombre(dict_jugadores)
-    orden_jugadores = list(dict_jugadores.keys()) #Pasar del input del tkinter a la lista orden_jugadores 
-    jugador = elegir_primero(orden_jugadores)
-    juego_terminado=False
-    fichas=generar_fichas()
-    mostrar_fichas(fichas) 
-    while not juego_terminado:
-        
-        fichas2,ingresos=turno(fichas)
-        dict_jugadores[jugador][INTENTOS]+=1
-
-        if acierto(fichas,ingresos):
-            print('Acierto!')
-            dict_jugadores[jugador][ACIERTOS]+=1
-            fichas=fichas2
-        else:
-            fichas=voltear_fichas_para_abajo(fichas,ingresos)
-            jugador=cambiar_jugador(orden_jugadores.index(jugador),orden_jugadores)
-
-        juego_terminado=revisar_si_ganaste(fichas)
-
-        if juego_terminado:
-            jugador_ganador = revisar_ganador(dict_jugadores,orden_jugadores)
-            mensaje_final(tiempo_inicio, jugador_ganador)
-        
-main()
-
-
-
 def solicitar_nombre(dict_jugadores):
     #Solicita el ingreso de los nombres de los Jugadores
-    #Hecho por Valentina Nieto y Camila Zarza
+    #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
     raiz= Tk()
     raiz.title("Fosiles Memotest")
     raiz.resizable(0,0)
@@ -224,9 +181,10 @@ def solicitar_nombre(dict_jugadores):
     jugador_2_entry.grid(row=1,column=1,padx=10, pady=10)
     #funciones del boton
     def presionar_enviar():
+        #No recibe nada. se ejecuta al presionar el Boton. Asigna el contenido de los entry al diccionario de jugadores.
+        # Valentina Nieto,Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
         dict_jugadores[nombre1_var.get()] = [0,0]
         dict_jugadores[nombre2_var.get()] = [0,0]
-        # hasta acá venimos bien.
         return None
     #Boton
     Boton=Button(raiz, text="Enviar",command= presionar_enviar)
@@ -235,3 +193,42 @@ def solicitar_nombre(dict_jugadores):
     CloseBoton.pack()
     raiz.mainloop()
     return None
+
+
+def main():
+    # Incluye un ciclo donde transcurre todo el juego.
+    # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
+    tiempo_inicio=time.time()
+    dict_jugadores={}#Este dicc. hay que formarlo con la list de abajo.
+    solicitar_nombre(dict_jugadores)
+    orden_jugadores=list(dict_jugadores.keys()) #Pasar del input del tkinter a la lista orden_jugadores 
+    jugador= elegir_primero(orden_jugadores)
+    
+    juego_terminado=False
+    fichas=generar_fichas()
+    mostrar_fichas(fichas) 
+    while not juego_terminado:
+        
+        fichas2,ingresos=turno(fichas, jugador)
+        dict_jugadores[jugador][INTENTOS]+=1
+
+        if acierto(fichas,ingresos):
+            print('Acierto!')
+            dict_jugadores[jugador][ACIERTOS]+=1
+            fichas=fichas2
+        else:
+            fichas=voltear_fichas_para_abajo(fichas,ingresos)
+            jugador=cambiar_jugador(orden_jugadores.index(jugador),orden_jugadores)
+
+        juego_terminado=revisar_si_ganaste(fichas)
+
+        if juego_terminado:
+            resultado = revisar_ganador(dict_jugadores,orden_jugadores)
+            mensaje_final(tiempo_inicio, resultado)
+        
+        
+            
+
+main()
+
+
