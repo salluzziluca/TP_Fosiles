@@ -162,6 +162,41 @@ def turno(fichas):
 
     return fichas2,ingresos
 
+
+def main():
+    # Incluye un ciclo donde transcurre todo el juego.
+    # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
+    tiempo_inicio=time.time()
+    dict_jugadores={}
+    solicitar_nombre(dict_jugadores)
+    orden_jugadores = list(dict_jugadores.keys()) #Pasar del input del tkinter a la lista orden_jugadores 
+    jugador = elegir_primero(orden_jugadores)
+    juego_terminado=False
+    fichas=generar_fichas()
+    mostrar_fichas(fichas) 
+    while not juego_terminado:
+        
+        fichas2,ingresos=turno(fichas)
+        dict_jugadores[jugador][INTENTOS]+=1
+
+        if acierto(fichas,ingresos):
+            print('Acierto!')
+            dict_jugadores[jugador][ACIERTOS]+=1
+            fichas=fichas2
+        else:
+            fichas=voltear_fichas_para_abajo(fichas,ingresos)
+            jugador=cambiar_jugador(orden_jugadores.index(jugador),orden_jugadores)
+
+        juego_terminado=revisar_si_ganaste(fichas)
+
+        if juego_terminado:
+            jugador_ganador = revisar_ganador(dict_jugadores,orden_jugadores)
+            mensaje_final(tiempo_inicio, jugador_ganador)
+        
+main()
+
+
+
 def solicitar_nombre(dict_jugadores):
     #Solicita el ingreso de los nombres de los Jugadores
     #Hecho por Valentina Nieto y Camila Zarza
@@ -200,36 +235,3 @@ def solicitar_nombre(dict_jugadores):
     CloseBoton.pack()
     raiz.mainloop()
     return None
-
-def main():
-    # Incluye un ciclo donde transcurre todo el juego.
-    # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
-    tiempo_inicio=time.time()
-    dict_jugadores={}
-    solicitar_nombre(dict_jugadores)
-    orden_jugadores = list(dict_jugadores.keys()) #Pasar del input del tkinter a la lista orden_jugadores 
-    jugador = elegir_primero(orden_jugadores)
-    juego_terminado=False
-    fichas=generar_fichas()
-    mostrar_fichas(fichas) 
-    while not juego_terminado:
-        
-        fichas2,ingresos=turno(fichas)
-        dict_jugadores[jugador][INTENTOS]+=1
-
-        if acierto(fichas,ingresos):
-            print('Acierto!')
-            dict_jugadores[jugador][ACIERTOS]+=1
-            fichas=fichas2
-        else:
-            fichas=voltear_fichas_para_abajo(fichas,ingresos)
-            jugador=cambiar_jugador(orden_jugadores.index(jugador),orden_jugadores)
-
-        juego_terminado=revisar_si_ganaste(fichas)
-
-        if juego_terminado:
-            jugador_ganador = revisar_ganador(dict_jugadores,orden_jugadores)
-            mensaje_final(tiempo_inicio, jugador_ganador)
-        
-main()
-
