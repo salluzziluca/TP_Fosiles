@@ -1,4 +1,5 @@
 import random, time
+from tkinter import*
 
 POSICION_LETRA = 0
 POSICION_BOOL=1
@@ -137,6 +138,12 @@ def acierto(fichas, ingresos):
     # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
     # Hecha por Lucas Osorio y Valentina Nieto
     return fichas[ingresos[INGRESO1]-1][POSICION_LETRA] == fichas[ingresos[INGRESO2]-1][POSICION_LETRA]
+
+def registrar_jugadores(jugador1,jugador2,dict_jugadores):
+    #recibe el nombre de los jugadores ingresado en la interfaz. los ingresa en dict_jugadores.
+    dict_jugadores[jugador1] = [0,0]
+    dict_jugadores[jugador2] = [0,0]
+    return None
     
 def turno(fichas):
     # Define una ronda de selección de fichas. Devuelve la lista_jugadores con el par de ELECCIONES y los ingresos realizados.
@@ -155,14 +162,53 @@ def turno(fichas):
 
     return fichas2,ingresos
 
+def solicitar_nombre(dict_jugadores):
+    #Solicita el ingreso de los nombres de los Jugadores
+    #Hecho por Valentina Nieto y Camila Zarza
+    raiz= Tk()
+    raiz.title("Fosiles Memotest")
+    raiz.resizable(0,0)
+    #raiz.iconbitmap()
+    raiz.geometry("350x200")
+    raiz.config(bg="yellow")
+    #frame
+    miFrame=Frame(raiz)
+    miFrame.pack(padx=10, pady=20)
+    miFrame.config(cursor="heart")
+    #jugadores j1
+    jugador_1=Label(miFrame, text="Primer Jugador: ")
+    jugador_1.grid(row=0,column=0, padx=10, pady=10)
+    nombre1_var = StringVar()
+    jugador_1_entry=Entry(miFrame,textvariable=nombre1_var)
+    jugador_1_entry.grid(row=0,column=1,padx=10, pady=10)
+    #j2
+    jugador_2=Label(miFrame, text="Segundo Jugador: ")
+    jugador_2.grid(row=1,column=0,padx=10, pady=10)
+    nombre2_var = StringVar()
+    jugador_2_entry=Entry(miFrame,textvariable= nombre2_var)
+    jugador_2_entry.grid(row=1,column=1,padx=10, pady=10)
+    #funciones del boton
+    def presionar_enviar():
+        dict_jugadores[nombre1_var.get()] = [0,0]
+        dict_jugadores[nombre2_var.get()] = [0,0]
+        # hasta acá venimos bien.
+        return None
+    #Boton
+    Boton=Button(raiz, text="Enviar",command= presionar_enviar)
+    Boton.pack()
+    CloseBoton=Button(raiz, text="Comenzar", command=raiz.destroy)
+    CloseBoton.pack()
+    raiz.mainloop()
+    return None
+
 def main():
     # Incluye un ciclo donde transcurre todo el juego.
     # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
     tiempo_inicio=time.time()
-    dict_jugadores={"Juan": [0,0], "Pedro": [0,0]}#Este dicc. hay que formarlo con la list de abajo.
-    orden_jugadores=list(dict_jugadores.keys()) #Pasar del input del tkinter a la lista orden_jugadores 
-    jugador= elegir_primero(orden_jugadores)
-    
+    dict_jugadores={}
+    solicitar_nombre(dict_jugadores)
+    orden_jugadores = list(dict_jugadores.keys()) #Pasar del input del tkinter a la lista orden_jugadores 
+    jugador = elegir_primero(orden_jugadores)
     juego_terminado=False
     fichas=generar_fichas()
     mostrar_fichas(fichas) 
@@ -185,41 +231,5 @@ def main():
             jugador_ganador = revisar_ganador(dict_jugadores,orden_jugadores)
             mensaje_final(tiempo_inicio, jugador_ganador)
         
-        
-            
-
 main()
 
-from tkinter import*
-
-def solicitar_nombre():
-    #Solicita el ingreso de los nombres de los Jugadores
-    #Hecho por Valentina Nieto y Camila Zarza
-    raiz= Tk()
-    raiz.title("Fosiles Memotest")
-    raiz.resizable(0,0)
-    #raiz.iconbitmap()
-    raiz.geometry("300x150")
-    raiz.config(bg="yellow")
-    #frame
-    miFrame=Frame(raiz)
-    miFrame.pack(padx=10, pady=20)
-    miFrame.config(cursor="heart")
-    #jugadores j1
-    jugador_1=Label(miFrame, text="Primer Jugador: ")
-    jugador_1.grid(row=0,column=0, padx=10, pady=10)
-    jugador_1_entry=Entry(miFrame)
-    jugador_1_entry.grid(row=0,column=1,padx=10, pady=10)
-    #j2
-    jugador_2=Label(miFrame, text="Segundo Jugador: ")
-    jugador_2.grid(row=1,column=0,padx=10, pady=10)
-    jugador_2_entry=Entry(miFrame)
-    jugador_2_entry.grid(row=1,column=1,padx=10, pady=10)
-    #Boton
-    Boton=Button(raiz, text="Enviar",command = lambda: acierto(jugador_1_entry.get(),jugador_2_entry.get()))
-    if not acierto:
-        return main
-    CloseBoton=Button(raiz, text="Comenzar", command=raiz.destroy)
-    Boton.pack()
-    raiz.mainloop()
-    solicitar_nombre()
