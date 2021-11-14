@@ -110,14 +110,14 @@ def revisar_ganador(diccionario, jugadores):
     aciertos_j1, intentos_j1= diccionario[jugadores[0]][ACIERTOS], diccionario[jugadores[0]][INTENTOS]
     aciertos_j2, intentos_j2 = diccionario[jugadores[1]][ACIERTOS], diccionario[jugadores[1]][INTENTOS]
     if  aciertos_j1 > aciertos_j2 :
-        resultado = jugadores[0]
+        resultado = f'{jugadores[0]} ganó'
     elif aciertos_j1 < aciertos_j2:
-        resultado = jugadores[1]
+        resultado = f'{jugadores[1]} ganó'
     else:
         if intentos_j1 < intentos_j2:
-            resultado = jugadores[0]
+            resultado = f'{jugadores[0]} ganó'
         elif intentos_j1 > intentos_j2:
-            resultado = jugadores[1]
+            resultado = f'{jugadores[1]} ganó'
         else:
             resultado = 'empate'
     return resultado
