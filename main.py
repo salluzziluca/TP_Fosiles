@@ -181,16 +181,15 @@ def solicitar_nombre(dict_jugadores):
     jugador_2_entry.grid(row=1,column=1,padx=10, pady=10)
     #funciones del boton
     def presionar_enviar():
-        #No recibe nada. se ejecuta al presionar el Boton. Asigna el contenido de los entry al diccionario de jugadores.
+        #No recibe nada. se ejecuta al presionar el Boton. Asigna el contenido de los entry al diccionario de jugadores. Cierra la interfaz.
         # Valentina Nieto,Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
         dict_jugadores[nombre1_var.get()] = [0,0]
         dict_jugadores[nombre2_var.get()] = [0,0]
+        raiz.destroy()
         return None
     #Boton
     Boton=Button(raiz, text="Enviar",command= presionar_enviar)
     Boton.pack()
-    CloseBoton=Button(raiz, text="Comenzar", command=raiz.destroy)
-    CloseBoton.pack()
     raiz.mainloop()
     return None
 
