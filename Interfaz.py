@@ -1,7 +1,4 @@
-from tkinter import Tk
+from tkinter import *
 
 
-import tkinter
-
-def interfaz_input_jugadores():
-    raiz=Tk
+# ACA PONEMOS LA FUNCION DE LA INTERFAZ Y LA IMPORTAMOS DESDE EL MAIN.
