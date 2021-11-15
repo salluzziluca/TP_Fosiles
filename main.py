@@ -181,7 +181,7 @@ def solicitar_nombre(dict_jugadores):
     raiz.title("Fosiles Memotest")
     raiz.resizable(0,0)
     #raiz.iconbitmap()
-    raiz.geometry("350x200")
+    raiz.geometry("310x160")
     raiz.config(bg="yellow")
     #frame
     miFrame=Frame(raiz)
