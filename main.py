@@ -106,7 +106,7 @@ def cambiar_jugador(jugador_anterior_pos,lista_jugadores):
 
 def revisar_ganador(diccionario, jugadores):
     # Evalúa aciertos e intentos y devuelve al jugador resultado.
-    # Hecha por Osorio y Salluzzi
+    # Hecha por Osorio y Salluzzi, Omar.
     aciertos_j1, intentos_j1= diccionario[jugadores[0]][ACIERTOS], diccionario[jugadores[0]][INTENTOS]
     aciertos_j2, intentos_j2 = diccionario[jugadores[1]][ACIERTOS], diccionario[jugadores[1]][INTENTOS]
     if  aciertos_j1 > aciertos_j2 :
@@ -196,18 +196,18 @@ def solicitar_nombre(dict_jugadores):
 
 
 def main():
+    # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi
     # Incluye un ciclo donde transcurre todo el juego.
-    # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi(era asi?)
     tiempo_inicio=time.time()
-    dict_jugadores={}#Este dicc. hay que formarlo con la list de abajo.
-    solicitar_nombre(dict_jugadores)
-    orden_jugadores=list(dict_jugadores.keys()) #Pasar del input del tkinter a la lista orden_jugadores 
-    jugador= elegir_primero(orden_jugadores)
+    dict_jugadores={}
+    solicitar_nombre(dict_jugadores) # función de interfaz hecha con tkinter.
+    orden_jugadores=list(dict_jugadores.keys()) 
+    jugador= elegir_primero(orden_jugadores) #elección aleatoria del primer jugador.
     
     juego_terminado=False
-    fichas=generar_fichas()
+    fichas=generar_fichas() # Generación de fichas, al azar.
     mostrar_fichas(fichas) 
-    while not juego_terminado:
+    while not juego_terminado: # Ciclo de juego general.
         
         fichas2,ingresos=turno(fichas, jugador)
         dict_jugadores[jugador][INTENTOS]+=1
@@ -225,9 +225,6 @@ def main():
         if juego_terminado:
             resultado = revisar_ganador(dict_jugadores,orden_jugadores)
             mensaje_final(tiempo_inicio, resultado)
-        
-        
-            
 
 main()
 
