@@ -128,11 +128,11 @@ def mensaje_final(tiempo_inicial, resultado):
     # Hecha por Lucas, Omar y Conti.
     # Recibe el tiempo inicial e intentos e imprime el fin del juego con la cantidad de intentos y el tiempo empleado.
     print('Fin del juego!')
-    print(f"El juego duró {int(time.time() - tiempo_inicial)} segundos")
+    print(f"\nEl juego duró {int(time.time() - tiempo_inicial)} segundos")
     if resultado != 'empate':
-        print(f' {resultado}, Felicitaciones!')
+        print(f'\n{resultado}, Felicitaciones!\n')
     else:
-        print(f'El juego terminó en {resultado}')
+        print(f'\nEl juego terminó en {resultado}')
     
 def acierto(fichas, ingresos):
     # Hecha por Lucas Osorio y Valentina Nieto
