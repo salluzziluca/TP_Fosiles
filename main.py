@@ -11,8 +11,8 @@ TURNO_ACTIVO=2
 
 
 def generar_fichas():
-    # Genera una lista_jugadores de fichas y las devuelve en posiciones aleatorias.
     # Hecha por Lucas, Omar y Conti.
+    # Genera una lista_jugadores de fichas y las devuelve en posiciones aleatorias.
     lista_jugadores=[
     ["D",False],["D",False],["E",False],["E",False],
     ["J",False],["J",False],["Y",False],["Y",False],
@@ -23,9 +23,9 @@ def generar_fichas():
     return lista_jugadores
 
 def mostrar_fichas(fichas):
+    # Hecha por Luca Salluzzi, Omar, Lucas, Conti.
     # Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Luego, se ejecuta un salto de linea
     # cada cuarta posicion y al final del ciclo.
-    # Hecha por Luca Salluzzi, Omar, Lucas, Conti.
     n_posicion = 1
     contador=0
     for ficha in fichas:
@@ -42,8 +42,8 @@ def mostrar_fichas(fichas):
     print('\n')
                
 def input_usuario(fichas2):
-    # Pide al usuario un ingreso numerico, devuelve ese numero.
     # Hecha por Camila Zarza, Oriz.
+    # Pide al usuario un ingreso numerico, devuelve ese numero.
     entero=False
     while not entero:
         try:
@@ -59,14 +59,14 @@ def input_usuario(fichas2):
     return posicion
 
 def validacion(input_realizado,fichas):
+    # Hecho por Omar Oriz.
     #recibe el input numérico del usuario y la lista_jugadores de fichas actualizada, devuelve un bool
     # Dependiendo si es una pos correcta, y si la ficha no está boca arriba.
-    # Hecho por Omar Oriz.
     return ((input_realizado-1) in range(len(fichas)) and fichas[input_realizado-1][POSICION_BOOL] != True)
 
 def revisar_si_ganaste(fichas):
-    # Determina si el juego terminó, comprobando que todas las fichas esten "volteadas".
     # Hecha por Agustín Conti
+    # Determina si el juego terminó, comprobando que todas las fichas esten "volteadas".
     ganar=True
     pos_maxima=len(fichas)-1
     i=0
@@ -77,26 +77,26 @@ def revisar_si_ganaste(fichas):
     return ganar
 
 def voltear_ficha(lista_fichas,ingreso):
-    # Recibe una lista_jugadores de fichas y un input y devuelve la lista_jugadores cambiada con la ficha (de pos. ingreso-1) volteada boca arriba.
     # Hecha por Omar Oriz.
+    # Recibe una lista_jugadores de fichas y un input y devuelve la lista_jugadores cambiada con la ficha (de pos. ingreso-1) volteada boca arriba.
     lista_fichas[ingreso-1][POSICION_BOOL]=True
     return lista_fichas
 
 def voltear_fichas_para_abajo(lista_fichas,ingresos):
-    # Recibe una lista_jugadores de fichas y una lista_jugadores de inputs y devuelve la lista_jugadores con esas fichas boca abajo.
     # Hecha por Omar Oriz.
+    # Recibe una lista_jugadores de fichas y una lista_jugadores de inputs y devuelve la lista_jugadores con esas fichas boca abajo.
     lista_fichas[(ingresos[INGRESO1]-1)][POSICION_BOOL]=False
     lista_fichas[(ingresos[INGRESO2]-1)][POSICION_BOOL]=False
     return lista_fichas
 
 def elegir_primero(orden_jugadores):
-    # Elije el jugador que va a empezar aleatoriamente 
     # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi
+    # Elije el jugador que va a empezar aleatoriamente
     return random.choice(orden_jugadores)
 
 def cambiar_jugador(jugador_anterior_pos,lista_jugadores):
-    # Devuelve el siguiente jugador en la lista de jugadores
     # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi
+    # Devuelve el siguiente jugador en la lista de jugadores
     if jugador_anterior_pos != (len(lista_jugadores)-1):
         jugador_siguiente= lista_jugadores[jugador_anterior_pos+1]
     else:
@@ -105,8 +105,8 @@ def cambiar_jugador(jugador_anterior_pos,lista_jugadores):
     return jugador_siguiente
 
 def revisar_ganador(diccionario, jugadores):
-    # Evalúa aciertos e intentos y devuelve al jugador resultado.
     # Hecha por Osorio y Salluzzi, Omar.
+    # Evalúa aciertos e intentos y devuelve al jugador resultado.
     aciertos_j1, intentos_j1= diccionario[jugadores[0]][ACIERTOS], diccionario[jugadores[0]][INTENTOS]
     aciertos_j2, intentos_j2 = diccionario[jugadores[1]][ACIERTOS], diccionario[jugadores[1]][INTENTOS]
     if  aciertos_j1 > aciertos_j2 :
@@ -123,8 +123,8 @@ def revisar_ganador(diccionario, jugadores):
     return resultado
 
 def mensaje_final(tiempo_inicial, resultado):
-    # Recibe el tiempo inicial e intentos e imprime el fin del juego con la cantidad de intentos y el tiempo empleado.
     # Hecha por Lucas, Omar y Conti.
+    # Recibe el tiempo inicial e intentos e imprime el fin del juego con la cantidad de intentos y el tiempo empleado.
     print('Fin del juego!')
     print(f"El juego duró {int(time.time() - tiempo_inicial)} segundos")
     if resultado != 'empate':
@@ -133,13 +133,13 @@ def mensaje_final(tiempo_inicial, resultado):
         print(f'El juego terminó en {resultado}')
     
 def acierto(fichas, ingresos):
-    # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
     # Hecha por Lucas Osorio y Valentina Nieto
+    # Determina si el par de inputs ingresados en un turno es correcto, devuelve un booleano.
     return fichas[ingresos[INGRESO1]-1][POSICION_LETRA] == fichas[ingresos[INGRESO2]-1][POSICION_LETRA]
     
 def turno(fichas, jugador):
-    # Define una ronda de selección de fichas. Devuelve la lista_jugadores con el par de ELECCIONES y los ingresos realizados.
     # Hecha por Oriz, Conti, Zarza.
+    # Define una ronda de selección de fichas. Devuelve la lista_jugadores con el par de ELECCIONES y los ingresos realizados.
     fichas2=fichas
     n=0
     print(f'Nuevo turno, {jugador}, Sus fichas:')
@@ -155,8 +155,8 @@ def turno(fichas, jugador):
     return fichas2,ingresos
 
 def solicitar_nombre(dict_jugadores):
-    #Solicita el ingreso de los nombres de los Jugadores
     #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
+    #Solicita el ingreso de los nombres de los Jugadores
     raiz= Tk()
     raiz.title("Fosiles Memotest")
     raiz.resizable(0,0)
@@ -181,8 +181,8 @@ def solicitar_nombre(dict_jugadores):
     jugador_2_entry.grid(row=1,column=1,padx=10, pady=10)
     #funciones del boton
     def presionar_enviar():
-        #No recibe nada. se ejecuta al presionar el Boton. Asigna el contenido de los entry al diccionario de jugadores. Cierra la interfaz.
         # Valentina Nieto,Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
+        #No recibe nada. se ejecuta al presionar el Boton. Asigna el contenido de los entry al diccionario de jugadores. Cierra la interfaz.
         dict_jugadores[nombre1_var.get()] = [0,0]
         dict_jugadores[nombre2_var.get()] = [0,0]
         raiz.destroy()
