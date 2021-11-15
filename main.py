@@ -12,15 +12,15 @@ TURNO_ACTIVO=2
 
 def generar_fichas():
     # Hecha por Lucas, Omar y Conti.
-    # Genera una lista_jugadores de fichas y las devuelve en posiciones aleatorias.
-    lista_jugadores=[
+    # Genera una lista de fichas y las devuelve en posiciones aleatorias.
+    lista_fichas=[
     ["D",False],["D",False],["E",False],["E",False],
     ["J",False],["J",False],["Y",False],["Y",False],
     ["A",False],["A",False],["G",False],["G",False],
     ["X",False],["X",False],["V",False],["V",False]
     ]
-    random.shuffle(lista_jugadores)
-    return lista_jugadores
+    random.shuffle(lista_fichas)
+    return lista_fichas
 
 def mostrar_fichas(fichas):
     # Hecha por Luca Salluzzi, Omar, Lucas, Conti.
@@ -43,14 +43,14 @@ def mostrar_fichas(fichas):
         contador+=1
     print('\n')
                
-def input_usuario(fichas2):
+def input_usuario(fichas):
     # Hecha por Camila Zarza, Oriz.
     # Pide al usuario un ingreso numerico, devuelve ese numero.
     entero=False
     while not entero:
         try:
             posicion=int(input("Posición: "))
-            if validacion(posicion,fichas2):
+            if validacion(posicion,fichas):
                 entero=True
             else:
                 print('Número ingresado inválido.')
@@ -62,31 +62,31 @@ def input_usuario(fichas2):
 
 def validacion(input_realizado,fichas):
     # Hecho por Omar Oriz.
-    #recibe el input numérico del usuario y la lista_jugadores de fichas actualizada, devuelve un bool
+    #recibe el input numérico del usuario y la lista de fichas actualizada, devuelve un bool
     # Dependiendo si es una pos correcta, y si la ficha no está boca arriba.
     return ((input_realizado-1) in range(len(fichas)) and fichas[input_realizado-1][POSICION_BOOL] != True)
 
-def revisar_si_ganaste(fichas):
+def juego_completo(fichas):
     # Hecha por Agustín Conti
     # Determina si el juego terminó, comprobando que todas las fichas esten "volteadas".
-    ganar=True
+    Terminado=True
     pos_maxima=len(fichas)-1
-    i=0
-    while ganar and i <=pos_maxima:
-        if not fichas[i][POSICION_BOOL]:
-            ganar=False
-        i+=1    
-    return ganar
+    pos_actual=0
+    while Terminado and pos_actual <=pos_maxima:
+        if not fichas[pos_actual][POSICION_BOOL]:
+            Terminado=False
+        pos_actual+=1    
+    return Terminado
 
 def voltear_ficha(lista_fichas,ingreso):
     # Hecha por Omar Oriz.
-    # Recibe una lista_jugadores de fichas y un input y devuelve la lista_jugadores cambiada con la ficha (de pos. ingreso-1) volteada boca arriba.
+    # Recibe una lista de fichas y un input y devuelve la lista cambiada con la ficha (de pos. ingreso-1) volteada boca arriba.
     lista_fichas[ingreso-1][POSICION_BOOL]=True
-    return lista_fichas
+    return None
 
 def voltear_fichas_para_abajo(lista_fichas,ingresos):
     # Hecha por Omar Oriz.
-    # Recibe una lista_jugadores de fichas y una lista_jugadores de inputs y devuelve la lista_jugadores con esas fichas boca abajo.
+    # Recibe una lista de fichas y una lista con ambos inputs del jugador y devuelve la lista de fichas con esas fichas boca abajo.
     lista_fichas[(ingresos[INGRESO1]-1)][POSICION_BOOL]=False
     lista_fichas[(ingresos[INGRESO2]-1)][POSICION_BOOL]=False
     return lista_fichas
@@ -125,7 +125,7 @@ def revisar_ganador(diccionario, jugadores):
     return resultado
 
 def mensaje_final(tiempo_inicial, resultado):
-    # Hecha por Lucas, Omar y Conti.
+    # Hecha por Lucas Osorio, Omar Oriz y Agustin Conti.
     # Recibe el tiempo inicial e intentos e imprime el fin del juego con la cantidad de intentos y el tiempo empleado.
     print('Fin del juego!')
     print(f"\nEl juego duró {int(time.time() - tiempo_inicial)} segundos")
@@ -141,8 +141,7 @@ def acierto(fichas, ingresos):
     
 def turno(fichas, jugador):
     # Hecha por Oriz, Conti, Zarza.
-    # Define una ronda de selección de fichas. Devuelve la lista_jugadores con el par de ELECCIONES y los ingresos realizados.
-    fichas2=fichas
+    # Define una ronda de selección de fichas. Devuelve la lista con el par de ELECCIONES y los ingresos realizados.
     n=0
     system('cls')  #limpia pantalla
     print('\n-------------------------------')
@@ -152,17 +151,17 @@ def turno(fichas, jugador):
     ingresos=[]
     while n<2:
 
-        input1=input_usuario(fichas2)
+        input1=input_usuario(fichas)
         ingresos.append(input1)
-        fichas2=voltear_ficha(fichas2,input1)
+        voltear_ficha(fichas,input1)
         system('cls') #limpia pantalla
         print('\n-------------------------------')
         print(f'Turno de {jugador}')
         print('-------------------------------\n')
-        mostrar_fichas(fichas2)
+        mostrar_fichas(fichas)
         n+=1
 
-    return fichas2,ingresos
+    return fichas,ingresos
 
 def timer_delay(segundos):
     # Omar Oriz
@@ -219,7 +218,7 @@ def main():
     # Incluye un ciclo donde transcurre todo el juego.
     tiempo_inicio=time.time()
     dict_jugadores={}
-    solicitar_nombre(dict_jugadores) # función de interfaz hecha con tkinter.
+    solicitar_nombre(dict_jugadores) # función de interfaz hecha con tkinter. incluye jugadores al diccionario.
     orden_jugadores=list(dict_jugadores.keys()) 
     jugador= elegir_primero(orden_jugadores) #elección aleatoria del primer jugador.
     
@@ -227,19 +226,18 @@ def main():
     fichas=generar_fichas() # Generación de fichas, al azar.
     while not juego_terminado: # Ciclo de juego general.
         
-        fichas2,ingresos=turno(fichas, jugador)
+        fichas,ingresos=turno(fichas, jugador)
         dict_jugadores[jugador][INTENTOS]+=1
         
         if acierto(fichas,ingresos):
             print('Acierto!')
             dict_jugadores[jugador][ACIERTOS]+=1
-            fichas=fichas2
             timer_delay(1.75) #1.75s para que el jugador pueda ver su elección.
         else:
             fichas=voltear_fichas_para_abajo(fichas,ingresos)
             jugador=cambiar_jugador(orden_jugadores.index(jugador),orden_jugadores)
             timer_delay(1.75) #1.75s para que el jugador pueda ver su elección.
-        juego_terminado=revisar_si_ganaste(fichas)
+        juego_terminado=juego_completo(fichas)
 
         if juego_terminado:
             resultado = revisar_ganador(dict_jugadores,orden_jugadores)
