@@ -1,4 +1,3 @@
-
 """
 def mostrar_las_fichas(fichas):
     #Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha.
