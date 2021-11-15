@@ -1,6 +1,6 @@
 import random, time
 from tkinter import *
-
+from os import system
 POSICION_LETRA = 0
 POSICION_BOOL=1
 INGRESO1 = 0
@@ -142,17 +142,31 @@ def turno(fichas, jugador):
     # Define una ronda de selección de fichas. Devuelve la lista_jugadores con el par de ELECCIONES y los ingresos realizados.
     fichas2=fichas
     n=0
-    print(f'Nuevo turno, {jugador}, Sus fichas:')
+    system('cls')  #limpia pantalla
+    print(f'Turno de {jugador}')
     mostrar_fichas(fichas)
     ingresos=[]
     while n<2:
+
         input1=input_usuario(fichas2)
         ingresos.append(input1)
         fichas2=voltear_ficha(fichas2,input1)
+        system('cls') #limpia pantalla
+        print(f'Turno de {jugador}')
         mostrar_fichas(fichas2)
         n+=1
 
     return fichas2,ingresos
+
+def timer_delay(segundos):
+    # Omar Oriz
+    # Genera un delay de la cantidad de segundos pedida, en la que se "frena" el avance del programa.
+    t_inicial = time.time()
+    tiempo_transcurrido = 0
+    while tiempo_transcurrido < segundos:
+        t_actual = time.time()
+        tiempo_transcurrido = t_actual - t_inicial
+    return None
 
 def solicitar_nombre(dict_jugadores):
     #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
@@ -205,20 +219,20 @@ def main():
     
     juego_terminado=False
     fichas=generar_fichas() # Generación de fichas, al azar.
-    mostrar_fichas(fichas) 
     while not juego_terminado: # Ciclo de juego general.
         
         fichas2,ingresos=turno(fichas, jugador)
         dict_jugadores[jugador][INTENTOS]+=1
-
+        
         if acierto(fichas,ingresos):
             print('Acierto!')
             dict_jugadores[jugador][ACIERTOS]+=1
             fichas=fichas2
+            timer_delay(1.5) #1.5s para que el jugador pueda ver su elección.
         else:
             fichas=voltear_fichas_para_abajo(fichas,ingresos)
             jugador=cambiar_jugador(orden_jugadores.index(jugador),orden_jugadores)
-
+            timer_delay(1.5) #1.5s para que el jugador pueda ver su elección.
         juego_terminado=revisar_si_ganaste(fichas)
 
         if juego_terminado:
