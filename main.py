@@ -128,7 +128,7 @@ def mensaje_final(tiempo_inicial, resultado):
     print('Fin del juego!')
     print(f"El juego duró {int(time.time() - tiempo_inicial)} segundos")
     if resultado != 'empate':
-        print(f'El/la resultado/a es {resultado}')
+        print(f' {resultado}, Felicitaciones!')
     else:
         print(f'El juego terminó en {resultado}')
     
