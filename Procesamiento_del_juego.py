@@ -1,7 +1,6 @@
 import random, time
 from Constantes import *
 
-
 def generar_fichas():
     # Hecha por Lucas, Omar y Conti.
     # Genera una lista de fichas y las devuelve en posiciones aleatorias.
@@ -21,7 +20,7 @@ def elegir_primero(orden_jugadores):
 
 def validacion(input_realizado,fichas):
     # Hecho por Omar Oriz.
-    #recibe el input numérico del usuario y la lista de fichas actualizada, devuelve un bool
+    # recibe el input numérico del usuario y la lista de fichas actualizada, devuelve un bool
     # Dependiendo si es una pos correcta, y si la ficha no está boca arriba.
     return ((input_realizado-1) in range(len(fichas)) and fichas[input_realizado-1][POSICION_BOOL] != True)
 
@@ -77,7 +76,7 @@ def timer_delay(segundos):
 
 def revisar_ganador(diccionario, jugadores):
     # Hecha por Osorio y Salluzzi, Omar.
-    # Evalúa aciertos e intentos y devuelve al jugador resultado.
+    # Evalúa aciertos e intentos y devuelve al ganador o anuncia un empate.
     aciertos_j1, intentos_j1= diccionario[jugadores[0]][ACIERTOS], diccionario[jugadores[0]][INTENTOS]
     aciertos_j2, intentos_j2 = diccionario[jugadores[1]][ACIERTOS], diccionario[jugadores[1]][INTENTOS]
     if  aciertos_j1 > aciertos_j2 :
@@ -94,5 +93,3 @@ def revisar_ganador(diccionario, jugadores):
     return resultado
 
 
-
-# ACA PONEMOS TODOS LAS FUNCIONES DEL JUEGO QUE CUMPLAN TAREAS DE PROCESAMIENTO QUE NO SEAN LA LA FUNCION MAIN.

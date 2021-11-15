@@ -8,7 +8,7 @@ from Procesamiento_del_juego import *
     
 def turno(fichas, jugador):
     # Hecha por Oriz, Conti, Zarza.
-    # Define una ronda de selección de fichas. Devuelve la lista con el par de ELECCIONES y los ingresos realizados.
+    # Define una ronda de selección de fichas. Devuelve la lista de fichas con dos de ellas dadas vuelta por el jugador y los ingresos realizados.
     n=0
     system('cls')  #limpia pantalla
     print('\n-------------------------------')

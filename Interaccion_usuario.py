@@ -30,8 +30,8 @@ def input_usuario(fichas):
     entero=False
     while not entero:
         try:
-            posicion=int(input("Posición: "))
-            if validacion(posicion,fichas):
+            input_realizado=int(input("Posición: "))
+            if validacion(input_realizado,fichas):
                 entero=True
             else:
                 print('Número ingresado inválido.')
@@ -39,7 +39,7 @@ def input_usuario(fichas):
             print ('Valor inválido.')
         except TypeError:
             print ('Valor inválido.')
-    return posicion
+    return input_realizado
 
 def mensaje_final(tiempo_inicial, resultado):
     # Hecha por Lucas Osorio, Omar Oriz y Agustin Conti.
