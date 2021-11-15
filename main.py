@@ -30,13 +30,15 @@ def mostrar_fichas(fichas):
     contador=0
     for ficha in fichas:
         if contador==4:
-            print('\n')
+            print('\n\n')
             contador=0
         if ficha[POSICION_BOOL]:
-            print(f'[{ficha[POSICION_LETRA]}]', end=' ')
+            print(f' {ficha[POSICION_LETRA]}', end='    ')
         else:
-            print(f'[{n_posicion}]', end=' ')
-        
+            if n_posicion < 10:                           # Condicionales para rectificar imagen de fichas en consola.
+                print(f' {n_posicion}', end='    ')
+            else:
+                print(f'{n_posicion}', end='    ')
         n_posicion+=1
         contador+=1
     print('\n')
@@ -143,7 +145,9 @@ def turno(fichas, jugador):
     fichas2=fichas
     n=0
     system('cls')  #limpia pantalla
+    print('\n-------------------------------')
     print(f'Turno de {jugador}')
+    print('-------------------------------\n')
     mostrar_fichas(fichas)
     ingresos=[]
     while n<2:
@@ -152,7 +156,9 @@ def turno(fichas, jugador):
         ingresos.append(input1)
         fichas2=voltear_ficha(fichas2,input1)
         system('cls') #limpia pantalla
+        print('\n-------------------------------')
         print(f'Turno de {jugador}')
+        print('-------------------------------\n')
         mostrar_fichas(fichas2)
         n+=1
 
@@ -228,11 +234,11 @@ def main():
             print('Acierto!')
             dict_jugadores[jugador][ACIERTOS]+=1
             fichas=fichas2
-            timer_delay(1.5) #1.5s para que el jugador pueda ver su elección.
+            timer_delay(1.75) #1.75s para que el jugador pueda ver su elección.
         else:
             fichas=voltear_fichas_para_abajo(fichas,ingresos)
             jugador=cambiar_jugador(orden_jugadores.index(jugador),orden_jugadores)
-            timer_delay(1.5) #1.5s para que el jugador pueda ver su elección.
+            timer_delay(1.75) #1.75s para que el jugador pueda ver su elección.
         juego_terminado=revisar_si_ganaste(fichas)
 
         if juego_terminado:
