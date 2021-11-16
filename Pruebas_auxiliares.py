@@ -1,9 +1,3 @@
-from main import INGRESO1, INGRESO2
-
-POSICION_BOOL = 1
-POSICION_LETRA = 0
-
-lista_prueba=[["D",False],["D",True],["s",False],["s",False]]
 """
 def mostrar_las_fichas(fichas):
     #Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha.
