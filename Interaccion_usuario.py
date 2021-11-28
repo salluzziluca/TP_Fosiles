@@ -1,13 +1,19 @@
 from Constantes import *
 from Procesamiento_del_juego import validacion
+from os import system
 import time
 
-def mostrar_fichas(fichas):
+
+def mostrar_fichas(fichas,jugador):
     # Hecha por Luca Salluzzi, Omar, Lucas, Conti.
     # Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Luego, se ejecuta un salto de linea
     # cada cuarta posicion y al final del ciclo.
     n_posicion = 1
     contador=0
+    system('cls')  #limpia pantalla
+    print('\n-------------------------------')
+    print(f'Turno de {jugador}')
+    print('-------------------------------\n')
     for ficha in fichas:
         if contador==4:
             print('\n\n')
