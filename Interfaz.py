@@ -42,7 +42,7 @@ def solicitar_nombre(dict_jugadores):
     raiz.mainloop()
     return None
     
-
+# LISTA TEMPORAL PARA TESTEO.
 lista_jugadores_ordenada = [['Pedro',[3,9]],['Omar',[6,8]],['Agus',[7,6]],['Rogelio',[6,6]],['Pepe',[6,5]],['Rodolfo',[6,4]]]
 
 
