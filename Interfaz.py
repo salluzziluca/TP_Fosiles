@@ -1,6 +1,4 @@
-from os import device_encoding
 from tkinter import *
-
 from Constantes import ACIERTOS, INTENTOS
 
 def solicitar_nombre(dict_jugadores):
@@ -43,76 +41,115 @@ def solicitar_nombre(dict_jugadores):
     return None
     
 # LISTA TEMPORAL PARA TESTEO.
-lista_jugadores_ordenada = [['Pedro',[3,9]],['Omar',[6,8]],['Agus',[7,6]],['Rogelio',[6,6]],['Pepe',[6,5]],['Rodolfo',[6,4]]]
+lista_jugadores_ordenada = [['Pedro',[3,9]],['Omar',[6,8]],['Agus',[7,6]],
+                            ['Rogelio',[6,6]],['Pepe',[6,5]],['Rodolfo',[6,4]],
+                            ['Julio',[6,3]],['Diego',[6,2]],['Fran',[6,1]],
+                            ['Julio',[6,3]],['Diego',[6,2]],['Fran',[6,1]],
+                            ['Julio',[6,3]],['Diego',[6,2]],['Fran',[6,1]],
+                            ['Julio',[6,3]],['Diego',[6,2]],['Fran',[6,1]],
+                            ]
 
 
 def ranking_de_partida(lista_jugadores_ordenada,promedio_intentos):
 
+    def coordinar_scroll_con_frame(lienzo):
+        # resetear la region de scroll para encompazar el frame
+        lienzo.configure(scrollregion=lienzo.bbox("all"))
+
+    def poblar_frame(frame_ranking,lista_jugadores_ordenada,trofeo_ganador):
+        # Recibe el frame, la lista de j. ordenada y la imagen trofeo. Se encarga de mostrar en la interfaz la tabla de ranking 
+        # con todas sus estadísticas.
+        #---------------------------------- label fijos--------------------------------------------
+        espacio = Label(frame_ranking,text='            ',bg='thistle2',pady=15,padx=10)
+        espacio.grid(column=0,row=0)
+
+        nombre_jugador = Label(frame_ranking,text='Nombre del Jugador',font=("Bahnschrift", 15),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
+        nombre_jugador.grid(column=1,row=0)
+
+        aciertos_jugador = Label(frame_ranking,text='Aciertos',font=("Bahnschrift", 15),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
+        aciertos_jugador.grid(column=3,row=0)
+
+        intentos_jugador = Label(frame_ranking,text='Intentos',font=("Bahnschrift", 15),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
+        intentos_jugador.grid(column=5,row=0)
+
+        promedio_intentos_jugador = Label(frame_ranking,text='Promedio de intentos',font=("Bahnschrift", 15),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
+        promedio_intentos_jugador.grid(column=7,row=0)
+
+        trofeo = Label(frame_ranking,image= trofeo_ganador,bg= 'thistle2',height=77,width=88)
+        trofeo.grid(column= 0,row= 1)
+
+        #---------------------------------- label generados--------------------------------------------
+        columna_actual = 1
+        fila_actual = 1
+        lugar = 2
+        tamanio_letra = 30
+        for jugador,estadisticas in lista_jugadores_ordenada:
+
+            if columna_actual == 0:
+                temp_label = Label(frame_ranking,text=f'{lugar}º',font=("Bahnschrift", tamanio_letra),bg = 'thistle2', borderwidth="1",relief="solid")
+                temp_label.grid(column= columna_actual , row= fila_actual)
+                columna_actual +=1
+                lugar += 1 
+                
+            temp_label = Label(frame_ranking,text=f'{jugador}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
+            temp_label.grid(column= columna_actual , row= fila_actual)
+
+            temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
+            temp_label.grid(column= columna_actual+2 , row= fila_actual)
+
+            temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
+            temp_label.grid(column= columna_actual+4 , row= fila_actual)
+
+            temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]/estadisticas[ACIERTOS]}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
+            temp_label.grid(column= columna_actual+6 , row= fila_actual)
+            if tamanio_letra > 10:
+                tamanio_letra -=3
+            fila_actual += 1
+            columna_actual = 0
+        return fila_actual
+
     #---------------------------------- raíz--------------------------------------------
     raiz_ranking = Tk()
     raiz_ranking.title("Ranking de partida")
-    raiz_ranking.wm_attributes('-transparentcolor','gray99')
-    raiz_ranking.resizable(1,1)
-    raiz_ranking.geometry("1270x400")
+    raiz_ranking.attributes('-topmost', True)
+    raiz_ranking.resizable(0,0)
+    raiz_ranking.geometry("720x400")
     raiz_ranking.config(bg="thistle2")
+    #---------------------------------- Scroll--------------------------------------------
+    barra_scroll = Scrollbar(raiz_ranking,orient="vertical",)
+    #---------------------------------- Lienzo--------------------------------------------
+    lienzo = Canvas(raiz_ranking)
     #---------------------------------- frame--------------------------------------------
-    frame_ranking = Frame(raiz_ranking)
+    frame_ranking = Frame(lienzo)
     frame_ranking.config(bg='thistle2')
-    frame_ranking.pack(anchor=W)
+    #---------------------------------- Configuracion del scroll--------------------------------------------
+    barra_scroll.config(command=lienzo.yview)
+    barra_scroll.pack(side="right", fill="y")
 
+    #---------------------------------- Configuracion del lienzo--------------------------------------------
+    lienzo.configure(yscrollcommand=barra_scroll.set, bg = 'thistle2') # parametro de configuracion yscrollcommand seteando la  barra_scroll como scroller.
+    lienzo.pack(side="left", fill="both", expand=True)
+    lienzo.create_window((0,0), window=frame_ranking, anchor="n")
+
+    #---------------------------------- relacionar el frame con la barra de scroll.--------------------------------------------
+    frame_ranking.bind("<Configure>", lambda event, lienzo=lienzo: coordinar_scroll_con_frame(lienzo))
     #---------------------------------- Imagenes --------------------------------------------
     trofeo_ganador = PhotoImage(file='trofeo_ganador.png')
+    #---------------------------------- Poblar Frame --------------------------------------------
+    ultima_fila = poblar_frame(frame_ranking,lista_jugadores_ordenada,trofeo_ganador)
 
-    #---------------------------------- label fijos--------------------------------------------
-    espacio = Label(frame_ranking,text='            ',bg='thistle2')
-    espacio.grid(column=0,row=0)
+    #---------------------------------- Botones --------------------------------------------
+    fila_actual = ultima_fila+1
+    salir_del_juego = Button(frame_ranking,text='Salir del Juego',command=raiz_ranking.destroy)
+    salir_del_juego.grid(column = 1,row = fila_actual+1,pady=10)
 
-    nombre_jugador = Label(frame_ranking,text='Nombre del Jugador',font=("Bahnschrift", 15),bg = 'thistle2', padx=50, pady=20)
-    nombre_jugador.grid(column=1,row=0)
-
-    aciertos_jugador = Label(frame_ranking,text='Aciertos',font=("Bahnschrift", 15),bg = 'thistle2', padx=50, pady=20)
-    aciertos_jugador.grid(column=3,row=0)
-
-    intentos_jugador = Label(frame_ranking,text='Intentos',font=("Bahnschrift", 15),bg = 'thistle2', padx=50, pady=20)
-    intentos_jugador.grid(column=5,row=0)
-
-    promedio_intentos_jugador = Label(frame_ranking,text='Promedio de intentos',font=("Bahnschrift", 15),bg = 'thistle2', padx=50, pady=20)
-    promedio_intentos_jugador.grid(column=7,row=0)
-
-    trofeo = Label(frame_ranking,image= trofeo_ganador,bg= 'thistle2',height=77,width=88)
-    trofeo.grid(column= 0,row= 1)
-    #---------------------------------- label generados--------------------------------------------
-    columna_actual = 1
-    fila_actual = 1
-    lugar = 2
-    tamanio_letra = 30
-    for jugador,estadisticas in lista_jugadores_ordenada:
-
-        if columna_actual == 0:
-            temp_label = Label(frame_ranking,text=f'{lugar}º',font=("Bahnschrift", 15),bg = 'thistle2', padx=100, pady=20)
-            temp_label.grid(column= columna_actual , row= fila_actual)
-            columna_actual +=1
-            lugar += 1 
-            
-        temp_label = Label(frame_ranking,text=f'{jugador}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2', padx=100, pady=20)
-        temp_label.grid(column= columna_actual , row= fila_actual)
-
-        temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2', padx=100, pady=20)
-        temp_label.grid(column= columna_actual+2 , row= fila_actual)
-
-        temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2', padx=100, pady=20)
-        temp_label.grid(column= columna_actual+4 , row= fila_actual)
-
-        temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]/estadisticas[ACIERTOS]}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2', padx=100, pady=20)
-        temp_label.grid(column= columna_actual+6 , row= fila_actual)
-
-        tamanio_letra -=3
-        fila_actual += 1
-        columna_actual = 0
-
+    nueva_partida = Button(frame_ranking,text='Nueva Partida')
+    nueva_partida.grid(column = 7,row = fila_actual+1,pady=10)
 
 
     raiz_ranking.mainloop()
+
+
 ranking_de_partida(lista_jugadores_ordenada,2)
 
 
