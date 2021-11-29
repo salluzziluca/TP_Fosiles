@@ -140,10 +140,10 @@ def ranking_de_partida(lista_jugadores_ordenada,promedio_intentos):
 
     #---------------------------------- Botones --------------------------------------------
     fila_actual = ultima_fila+1
-    salir_del_juego = Button(frame_ranking,text='Salir del juego',command=raiz_ranking.destroy,bg = 'pale violet red',fg = 'dark slate blue' )
+    salir_del_juego = Button(frame_ranking,text='Salir del juego',command=raiz_ranking.destroy,bg = 'pale violet red',fg = 'dark slate blue',activebackground='violetred3' )
     salir_del_juego.grid(column = 1,row = fila_actual,pady=10)
 
-    nueva_partida = Button(frame_ranking,text='Nueva Partida',bg = 'medium sea green',fg = 'dark slate blue' )
+    nueva_partida = Button(frame_ranking,text='Nueva Partida',bg = 'medium sea green',fg = 'dark slate blue',activebackground = 'sea green')
     nueva_partida.grid(column = 7,row = fila_actual,pady=10)
 
 
