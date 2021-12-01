@@ -127,6 +127,10 @@ def interfaz_registro():
         if validacion[0] and validacion[1] and validacion[2]:
             msg_final.config(bg='green',fg='white',text='Registro exitoso!')
             msg_final.pack(padx= 70, pady=0)
+            # si el registro es exitoso se limpian los campos.
+            usario_nuevo_entry.delete(0, 'end')
+            mi_clave_entry.delete(0, 'end')
+            mi_clave_re_entry.delete(0, 'end')
         elif not validacion[0]:
             msg_final.config(bg='green',fg='white',text='Nombre de usuario inválido.\nPuede contener letras y numeros y el _.\nDebe tener entre 4 y 15 caracteres.\nNo puede ser un nombre de usuario existente.')
             msg_final.pack(padx= 70, pady=0)
@@ -138,7 +142,7 @@ def interfaz_registro():
             msg_final.pack(padx= 70, pady=0)
         return None
 
-    #---------------------------------- funciones del  botón--------------------------------------------
+    #---------------------------------- funciones--------------------------------------------
     def get_usuario_contra():
         #obtiene los datos ingresados en los campos de la interfaz al momento de la llamada de esta función.
         return (var_usuario_nuevo.get(),var_pass.get(),var_pass_re.get())
@@ -159,3 +163,5 @@ def interfaz_registro():
     raiz.mainloop()
     return None
 ########################################
+
+interfaz_registro()
