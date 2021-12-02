@@ -24,7 +24,7 @@ def validacion(input_realizado,fichas):
     # Dependiendo si es una pos correcta, y si la ficha no está boca arriba.
     return ((input_realizado-1) in range(len(fichas)) and fichas[input_realizado-1][POSICION_BOOL] != True)
 
-def juego_completo(fichas):
+def partida_completa(fichas):
     # Hecha por Agustín Conti
     # Determina si el juego terminó, comprobando que todas las fichas esten "volteadas".
     Terminado=True

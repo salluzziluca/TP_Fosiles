@@ -50,7 +50,7 @@ lista_jugadores_ordenada = [['Pedro',[3,9]],['Omar',[6,8]],['Agus',[7,6]],
                             ]
 
 
-def ranking_de_partida(lista_jugadores_ordenada,promedio_intentos):
+def ranking_de_partida(lista_jugadores_ordenada,partidas_jugadas):
 
     def coordinar_scroll_con_frame(lienzo):
         # resetear la region de scroll para encompazar el frame
@@ -100,7 +100,7 @@ def ranking_de_partida(lista_jugadores_ordenada,promedio_intentos):
             temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
             temp_label.grid(column= columna_actual+4 , row= fila_actual)
 
-            temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]/estadisticas[ACIERTOS]}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
+            temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]/partidas_jugadas}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
             temp_label.grid(column= columna_actual+6 , row= fila_actual)
             if tamanio_letra > 10:
                 tamanio_letra -=3
@@ -150,7 +150,7 @@ def ranking_de_partida(lista_jugadores_ordenada,promedio_intentos):
     raiz_ranking.mainloop()
 
 
-ranking_de_partida(lista_jugadores_ordenada,2)
+#ranking_de_partida(lista_jugadores_ordenada,2)
 
 
 
