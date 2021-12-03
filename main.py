@@ -1,6 +1,7 @@
 import time
 from os import system
 
+from interfaz_ranking import ranking_de_partida
 from Interfaz import *
 from Interaccion_usuario import *
 from Constantes import *
@@ -26,7 +27,7 @@ def main():
     # Incluye un ciclo donde transcurre todo el juego.
     
     partida_terminada=False
-    juego_terminado= False
+    juego_terminado = []
     partidas_jugadas= 1
    
     while (not juego_terminado) and (partidas_jugadas <= MAX_PARTIDAS): # Ciclo de juego general.
@@ -58,8 +59,8 @@ def main():
                 resultado = revisar_ganador(dict_jugadores,orden_jugadores)
                 mensaje_final(tiempo_inicio, resultado)
 
-        
         ranking_de_partida(sorted(dict_jugadores.items(),key= lambda x: (x[1][ACIERTOS], - x[1][INTENTOS]) , reverse=True) , partidas_jugadas, juego_terminado)
+
         partidas_jugadas+=1
 
 main()
