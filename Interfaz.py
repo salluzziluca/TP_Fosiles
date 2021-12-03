@@ -50,7 +50,7 @@ lista_jugadores_ordenada = [['Pedro',[3,9]],['Omar',[6,8]],['Agus',[7,6]],
                             ]
 
 
-def ranking_de_partida(lista_jugadores_ordenada,partidas_jugadas):
+def ranking_de_partida(lista_jugadores_ordenada,partidas_jugadas,juego_terminado):
 
     def coordinar_scroll_con_frame(lienzo):
         # resetear la region de scroll para encompazar el frame
@@ -108,6 +108,12 @@ def ranking_de_partida(lista_jugadores_ordenada,partidas_jugadas):
             columna_actual = 0
         return fila_actual
 
+    def boton_salir():
+        nonlocal juego_terminado
+        juego_terminado = True
+        
+        raiz_ranking.destroy()
+
     #---------------------------------- raíz--------------------------------------------
     raiz_ranking = Tk()
     raiz_ranking.title("Ranking de partida")
@@ -139,11 +145,12 @@ def ranking_de_partida(lista_jugadores_ordenada,partidas_jugadas):
     ultima_fila = poblar_frame(frame_ranking,lista_jugadores_ordenada,trofeo_ganador)
 
     #---------------------------------- Botones --------------------------------------------
+
     fila_actual = ultima_fila+1
-    salir_del_juego = Button(frame_ranking,text='Salir del juego',command=raiz_ranking.destroy,bg = 'pale violet red',fg = 'dark slate blue',activebackground='violetred3' )
+    salir_del_juego = Button(frame_ranking,text='Salir del juego',command = boton_salir , bg = 'pale violet red',fg = 'dark slate blue',activebackground='violetred3' )
     salir_del_juego.grid(column = 1,row = fila_actual,pady=10)
 
-    nueva_partida = Button(frame_ranking,text='Nueva Partida',bg = 'medium sea green',fg = 'dark slate blue',activebackground = 'sea green')
+    nueva_partida = Button(frame_ranking,text='Nueva Partida',command = raiz_ranking.destroy ,bg = 'medium sea green',fg = 'dark slate blue',activebackground = 'sea green')
     nueva_partida.grid(column = 7,row = fila_actual,pady=10)
 
 

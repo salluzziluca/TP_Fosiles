@@ -29,7 +29,7 @@ def main():
     juego_terminado= False
     partidas_jugadas= 1
    
-    while not juego_terminado and partidas_jugadas <= MAX_PARTIDAS: # Ciclo de juego general.
+    while (not juego_terminado) and (partidas_jugadas <= MAX_PARTIDAS): # Ciclo de juego general.
 
         partida_terminada=False
         tiempo_inicio=time.time()
@@ -58,7 +58,8 @@ def main():
                 resultado = revisar_ganador(dict_jugadores,orden_jugadores)
                 mensaje_final(tiempo_inicio, resultado)
 
-        ranking_de_partida(sorted(dict_jugadores.items(),key= lambda x: x[1][ACIERTOS],reverse=True),partidas_jugadas)
+        
+        ranking_de_partida(sorted(dict_jugadores.items(),key= lambda x: (x[1][ACIERTOS], - x[1][INTENTOS]) , reverse=True) , partidas_jugadas, juego_terminado)
         partidas_jugadas+=1
 
 main()

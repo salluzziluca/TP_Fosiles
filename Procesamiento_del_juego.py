@@ -4,12 +4,20 @@ from Constantes import *
 def generar_fichas():
     # Hecha por Lucas, Omar y Conti.
     # Genera una lista de fichas y las devuelve en posiciones aleatorias.
+    """   
+    lista_fichas=[
+        ["D",False],["D",False],["E",False],["E",False],
+        ["J",False],["J",False],["Y",False],["Y",False],
+        ["A",False],["A",False],["G",False],["G",False],
+        ["X",False],["X",False],["V",False],["V",False]
+        ]
+        
+    """
+
     lista_fichas=[
     ["D",False],["D",False],["E",False],["E",False],
-    ["J",False],["J",False],["Y",False],["Y",False],
-    ["A",False],["A",False],["G",False],["G",False],
-    ["X",False],["X",False],["V",False],["V",False]
-    ]
+    ["J",False],["J",False],["Y",False],["Y",False]]
+
     random.shuffle(lista_fichas)
     return lista_fichas
 
