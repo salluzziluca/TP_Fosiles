@@ -99,12 +99,12 @@ def ranking_de_partida (lista_jugadores_ordenada,partidas_jugadas,juego_terminad
     salir_del_juego = Button(frame_ranking,text='Salir del juego',command = boton_salir , bg = 'pale violet red',fg = 'dark slate blue',activebackground='violetred3' )
     salir_del_juego.grid(column = 1,row = fila_actual,pady=10)
 
-    nueva_partida = Button(frame_ranking,text='Nueva Partida',command = raiz_ranking.destroy , bg = 'grey', fg = 'dark slate blue',activebackground = 'sea green')
+    nueva_partida = Button(frame_ranking,text='Nueva Partida',command = raiz_ranking.destroy , bg = 'dark sea green', fg = 'dark slate blue',activebackground = 'sea green')
     
     if partidas_jugadas < MAX_PARTIDAS:
         nueva_partida.grid(column = 7,row = fila_actual,pady=10)   
     else: 
-        nueva_partida.config(state = DISABLED)
+        nueva_partida.config(bg = 'grey',state = DISABLED)
         nueva_partida.grid(column = 7,row = fila_actual,pady=10)
         
         max_partidas_alcanzadas = Label(frame_ranking,text='Max. partidas alcanzada.',fg= 'red',font=("Bahnschrift", 10),bg = 'thistle2', borderwidth="1",pady=7)
