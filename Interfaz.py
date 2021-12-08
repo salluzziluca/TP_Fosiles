@@ -39,4 +39,6 @@ def solicitar_nombre(dict_jugadores):
     raiz.mainloop()
     return None
     
+
+
 # ACA PONEMOS LA FUNCION DE LA INTERFAZ Y LA IMPORTAMOS DESDE EL MAIN.
