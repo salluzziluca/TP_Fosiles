@@ -1,7 +1,7 @@
 from tkinter import *
 
 from window import ventana_registro
-from interfaz_de_registro import interfaz_registro
+from interfaz_de_registro import *
 
 def solicitar_nombre(dict_jugadores):
     #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
@@ -35,6 +35,7 @@ def solicitar_nombre(dict_jugadores):
         #No recibe nada. se ejecuta al presionar el Boton. Asigna el contenido de los entry al diccionario de jugadores. Cierra la interfaz.
         dict_jugadores[nombre1_var.get()] = [0,0]
         return None
+
     #Boton Envio
     boton_envio=Button(raiz, text="Logearse",command= presionar_enviar)
     boton_envio.pack()
@@ -46,7 +47,5 @@ def solicitar_nombre(dict_jugadores):
     boton_inicio.pack()
     raiz.mainloop()
     return None
-    
-
 
 # ACA PONEMOS LA FUNCION DE LA INTERFAZ Y LA IMPORTAMOS DESDE EL MAIN.

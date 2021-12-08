@@ -81,45 +81,45 @@ def pass_valida(contrasenia):
 #################  Front #######################
 def interfaz_registro():
     #---------------------------------- raíz--------------------------------------------
-    raiz=Tk()
-    raiz.title("Registro de Jugador")
-    raiz.resizable(0,0)
-    raiz.geometry("515x315")
-    raiz.iconbitmap("fosil.ico")
-    raiz.config(bg="green")
+    raiz_registro=Tk()
+    raiz_registro.title("Registro de Jugador")
+    raiz_registro.resizable(0,0)
+    raiz_registro.geometry("515x315")
+    raiz_registro.iconbitmap("fosil.ico")
+    raiz_registro.config(bg="green")
     #---------------------------------- frame--------------------------------------------
-    mi_frame=Frame(raiz)
-    mi_frame.pack(padx= 10, pady=20)
+    frame_registro=Frame(raiz_registro)
+    frame_registro.pack(padx= 10, pady=20)
 
-    mi_frame.rowconfigure(0,pad=10)
-    mi_frame.rowconfigure(2,minsize = 80)
-    mi_frame.rowconfigure(4,minsize=40)
-    mi_frame.columnconfigure(0,pad=10)
-    mi_frame.columnconfigure(3,minsize = 10)
+    frame_registro.rowconfigure(0,pad=10)
+    frame_registro.rowconfigure(2,minsize = 80)
+    frame_registro.rowconfigure(4,minsize=40)
+    frame_registro.columnconfigure(0,pad=10)
+    frame_registro.columnconfigure(3,minsize = 10)
 
     #---------------------------------- usuario--------------------------------------------
-    usario_nuevo=Label(mi_frame, text = "Nombre del Jugador: ",font=("Bahnschrift", 15))
+    usario_nuevo=Label(frame_registro, text = "Nombre del Jugador: ",font=("Bahnschrift", 15))
     usario_nuevo.grid(row=0,column=0)
     var_usuario_nuevo=StringVar()
-    usario_nuevo_entry=Entry(mi_frame, textvariable = var_usuario_nuevo,font=("Bahnschrift", 15))
+    usario_nuevo_entry=Entry(frame_registro, textvariable = var_usuario_nuevo,font=("Bahnschrift", 15))
     usario_nuevo_entry.grid(row=0,column=1)
     #---------------------------------- contraseña--------------------------------------------
-    mi_clave=Label(mi_frame, text="Clave: ",font=("Bahnschrift", 15))
+    mi_clave=Label(frame_registro, text="Clave: ",font=("Bahnschrift", 15))
     mi_clave.grid(row=2,column=0)
     var_pass=StringVar()
-    mi_clave_entry=Entry(mi_frame, textvariable=var_pass,font=("Bahnschrift", 15))
+    mi_clave_entry=Entry(frame_registro, textvariable=var_pass,font=("Bahnschrift", 15))
     mi_clave_entry.config(show="*")
     # para implementar el boton ojito. mi_clave_entry.config(show= str)
     mi_clave_entry.grid(row=2,column=1)
     #---------------------------------- REINGRESAR contraseña--------------------------------------------
-    mi_clave_re=Label(mi_frame, text="Reingresar Clave: ",font=("Bahnschrift", 15))
+    mi_clave_re=Label(frame_registro, text="Reingresar Clave: ",font=("Bahnschrift", 15))
     mi_clave_re.grid(row=4,column=0)
     var_pass_re=StringVar()
-    mi_clave_re_entry=Entry(mi_frame, textvariable = var_pass_re,font=("Bahnschrift", 15))
+    mi_clave_re_entry=Entry(frame_registro, textvariable = var_pass_re,font=("Bahnschrift", 15))
     mi_clave_re_entry.config(show="*")
     mi_clave_re_entry.grid(row=4,column=1)
     #---------------------------------- Label dador de resultado--------------------------------------------
-    msg_final=Label(raiz, text='')
+    msg_final=Label(raiz_registro, text='')
     msg_final.config(bg='green',fg='white')
     msg_final.pack(padx= 70, pady=0)
     #---------------------------------- interaccion con usuario.--------------------------------------------
@@ -158,11 +158,9 @@ def interfaz_registro():
         return None
     #---------------------------------- botón REGISTRAR--------------------------------------------
     
-    boton = Button( text= "Registrarse",font=("Bahnschrift", 11), command = presionar_boton_registrarse )
-    boton.pack(anchor = S)
-    
-    raiz.mainloop()
+    boton_de_registro = Button(raiz_registro,text= "Registrarse",font=("Bahnschrift", 11), command = presionar_boton_registrarse )
+    boton_de_registro.pack(anchor = S)
+
+    raiz_registro.mainloop()
     return None
 ########################################
-
-interfaz_registro()
