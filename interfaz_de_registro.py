@@ -116,6 +116,7 @@ def interfaz_registro():
     mi_clave_re.grid(row=4,column=0)
     var_pass_re=StringVar()
     mi_clave_re_entry=Entry(mi_frame, textvariable = var_pass_re,font=("Bahnschrift", 15))
+    mi_clave_re_entry.config(show="*")
     mi_clave_re_entry.grid(row=4,column=1)
     #---------------------------------- Label dador de resultado--------------------------------------------
     msg_final=Label(raiz, text='')

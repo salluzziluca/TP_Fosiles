@@ -1,9 +1,0 @@
-NOMBRE,CLAVE
-Omar,klfjas
-Roberto,Pepe10_-
-Rodolfo,Pepe10_-
-José,Pepe10_-
-Pepe,Pepe10_-
-Luca,Perro1-_
-Agustin,Pancho1-_
-Luciano,Lucho10-_
