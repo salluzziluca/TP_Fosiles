@@ -36,14 +36,14 @@ def solicitar_nombre(dict_jugadores):
     mensaje_login.pack(padx= 50, pady=0)
     
     #Mensaje max jugadores 
-    mensaje_jugadores = Label(raiz, text = f'Maximo total de jugadores es {MAX_JUGADORES}')
+    mensaje_jugadores = Label(raiz, text = f'El maximo total de jugadores es {MAX_JUGADORES}')
     mensaje_jugadores.config(bg = 'yellow',fg = 'black')
     mensaje_jugadores.pack(padx= 50, pady=0)
     
-    #Lista jugadores
-   
-    lista_jugadores = Listbox(raiz)
-    lista_jugadores.pack()
+    #Listbox jugadores
+    listbox_jugadores = Listbox(raiz)
+    listbox_jugadores.pack()
+    
     #funciones del boton
     def validaciones():
         usuarios_clave = open('usuarios.csv','r')
@@ -66,7 +66,7 @@ def solicitar_nombre(dict_jugadores):
             if validaciones():
                 dict_jugadores[usuario_var.get()] = [0,0]
                 mensaje_login.config(bg='yellow',fg='black',text='Usuario ingresado correctamente')
-                lista_jugadores.insert(END, usuario_var.get())
+                listbox_jugadores.insert(END, usuario_var.get())
             else:
                 mensaje_login.config(bg='yellow',fg='black',text='Usuario y contraseña no coinciden con nuestros registros')
         else:
