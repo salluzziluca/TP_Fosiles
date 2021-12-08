@@ -1,5 +1,7 @@
 from tkinter import *
 
+from window import ventana_registro
+
 def solicitar_nombre(dict_jugadores):
     #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
     #Solicita el ingreso de los nombres de los Jugadores
@@ -7,35 +9,40 @@ def solicitar_nombre(dict_jugadores):
     raiz.title("Fosiles Memotest")
     raiz.resizable(0,0)
     #raiz.iconbitmap()
-    raiz.geometry("310x160")
+    raiz.geometry("400x200")
     raiz.config(bg="yellow")
     #frame
     miFrame=Frame(raiz)
     miFrame.pack(padx=10, pady=20)
     miFrame.config(cursor="heart")
     #jugadores j1
-    jugador_1=Label(miFrame, text="Primer Jugador: ")
+    jugador_1=Label(miFrame, text="Usuario: ")
     jugador_1.grid(row=0,column=0, padx=10, pady=10)
     nombre1_var = StringVar()
     jugador_1_entry=Entry(miFrame,textvariable=nombre1_var)
     jugador_1_entry.grid(row=0,column=1,padx=10, pady=10)
     #j2
-    jugador_2=Label(miFrame, text="Segundo Jugador: ")
-    jugador_2.grid(row=1,column=0,padx=10, pady=10)
+    contraseña=Label(miFrame, text="Contraseña: ")
+    contraseña.grid(row=1,column=0,padx=10, pady=10)
     nombre2_var = StringVar()
-    jugador_2_entry=Entry(miFrame,textvariable= nombre2_var)
-    jugador_2_entry.grid(row=1,column=1,padx=10, pady=10)
+    contraseña_entry=Entry(miFrame,textvariable= nombre2_var)
+    contraseña_entry.grid(row=1,column=1,padx=10, pady=10)
+    contraseña_entry.config(show="*")
     #funciones del boton
     def presionar_enviar():
         # Valentina Nieto,Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
         #No recibe nada. se ejecuta al presionar el Boton. Asigna el contenido de los entry al diccionario de jugadores. Cierra la interfaz.
         dict_jugadores[nombre1_var.get()] = [0,0]
-        dict_jugadores[nombre2_var.get()] = [0,0]
-        raiz.destroy()
         return None
-    #Boton
-    Boton=Button(raiz, text="Enviar",command= presionar_enviar)
-    Boton.pack()
+    #Boton Envio
+    boton_envio=Button(raiz, text="Logearse",command= presionar_enviar)
+    boton_envio.pack()
+    # Boton Registro
+    boton_registro=Button(raiz, text="Registrarse",command= ventana_registro)
+    boton_registro.pack()
+    #Boton Iniciar
+    boton_inicio=Button(raiz, text="Iniciar Partida",command= raiz.destroy)
+    boton_inicio.pack()
     raiz.mainloop()
     return None
     
