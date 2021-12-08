@@ -33,7 +33,8 @@ def solicitar_nombre(dict_jugadores):
     def presionar_enviar():
         # Valentina Nieto,Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
         #No recibe nada. se ejecuta al presionar el Boton. Asigna el contenido de los entry al diccionario de jugadores. Cierra la interfaz.
-        dict_jugadores[nombre1_var.get()] = [0,0]
+        if True: #validacion correcta :
+            dict_jugadores[nombre1_var.get()] = [0,0]
         return None
     #Boton Envio
     boton_envio=Button(raiz, text="Logearse",command= presionar_enviar)
