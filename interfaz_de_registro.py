@@ -4,7 +4,7 @@ from tkinter import*
 def usuario_existente(nombre_jugador):
     #Recibe un str (nombre del jugador) y verifica si se encuentra registrado en el archivo de usuarios.
     #Devuelve true si lo encuentra, false caso contrario.
-    usuarios_clave = open('usuarios.txt','r')
+    usuarios_clave = open('usuarios.csv','r')
     linea = usuarios_clave.readline()
     registro = linea.split(',')
     iguales= False
@@ -19,7 +19,7 @@ def usuario_existente(nombre_jugador):
 
 def guardar_usuario_nuevo(usuario,contrasenia):
     #Recibe nombre de usuario y contraseña. Abre el archivo de usuarios y guarda allí la información (usuario,clave).
-    usuarios_clave = open('usuarios.txt','a')
+    usuarios_clave = open('usuarios.csv','a')
     usuarios_clave.write(f'\n{usuario},{contrasenia}')
     usuarios_clave.close()
  
