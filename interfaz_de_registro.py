@@ -163,4 +163,6 @@ def interfaz_registro():
 
     raiz_registro.mainloop()
     return None
+interfaz_registro()
 ########################################
+

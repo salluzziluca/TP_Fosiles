@@ -1,7 +1,7 @@
 from tkinter import *
 
 from window import ventana_registro
-from interfaz_de_registro import *
+from interfaz_de_registro import usuario_existente,guardar_usuario_nuevo,alnum_y_guionbajo,jugador_valido,pass_valida,interfaz_registro
 
 def solicitar_nombre(dict_jugadores):
     #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
@@ -49,4 +49,5 @@ def solicitar_nombre(dict_jugadores):
     raiz.mainloop()
     return None
 
+solicitar_nombre()
 # ACA PONEMOS LA FUNCION DE LA INTERFAZ Y LA IMPORTAMOS DESDE EL MAIN.
