@@ -1,7 +1,5 @@
-
 from os import write
 from tkinter import*
-
 #################  back #######################
 def usuario_existente(nombre_jugador):
     #Recibe un str (nombre del jugador) y verifica si se encuentra registrado en el archivo de usuarios.
@@ -77,11 +75,10 @@ def pass_valida(contrasenia):
 
 
 ########################################
-
 #################  Front #######################
-def interfaz_registro():
+def interfaz_registro(raiz_importada):
     #---------------------------------- raíz--------------------------------------------
-    raiz_registro=Tk()
+    raiz_registro=Toplevel(raiz_importada)
     raiz_registro.title("Registro de Jugador")
     raiz_registro.resizable(0,0)
     raiz_registro.geometry("515x315")
@@ -151,6 +148,7 @@ def interfaz_registro():
     def presionar_boton_registrarse():
         # organiza la secuencia de desencadenadores al apretar el botón 'Registrarse'.
         usuario_nuevo,contrasenia,contrasenia_re=get_usuario_contra()
+        print(usuario_nuevo,contrasenia,contrasenia_re)
         es_valido = (jugador_valido(usuario_nuevo), pass_valida(contrasenia),(contrasenia == contrasenia_re)) # tupla con tres booleanos validadores.
         interaccion_usuario(es_valido)
         if es_valido[0] and es_valido[1] and es_valido[2]:

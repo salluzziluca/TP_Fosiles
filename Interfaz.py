@@ -1,7 +1,6 @@
 from tkinter import *
-
 from window import ventana_registro
-from interfaz_de_registro import usuario_existente,guardar_usuario_nuevo,alnum_y_guionbajo,jugador_valido,pass_valida,interfaz_registro
+from interfaz_de_registro import interfaz_registro
 
 def solicitar_nombre(dict_jugadores):
     #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
@@ -41,7 +40,7 @@ def solicitar_nombre(dict_jugadores):
     boton_envio=Button(raiz, text="Logearse",command= presionar_enviar)
     boton_envio.pack()
     # Boton Registro
-    boton_registro=Button(raiz, text="Registrarse",command= interfaz_registro)
+    boton_registro=Button(raiz, text="Registrarse",command= lambda: interfaz_registro(raiz))
     boton_registro.pack()
     #Boton Iniciar
     boton_inicio=Button(raiz, text="Iniciar Partida",command= raiz.destroy)
