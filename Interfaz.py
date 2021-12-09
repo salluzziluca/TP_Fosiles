@@ -1,17 +1,33 @@
 from tkinter import *
-import tkinter
-from Constantes import *
-from window import ventana_registro
-from interfaz_de_registro import interfaz_registro, usuario_existente
+from Constantes import MAX_JUGADORES
+from interfaz_de_registro import interfaz_registro
+
+def validaciones(usuario, contraseña):
+    #Desarollada por Luca Salluzzi
+    #Valida si el usuario y la contraseña ingresadas corresponden con alguna linea del registro .csv
+    usuarios_clave = open('usuarios.csv','r')
+    linea = usuarios_clave.readline()
+    linea = linea.rstrip('\n')
+    registro = linea.split(',')
+    valido = False
+    while (not valido) and linea:
+        if usuario == registro[0] and contraseña == registro[1]:
+            valido = True
+        else:
+            linea = usuarios_clave.readline()
+            linea = linea.rstrip('\n')
+            registro = linea.split(',')
+    usuarios_clave.close()
+    return valido
 
 def solicitar_nombre(dict_jugadores):
-    #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
+    #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi, Agustín Conti, Lucas Osorio.
     #Solicita el ingreso de los nombres de los Jugadores, muestra por pantalla el boton de registro, el de inicio de juego, el maximo de jugadores posibles, los nombres de los jugadores logueados y ademas, mensajes por pantalla del estado del login.
     raiz= Tk()
     raiz.title("Fosiles Memotest")
     raiz.resizable(0,0)
     #raiz.iconbitmap()
-    raiz.geometry("400x600")
+    raiz.geometry("400x450")
     raiz.config(bg="yellow")
     #frame
     miFrame=Frame(raiz)
@@ -45,28 +61,11 @@ def solicitar_nombre(dict_jugadores):
     listbox_jugadores.pack()
     
     #funciones del boton
-    def validaciones():
-        #Desarollada por Luca Salluzzi
-        #Valida si el ussuario y la contraseña ingresadas corresponden con alguna linea del registro .csv
-        usuarios_clave = open('usuarios.csv','r')
-        linea = usuarios_clave.readline()
-        linea = linea.rstrip('\n')
-        registro = linea.split(',')
-        valido = False
-        while (not valido) and linea:
-            if usuario_var.get() == registro[0] and contraseña_var.get() == registro[1]:
-                valido = True
-            else:
-                linea = usuarios_clave.readline()
-                registro = linea.split(',')
-        usuarios_clave.close()
-        return valido
-    
     def presionar_enviar():
         # Valentina Nieto,Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
         #Se ejecuta al presionar el Boton.Si el usuario y la contraseña coinciden con los registros, asigna el contenido de los entry al diccionario de jugadores y a la listbox presente en memoria, ademas notifica al usuario en ambos casos.
-        if len(dict_jugadores.keys())< MAX_JUGADORES:
-            if validaciones():
+        if len(dict_jugadores.keys()) < MAX_JUGADORES:
+            if validaciones(usuario_var.get(), contraseña_var.get()):
                 dict_jugadores[usuario_var.get()] = [0,0]
                 mensaje_login.config(bg = 'yellow',fg = 'black',text='Usuario ingresado correctamente')
                 listbox_jugadores.insert(END, usuario_var.get())
@@ -75,7 +74,7 @@ def solicitar_nombre(dict_jugadores):
                 mensaje_login.config(bg = 'yellow',fg = 'black',text = 'Usuario y contraseña no coinciden con nuestros registros')
                 
         else:
-            raiz.destroy
+            boton_envio['state']='disabled'
         return None
 
     #Boton Envio
