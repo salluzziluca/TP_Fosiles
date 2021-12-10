@@ -27,7 +27,7 @@ def ranking_de_partida (lista_jugadores_ordenada,partidas_jugadas,juego_terminad
         intentos_jugador = Label(frame_ranking,text='Intentos',font=("Bahnschrift", 15),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
         intentos_jugador.grid(column=5,row=0)
 
-        promedio_intentos_jugador = Label(frame_ranking,text='Promedio de intentos',font=("Bahnschrift", 15),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
+        promedio_intentos_jugador = Label(frame_ranking,text='Aciertos por intento',font=("Bahnschrift", 15),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
         promedio_intentos_jugador.grid(column=7,row=0)
 
         trofeo = Label(frame_ranking,image= trofeo_ganador,bg= 'thistle2',height=77,width=88)
@@ -55,7 +55,7 @@ def ranking_de_partida (lista_jugadores_ordenada,partidas_jugadas,juego_terminad
             temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
             temp_label.grid(column= columna_actual+4 , row= fila_actual)
 
-            temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]/partidas_jugadas}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
+            temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]/estadisticas[INTENTOS]:.2f}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
             temp_label.grid(column= columna_actual+6 , row= fila_actual)
             if tamanio_letra > 10:
                 tamanio_letra -=3
@@ -96,7 +96,7 @@ def ranking_de_partida (lista_jugadores_ordenada,partidas_jugadas,juego_terminad
     #---------------------------------- Botones --------------------------------------------
 
     fila_actual = ultima_fila+1
-    salir_del_juego = Button(frame_ranking,text='Salir del juego',command = boton_salir , bg = 'pale violet red',fg = 'dark slate blue',activebackground='violetred3' )
+    salir_del_juego = Button(frame_ranking,text='Cerrar',command = boton_salir , bg = 'pale violet red',fg = 'dark slate blue',activebackground='violetred3' )
     salir_del_juego.grid(column = 1,row = fila_actual,pady=10)
 
     nueva_partida = Button(frame_ranking,text='Nueva Partida',command = raiz_ranking.destroy , bg = 'dark sea green', fg = 'dark slate blue',activebackground = 'sea green')
