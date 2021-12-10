@@ -78,16 +78,17 @@ def solicitar_nombre(dict_jugadores):
     listbox_jugadores = Listbox(raiz)
     listbox_jugadores.pack()
     
+    #Funcion deshabilitación del botón
     def verificar_cantidad_jugadores():
-        if len(dict_jugadores.keys()) > (MAX_JUGADORES-1):
+        #Luca Salluzzi
+        #Verifica si la cantidad de usuarios logeados (listos para jugar) es igual o mayor a la constante del archivo de configuración. 
+        if len(dict_jugadores.keys()) >= (MAX_JUGADORES):
             boton_envio['state']='disabled'
             
     #Boton Envio
     boton_envio=Button(raiz, text = "Logearse",command= lambda:[presionar_enviar(dict_jugadores, usuario_var.get(), contraseña_var.get(), listbox_jugadores, mensaje_login), verificar_cantidad_jugadores()])
     boton_envio.pack()
     
-
-        
     # Boton Registro
     boton_registro=Button(raiz, text ="Registrarse",command = lambda: interfaz_registro(raiz))
     boton_registro.pack()
