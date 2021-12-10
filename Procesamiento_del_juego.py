@@ -1,3 +1,4 @@
+from os import stat
 import random, time
 from Constantes import *
 
@@ -100,4 +101,14 @@ def revisar_ganador(diccionario, jugadores):
             resultado = 'empate'
     return resultado
 
+def juntar_datos_partida(dict_jugadores,dict_jugadores_total):
 
+    for jugador, stats in dict_jugadores.items():
+
+        if jugador not in dict_jugadores_total:
+            dict_jugadores_total[jugador] = stats
+        else:
+            dict_jugadores_total[jugador][INTENTOS] += stats[INTENTOS]
+            dict_jugadores_total[jugador][ACIERTOS] += stats[ACIERTOS]
+    
+    print(dict_jugadores_total)
