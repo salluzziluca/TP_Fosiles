@@ -1,5 +1,5 @@
 from os import stat
-import random, time
+import random, time, datetime
 from Constantes import *
 
 def generar_fichas():
@@ -102,7 +102,9 @@ def revisar_ganador(diccionario, jugadores):
     return resultado
 
 def juntar_datos_partida(dict_jugadores,dict_jugadores_total):
-
+    # Hecha por Omar Oriz, Agustin Conti.
+    # recibe diccionario de jugadores de cada partida y un diccionario que almacena los datos de todas las partidas.
+    # Actualiza el segundo en base al primero.
     for jugador, stats in dict_jugadores.items():
 
         if jugador not in dict_jugadores_total:
@@ -111,4 +113,12 @@ def juntar_datos_partida(dict_jugadores,dict_jugadores_total):
             dict_jugadores_total[jugador][INTENTOS] += stats[INTENTOS]
             dict_jugadores_total[jugador][ACIERTOS] += stats[ACIERTOS]
     
-    print(dict_jugadores_total)
+
+def guardar_partida_en_csv(dict_jugadores_ordenado):
+    # hecha por Omar Oriz, Agustin conti.
+    # Recibe el diccionario de jugadores de cada partida y registra sus datos en el csv de ranking all-time.
+    fecha_actual = datetime.datetime.now().strftime("%x")
+    hora_actual = datetime.datetime.now().strftime("%X")
+    archivo = open('historial_all_time.txt', 'a')  # a de append para no pisar.
+    for jugador, stats in dict_jugadores_ordenado:
+        archivo.write(f'{fecha_actual},{hora_actual},{jugador},{stats[ACIERTOS]},{stats[INTENTOS]}\n')

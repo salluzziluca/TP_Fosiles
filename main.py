@@ -61,9 +61,10 @@ def main():
                 resultado = revisar_ganador(dict_jugadores,orden_jugadores)
                 mensaje_final(tiempo_inicio, resultado)
 
-        ranking_de_partida(sorted(dict_jugadores.items(),key= lambda x: (x[1][ACIERTOS], - x[1][INTENTOS]) , reverse=True) , partidas_jugadas, juego_terminado)
+        dict_jugadores_ordenado = sorted(dict_jugadores.items(),key= lambda x: (x[1][ACIERTOS], - x[1][INTENTOS]) , reverse=True)
+        ranking_de_partida(dict_jugadores_ordenado , partidas_jugadas, juego_terminado)
         juntar_datos_partida(dict_jugadores,dict_jugadores_total)
-
+        guardar_partida_en_csv(dict_jugadores_ordenado)
     
     ranking_fin_de_juego(sorted(dict_jugadores_total.items(),key= lambda x: (x[1][ACIERTOS], - x[1][INTENTOS]) , reverse=True) , partidas_jugadas)
 

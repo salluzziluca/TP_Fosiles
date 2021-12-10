@@ -116,4 +116,3 @@ def ranking_fin_de_juego (lista_jugadores_ordenada_final,partidas_jugadas):
 
 
 
-ranking_fin_de_juego ( [['Omar',[9,6]] , ['Tato',[9,6]]] , 2)
