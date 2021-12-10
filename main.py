@@ -1,11 +1,12 @@
 import time
 from os import system
-
+# import sys
 from Interfaz import solicitar_nombre
 from Interaccion_usuario import *
 from Constantes import *
-from Procesamiento_del_juego import *
-    
+from Procesamiento_del_juego import *    
+# sys.setrecursionlimit(5000)
+
 def turno(fichas, jugador):
     # Hecha por Oriz, Conti, Zarza.
     # Define una ronda de selección de fichas. Devuelve la lista de fichas con dos de ellas dadas vuelta por el jugador y los ingresos realizados.
