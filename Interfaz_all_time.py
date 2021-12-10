@@ -1,12 +1,39 @@
 from tkinter import *
 from Constantes import *
-from Interfaz_all_time import *
+
+def leer_linea_all_time(archivo):
+    fin_archivo = False
+    linea = archivo.readline()
+    registro = ['NAN','NAN','NAN',0,0]
+    if linea:
+        registro = linea.rstrip().split(',')
+        registro[POS_ACIERTOS_REGISTRO] = int(registro[POS_ACIERTOS_REGISTRO]) 
+        registro[POS_INTENTOS_REGISTRO] = int(registro[POS_INTENTOS_REGISTRO])
+    else:
+        fin_archivo = True
+    return registro,fin_archivo
+
+def gen_dict_all_time_ordenado():
+    archivo = open('historial_all_time.txt','r')
+    registro,fin_archivo = leer_linea_all_time(archivo)
+    dict_all_time = {}
+    while not fin_archivo:
+        if registro[POS_NOMBRE_REGISTRO] not in dict_all_time:
+            dict_all_time[registro[POS_NOMBRE_REGISTRO]] = [registro[POS_INTENTOS_REGISTRO],registro[POS_ACIERTOS_REGISTRO],INICIAR_CANT_PARTIDAS]
+        else:
+            dict_all_time[registro[POS_NOMBRE_REGISTRO]][INTENTOS] += registro[POS_INTENTOS_REGISTRO]
+            dict_all_time[registro[POS_NOMBRE_REGISTRO]][ACIERTOS] += registro[POS_ACIERTOS_REGISTRO]
+            dict_all_time[registro[POS_NOMBRE_REGISTRO]][PARTIDAS_JUGADAS]  += 1
+
+        registro,fin_archivo = leer_linea_all_time(archivo)
+
+    return sorted(dict_all_time.items(),key= lambda item: (item[1][ACIERTOS], - item[1][INTENTOS]) , reverse=True)
 
 def coordinar_scroll_con_frame(lienzo):
     # resetear la region de scroll para encompazar el frame
     lienzo.configure(scrollregion=lienzo.bbox("all"))
 
-def poblar_frame(frame_ranking , trofeo_ganador,partidas_jugadas,lista_jugadores_ordenada_final):
+def poblar_frame(frame_ranking , trofeo_ganador):
     # Recibe el frame, la lista de j. ordenada y la imagen trofeo. Se encarga de mostrar en la interfaz la tabla de ranking 
     # con todas sus estadísticas.
     #---------------------------------- label fijos--------------------------------------------
@@ -36,7 +63,7 @@ def poblar_frame(frame_ranking , trofeo_ganador,partidas_jugadas,lista_jugadores
     fila_actual = 1
     lugar = 2
     tamanio_letra = 30
-            
+    lista_jugadores_ordenada_final = gen_dict_all_time_ordenado()
     for jugador,estadisticas in lista_jugadores_ordenada_final:
 
         if columna_actual == 0:
@@ -57,7 +84,7 @@ def poblar_frame(frame_ranking , trofeo_ganador,partidas_jugadas,lista_jugadores
         temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]/estadisticas[INTENTOS]:.2f}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
         temp_label.grid(column= columna_actual+6 , row= fila_actual)
         
-        temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]/partidas_jugadas:.2f}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
+        temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]/estadisticas[PARTIDAS_JUGADAS]:.2f}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
         temp_label.grid(column= columna_actual+8 , row= fila_actual)
         
         
@@ -68,18 +95,18 @@ def poblar_frame(frame_ranking , trofeo_ganador,partidas_jugadas,lista_jugadores
     return fila_actual
 
 
-def ranking_fin_de_juego (lista_jugadores_ordenada_final,partidas_jugadas):
+def ranking_all_time(raiz_ranking_fin):
     #---------------------------------- raíz--------------------------------------------
-    raiz_ranking_fin = Tk()
-    raiz_ranking_fin.title("RESULTADOS FINALES!")
-    raiz_ranking_fin.attributes('-topmost', True)
-    raiz_ranking_fin.resizable(0,0)
-    raiz_ranking_fin.geometry("910x400")
-    raiz_ranking_fin.config(bg="thistle2")
+    raiz_all_time = Toplevel(raiz_ranking_fin)
+    raiz_all_time.title("RANKING ALL-TIME!")
+    raiz_all_time.attributes('-topmost', True)
+    raiz_all_time.resizable(0,0)
+    raiz_all_time.geometry("910x400")
+    raiz_all_time.config(bg="thistle2")
     #---------------------------------- Scroll--------------------------------------------
-    barra_scroll = Scrollbar(raiz_ranking_fin,orient="vertical",)
+    barra_scroll = Scrollbar(raiz_all_time,orient="vertical",)
     #---------------------------------- Lienzo--------------------------------------------
-    lienzo = Canvas(raiz_ranking_fin)
+    lienzo = Canvas(raiz_all_time)
     #---------------------------------- frame--------------------------------------------
     frame_ranking = Frame(lienzo)
     frame_ranking.config(bg='thistle2')
@@ -95,16 +122,10 @@ def ranking_fin_de_juego (lista_jugadores_ordenada_final,partidas_jugadas):
     #---------------------------------- Imagenes --------------------------------------------
     trofeo_ganador = PhotoImage(file='trofeo_ganador.png')
     #---------------------------------- Poblar Frame --------------------------------------------
-    ultima_fila = poblar_frame(frame_ranking , trofeo_ganador,partidas_jugadas,lista_jugadores_ordenada_final)
+    ultima_fila = poblar_frame(frame_ranking , trofeo_ganador)
     #---------------------------------- Botones --------------------------------------------
 
     fila_actual = ultima_fila+1
-    salir_del_juego = Button(frame_ranking,text='Salir del juego',command = raiz_ranking_fin.destroy , bg = 'pale violet red',fg = 'dark slate blue',activebackground='violetred3' )
+    salir_del_juego = Button(frame_ranking,text='Cerrar ventana',command = raiz_all_time.destroy , bg = 'pale violet red',fg = 'dark slate blue',activebackground='violetred3' )
     salir_del_juego.grid(column = 7,row = fila_actual,pady= 10)  
-    
-    ver_all_time = Button(frame_ranking,text='RANKING ALL-TIME',command = lambda: ranking_all_time(raiz_ranking_fin) , bg = 'gold', fg = 'dark slate blue',activebackground = 'yellow')
-    ver_all_time.grid(column = 1,row = fila_actual,pady=10) 
-
-
-    raiz_ranking_fin.mainloop()
-
+    raiz_all_time.mainloop()

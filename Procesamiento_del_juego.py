@@ -122,3 +122,4 @@ def guardar_partida_en_csv(dict_jugadores_ordenado):
     archivo = open('historial_all_time.txt', 'a')  # a de append para no pisar.
     for jugador, stats in dict_jugadores_ordenado:
         archivo.write(f'{fecha_actual},{hora_actual},{jugador},{stats[ACIERTOS]},{stats[INTENTOS]}\n')
+    archivo.close()
