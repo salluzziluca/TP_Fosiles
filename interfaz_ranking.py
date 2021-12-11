@@ -93,7 +93,7 @@ def ranking_de_partida (lista_jugadores_ordenada,partidas_jugadas,juego_terminad
     #---------------------------------- relacionar el frame con la barra de scroll.--------------------------------------------
     frame_ranking.bind("<Configure>", lambda event, lienzo=lienzo: coordinar_scroll_con_frame(lienzo))
     #---------------------------------- Imagenes --------------------------------------------
-    trofeo_ganador = PhotoImage(file='trofeo_transparente.png')
+    trofeo_ganador = PhotoImage(file='primer_puesto.png')
     #---------------------------------- Poblar Frame --------------------------------------------
     ultima_fila = poblar_frame(frame_ranking,lista_jugadores_ordenada,trofeo_ganador)
     #---------------------------------- Botones --------------------------------------------
@@ -119,4 +119,4 @@ def ranking_de_partida (lista_jugadores_ordenada,partidas_jugadas,juego_terminad
     raiz_ranking.mainloop()
 
 
-#ranking_de_partida([['Omar',[6,3,2]],['Tato',[6,3,2]]],2,[])
+ranking_de_partida([['Omar',[6,3,2]],['Tato',[6,3,2]]],2,[])
