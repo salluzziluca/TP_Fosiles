@@ -1,3 +1,4 @@
+from os import pathsep
 from tkinter import *
 from Constantes import *
 
@@ -33,7 +34,7 @@ def coordinar_scroll_con_frame(lienzo):
     # resetear la region de scroll para encompazar el frame
     lienzo.configure(scrollregion=lienzo.bbox("all"))
 
-def poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo):
+def poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo,medalla_plata,medalla_bronce):
     # Recibe el frame, la lista de j. ordenada y la imagen trofeo. Se encarga de mostrar en la interfaz la tabla de ranking 
     # con todas sus estadísticas.
     #---------------------------------- label fijos--------------------------------------------
@@ -63,16 +64,23 @@ def poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo)
 
     laurel_d = Label(frame_ranking,image= laurel_derecho,bg= '#F2F3F4',height=100,width=50)
     laurel_d.grid(column= 3,row= 1)
+
+    medalla_p = Label(frame_ranking,image= medalla_plata,bg= '#F2F3F4',height=50,width=50)
+    medalla_p.grid(column= 0,row= 2)
+
+    medalla_b = Label(frame_ranking,image= medalla_bronce,bg= '#F2F3F4',height=50,width=50)
+    medalla_b.grid(column= 0,row= 3)
     #---------------------------------- label generados--------------------------------------------
     columna_actual = 2
     fila_actual = 1
-    lugar = 2
+    lugar = 4
     tamanio_letra = 30
+    posicion = 0
     lista_jugadores_ordenada_final = gen_dict_all_time_ordenado()
     for jugador,estadisticas in lista_jugadores_ordenada_final:
 
-        if columna_actual == 0:
-            temp_label = Label(frame_ranking,text=f'{lugar}º',font=("Lucida Console", tamanio_letra),bg = '#F2F3F4', borderwidth="1",relief="solid")
+        if posicion >=3 and columna_actual==0:
+            temp_label = Label(frame_ranking,text=f'{lugar}º',font=("Lucida Console", tamanio_letra-2),bg = '#F2F3F4', borderwidth="1",relief="solid")
             temp_label.grid(column= columna_actual , row= fila_actual)
             columna_actual +=2
             lugar += 1 
@@ -96,7 +104,11 @@ def poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo)
         if tamanio_letra > 10:
             tamanio_letra -=3
         fila_actual += 1
-        columna_actual = 0
+        if posicion >=2:
+            columna_actual = 0
+        else:
+            columna_actual = 2
+        posicion += 1
     return fila_actual
 
 def cerrar_all_time(ver_all_time,raiz_all_time):
@@ -109,6 +121,7 @@ def ranking_all_time(raiz_ranking_fin,ver_all_time):
     raiz_all_time = Toplevel(raiz_ranking_fin)
     raiz_all_time.title("RANKING ALL-TIME!")
     raiz_all_time.attributes('-topmost', True)
+    raiz_all_time.iconbitmap('laureles.ico')
     raiz_all_time.resizable(0,0)
     raiz_all_time.geometry("1050x400")
     raiz_all_time.config(bg="#F2F3F4")
@@ -132,8 +145,10 @@ def ranking_all_time(raiz_ranking_fin,ver_all_time):
     trofeo_ganador = PhotoImage(file='trofeo_transparente.png')
     laurel_derecho = PhotoImage(file='laurel_derecho.png')
     laurel_izquierdo = PhotoImage(file='laurel_izquierdo.png')
+    medalla_plata = PhotoImage(file='medalla_silver.png')
+    medalla_bronce = PhotoImage(file='medalla_bronce.png')
     #---------------------------------- Poblar Frame --------------------------------------------
-    ultima_fila = poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo)
+    ultima_fila = poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo,medalla_plata,medalla_bronce)
     #---------------------------------- Botones --------------------------------------------
 
     fila_actual = ultima_fila+1
