@@ -101,7 +101,7 @@ def poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo)
 
 def cerrar_all_time(ver_all_time,raiz_all_time):
     raiz_all_time.destroy()
-    ver_all_time.config(state = NORMAL)
+    ver_all_time.config(state = NORMAL,bg = 'gold')
 
 def ranking_all_time(raiz_ranking_fin,ver_all_time):
 

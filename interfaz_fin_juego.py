@@ -68,7 +68,7 @@ def poblar_frame(frame_ranking , trofeo_ganador,partidas_jugadas,lista_jugadores
     return fila_actual
 
 def boton_all_time(raiz_ranking_fin,ver_all_time):
-    ver_all_time.config(state = DISABLED)
+    ver_all_time.config(state = DISABLED,bg='grey')
     ranking_all_time(raiz_ranking_fin,ver_all_time) 
 
 
@@ -114,4 +114,3 @@ def ranking_fin_de_juego (lista_jugadores_ordenada_final,partidas_jugadas):
 
     raiz_ranking_fin.mainloop()
 
-ranking_fin_de_juego([['Juan',[6,3,2]],['omar',[6,3,2]]], 2)
