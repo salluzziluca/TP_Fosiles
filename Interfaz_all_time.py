@@ -50,7 +50,7 @@ def poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo,
     intentos_jugador = Label(frame_ranking,text='Intentos',font=("Lucida Console", 11),bg = '#F2F3F4', borderwidth="1",pady=15,padx=10)
     intentos_jugador.grid(column=6,row=0)
 
-    promedio_aciertos_por_intento = Label(frame_ranking,text='Aciertos por intento',font=("Lucida Console", 11),bg = '#F2F3F4', borderwidth="1",pady=15,padx=10)
+    promedio_aciertos_por_intento = Label(frame_ranking,text='% Aciertos por intento',font=("Lucida Console", 11),bg = '#F2F3F4', borderwidth="1",pady=15,padx=10)
     promedio_aciertos_por_intento.grid(column=8,row=0)
 
     promedio_intentos_partida = Label(frame_ranking,text='Intentos por partida',font=("Lucida Console", 11),bg = '#F2F3F4', borderwidth="1",pady=15,padx=10)
@@ -94,7 +94,7 @@ def poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo,
         temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]}',font=("Lucida Console", tamanio_letra),bg = '#F2F3F4')
         temp_label.grid(column= columna_actual+4 , row= fila_actual)
 
-        temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]/estadisticas[INTENTOS]:.2f}',font=("Lucida Console", tamanio_letra),bg = '#F2F3F4')
+        temp_label = Label(frame_ranking,text=f'{(estadisticas[ACIERTOS]/estadisticas[INTENTOS])*100:.2f}%',font=("Lucida Console", tamanio_letra),bg = '#F2F3F4')
         temp_label.grid(column= columna_actual+6 , row= fila_actual)
         
         temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]/estadisticas[PARTIDAS_JUGADAS]:.2f}',font=("Lucida Console", tamanio_letra),bg = '#F2F3F4')
