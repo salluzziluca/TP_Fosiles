@@ -13,19 +13,19 @@ def poblar_frame(frame_ranking , trofeo_ganador,partidas_jugadas,lista_jugadores
     espacio = Label(frame_ranking,text='            ',bg='thistle2',pady=15,padx=10)
     espacio.grid(column=0,row=0)
 
-    nombre_jugador = Label(frame_ranking,text='Nombre del Jugador',font=("Bahnschrift", 15),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
+    nombre_jugador = Label(frame_ranking,text='Nombre del Jugador',font=("Lucida Console", 11),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
     nombre_jugador.grid(column=1,row=0)
 
-    aciertos_jugador = Label(frame_ranking,text='Aciertos',font=("Bahnschrift", 15),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
+    aciertos_jugador = Label(frame_ranking,text='Aciertos',font=("Lucida Console", 11),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
     aciertos_jugador.grid(column=3,row=0)
 
-    intentos_jugador = Label(frame_ranking,text='Intentos',font=("Bahnschrift", 15),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
+    intentos_jugador = Label(frame_ranking,text='Intentos',font=("Lucida Console", 11),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
     intentos_jugador.grid(column=5,row=0)
 
-    promedio_aciertos_por_intento = Label(frame_ranking,text='Aciertos por intento',font=("Bahnschrift", 15),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
+    promedio_aciertos_por_intento = Label(frame_ranking,text='Aciertos por intento',font=("Lucida Console", 11),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
     promedio_aciertos_por_intento.grid(column=7,row=0)
 
-    promedio_intentos_partida = Label(frame_ranking,text='Intentos por partida',font=("Bahnschrift", 15),bg = 'thistle2', borderwidth="1",pady=15,padx=10)
+    promedio_intentos_partida = Label(frame_ranking,text='Intentos por partida',font=("Lucida Console", 11),bg = 'thistle2', borderwidth="1",pady=15,padx=5)
     promedio_intentos_partida.grid(column=9,row=0)
 
     trofeo = Label(frame_ranking,image= trofeo_ganador,bg= 'thistle2',height=77,width=88)
@@ -35,29 +35,29 @@ def poblar_frame(frame_ranking , trofeo_ganador,partidas_jugadas,lista_jugadores
     columna_actual = 1
     fila_actual = 1
     lugar = 2
-    tamanio_letra = 30
+    tamanio_letra = 26
             
     for jugador,estadisticas in lista_jugadores_ordenada_final:
 
         if columna_actual == 0:
-            temp_label = Label(frame_ranking,text=f'{lugar}º',font=("Bahnschrift", tamanio_letra),bg = 'thistle2', borderwidth="1",relief="solid")
+            temp_label = Label(frame_ranking,text=f'{lugar}º',font=("Lucida Console", tamanio_letra),bg = 'thistle2', borderwidth="1",relief="solid")
             temp_label.grid(column= columna_actual , row= fila_actual)
             columna_actual +=1
             lugar += 1 
 
-        temp_label = Label(frame_ranking,text=f'{jugador}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
+        temp_label = Label(frame_ranking,text=f'{jugador}',font=("Lucida Console", tamanio_letra),bg = 'thistle2')
         temp_label.grid(column= columna_actual , row= fila_actual)
 
-        temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
+        temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]}',font=("Lucida Console", tamanio_letra),bg = 'thistle2')
         temp_label.grid(column= columna_actual+2 , row= fila_actual)
 
-        temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
+        temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]}',font=("Lucida Console", tamanio_letra),bg = 'thistle2')
         temp_label.grid(column= columna_actual+4 , row= fila_actual)
 
-        temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]/estadisticas[INTENTOS]:.2f}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
+        temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]/estadisticas[INTENTOS]:.2f}',font=("Lucida Console", tamanio_letra),bg = 'thistle2')
         temp_label.grid(column= columna_actual+6 , row= fila_actual)
         
-        temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]/partidas_jugadas:.2f}',font=("Bahnschrift", tamanio_letra),bg = 'thistle2')
+        temp_label = Label(frame_ranking,text=f'{estadisticas[INTENTOS]/partidas_jugadas:.2f}',font=("Lucida Console", tamanio_letra),bg = 'thistle2')
         temp_label.grid(column= columna_actual+8 , row= fila_actual)
         
         
@@ -67,14 +67,18 @@ def poblar_frame(frame_ranking , trofeo_ganador,partidas_jugadas,lista_jugadores
         columna_actual = 0
     return fila_actual
 
+def boton_all_time(raiz_ranking_fin,ver_all_time):
+    ver_all_time.config(state = DISABLED)
+    ranking_all_time(raiz_ranking_fin,ver_all_time) 
+
 
 def ranking_fin_de_juego (lista_jugadores_ordenada_final,partidas_jugadas):
     #---------------------------------- raíz--------------------------------------------
     raiz_ranking_fin = Tk()
     raiz_ranking_fin.title("RESULTADOS FINALES!")
     raiz_ranking_fin.attributes('-topmost', True)
-    raiz_ranking_fin.resizable(0,0)
-    raiz_ranking_fin.geometry("910x400")
+    raiz_ranking_fin.resizable(0,1)
+    raiz_ranking_fin.geometry("950x300")
     raiz_ranking_fin.config(bg="thistle2")
     #---------------------------------- Scroll--------------------------------------------
     barra_scroll = Scrollbar(raiz_ranking_fin,orient="vertical",)
@@ -99,12 +103,15 @@ def ranking_fin_de_juego (lista_jugadores_ordenada_final,partidas_jugadas):
     #---------------------------------- Botones --------------------------------------------
 
     fila_actual = ultima_fila+1
-    salir_del_juego = Button(frame_ranking,text='Salir del juego',command = raiz_ranking_fin.destroy , bg = 'pale violet red',fg = 'dark slate blue',activebackground='violetred3' )
-    salir_del_juego.grid(column = 7,row = fila_actual,pady= 10)  
+    salir_del_juego = Button(frame_ranking,text='Salir del juego',command = raiz_ranking_fin.destroy , bg = 'pale violet red',
+    fg = 'dark slate blue',activebackground='violetred3' )
+    salir_del_juego.grid(column = 9,row = fila_actual,pady= 10)  
     
-    ver_all_time = Button(frame_ranking,text='RANKING ALL-TIME',command = lambda: ranking_all_time(raiz_ranking_fin) , bg = 'gold', fg = 'dark slate blue',activebackground = 'yellow')
-    ver_all_time.grid(column = 1,row = fila_actual,pady=10) 
+    ver_all_time = Button(frame_ranking,text='RANKING ALL-TIME',command = lambda: boton_all_time(raiz_ranking_fin,ver_all_time) , 
+    bg = 'gold', fg = 'dark slate blue',activebackground = 'yellow')
+    ver_all_time.grid(column = 0,row = fila_actual,pady=10,padx=10) 
 
 
     raiz_ranking_fin.mainloop()
 
+ranking_fin_de_juego([['Juan',[6,3,2]],['omar',[6,3,2]]], 2)
