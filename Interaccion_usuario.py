@@ -47,12 +47,8 @@ def input_usuario(fichas):
             print ('Valor inválido.')
     return input_realizado
 
-def mensaje_final(tiempo_inicial, resultado):
+def mensaje_final(tiempo_inicial):
     # Hecha por Lucas Osorio, Omar Oriz y Agustin Conti.
     # Recibe el tiempo inicial e intentos e imprime el fin del juego con la cantidad de intentos y el tiempo empleado.
     print('Fin del juego!')
     print(f"\nEl juego duró {int(time.time() - tiempo_inicial)} segundos")
-    if resultado != 'empate':
-        print(f'\n{resultado}, Felicitaciones!\n')
-    else:
-        print(f'\nEl juego terminó en {resultado}')

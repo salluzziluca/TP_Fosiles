@@ -1,15 +1,16 @@
-import random, time
+from os import stat
+import random, time, datetime
 from Constantes import *
 
 def generar_fichas():
-    # Hecha por Lucas, Omar y Conti.
-    # Genera una lista de fichas y las devuelve en posiciones aleatorias.
-    lista_fichas=[
-    ["D",False],["D",False],["E",False],["E",False],
-    ["J",False],["J",False],["Y",False],["Y",False],
-    ["A",False],["A",False],["G",False],["G",False],
-    ["X",False],["X",False],["V",False],["V",False]
-    ]
+    # Hecha por Conti.
+    # Genera una lista de fichas del tamaño puesto en la configuracion y las devuelve en posiciones aleatorias.
+    lista_fichas = []
+    caracteres_posibles = [chr(x) for x in range(65, 91)]
+    while len(lista_fichas) < CANTIDAD_FICHAS:
+        letra = caracteres_posibles.pop(random.randint(0, len(caracteres_posibles)-1))
+        lista_fichas.append([letra, False])
+        lista_fichas.append([letra, False])
     random.shuffle(lista_fichas)
     return lista_fichas
 
@@ -24,7 +25,7 @@ def validacion(input_realizado,fichas):
     # Dependiendo si es una pos correcta, y si la ficha no está boca arriba.
     return ((input_realizado-1) in range(len(fichas)) and fichas[input_realizado-1][POSICION_BOOL] != True)
 
-def juego_completo(fichas):
+def partida_completa(fichas):
     # Hecha por Agustín Conti
     # Determina si el juego terminó, comprobando que todas las fichas esten "volteadas".
     Terminado=True
@@ -74,22 +75,29 @@ def timer_delay(segundos):
         tiempo_transcurrido = t_actual - t_inicial
     return None
 
-def revisar_ganador(diccionario, jugadores):
-    # Hecha por Osorio y Salluzzi, Omar.
-    # Evalúa aciertos e intentos y devuelve al ganador o anuncia un empate.
-    aciertos_j1, intentos_j1= diccionario[jugadores[0]][ACIERTOS], diccionario[jugadores[0]][INTENTOS]
-    aciertos_j2, intentos_j2 = diccionario[jugadores[1]][ACIERTOS], diccionario[jugadores[1]][INTENTOS]
-    if  aciertos_j1 > aciertos_j2 :
-        resultado = f'{jugadores[0]} ganó'
-    elif aciertos_j1 < aciertos_j2:
-        resultado = f'{jugadores[1]} ganó'
-    else:
-        if intentos_j1 < intentos_j2:
-            resultado = f'{jugadores[0]} ganó'
-        elif intentos_j1 > intentos_j2:
-            resultado = f'{jugadores[1]} ganó'
+def juntar_datos_partida(dict_jugadores,dict_jugadores_total):
+    # Hecha por Omar Oriz, Agustin Conti.
+    # recibe diccionario de jugadores de cada partida y un diccionario que almacena los datos de todas las partidas.
+    # Actualiza el segundo en base al primero.
+    for jugador, stats in dict_jugadores.items():
+
+        if jugador not in dict_jugadores_total:
+            dict_jugadores_total[jugador] = stats
         else:
-            resultado = 'empate'
-    return resultado
+            dict_jugadores_total[jugador][INTENTOS] += stats[INTENTOS]
+            dict_jugadores_total[jugador][ACIERTOS] += stats[ACIERTOS]
+    
 
-
+def guardar_partida_en_csv(dict_jugadores_ordenado):
+    # hecha por Omar Oriz, Agustin conti.
+    # Recibe el diccionario de jugadores de cada partida y registra sus datos en el csv de ranking all-time.
+    
+    fecha_actual = datetime.datetime.now().strftime("%x")
+    hora_actual = datetime.datetime.now().strftime("%X")
+    if not REINICIAR_ARCHIVO_PARTIDAS:
+        modo_apertura = 'a'
+    else: modo_apertura = 'w'
+    archivo = open('historial_all_time.txt', modo_apertura)
+    for jugador, stats in dict_jugadores_ordenado:
+        archivo.write(f'{fecha_actual},{hora_actual},{jugador},{stats[ACIERTOS]},{stats[INTENTOS]}\n')
+    archivo.close()
