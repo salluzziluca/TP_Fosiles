@@ -1,4 +1,5 @@
 from tkinter import *
+from Constantes import MINIMO_JUGADORES
 from Constantes_config import MAX_JUGADORES
 from interfaz_de_registro import interfaz_registro
 
@@ -84,6 +85,8 @@ def solicitar_nombre(dict_jugadores):
         #Verifica si la cantidad de usuarios logeados (listos para jugar) es igual o mayor a la constante del archivo de configuración. 
         if len(dict_jugadores.keys()) >= (MAX_JUGADORES):
             boton_envio['state']='disabled'
+        if len(dict_jugadores.keys()) >= MINIMO_JUGADORES:
+            boton_inicio['state'] = 'active'
             
     #Boton Envio
     boton_envio=Button(raiz, text = "Logearse",command= lambda:[presionar_enviar(dict_jugadores, usuario_var.get(), contraseña_var.get(), listbox_jugadores, mensaje_login), verificar_cantidad_jugadores()])
@@ -93,7 +96,7 @@ def solicitar_nombre(dict_jugadores):
     boton_registro=Button(raiz, text ="Registrarse",command = lambda: interfaz_registro(raiz))
     boton_registro.pack()
     #Boton Iniciar
-    boton_inicio=Button(raiz, text = "Iniciar Partida",command = raiz.destroy)
+    boton_inicio=Button(raiz, text = "Iniciar Partida", state = DISABLED,command = raiz.destroy)
     boton_inicio.pack()
     raiz.mainloop()
     return None
