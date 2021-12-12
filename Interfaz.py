@@ -82,10 +82,8 @@ def solicitar_nombre(dict_jugadores):
     def verificar_cantidad_jugadores():
         #Luca Salluzzi
         #Verifica si la cantidad de usuarios logeados (listos para jugar) es igual o mayor a la constante del archivo de configuración. 
-        if len(dict_jugadores.keys()) >= (MAX_JUGADORES) or len(dict_jugadores.keys()) == 1:
+        if len(dict_jugadores.keys()) >= (MAX_JUGADORES):
             boton_envio['state']='disabled'
-        else:
-            boton_envio['state']='enabled'
             
     #Boton Envio
     boton_envio=Button(raiz, text = "Logearse",command= lambda:[presionar_enviar(dict_jugadores, usuario_var.get(), contraseña_var.get(), listbox_jugadores, mensaje_login), verificar_cantidad_jugadores()])
