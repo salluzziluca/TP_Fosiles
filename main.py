@@ -57,8 +57,7 @@ def main():
             partida_terminada=partida_completa(fichas)
 
             if partida_terminada:
-                resultado = revisar_ganador(dict_jugadores,orden_jugadores)
-                mensaje_final(tiempo_inicio, resultado)
+                mensaje_final(tiempo_inicio)
 
         dict_jugadores_ordenado = sorted(dict_jugadores.items(),key= lambda x: (x[1][ACIERTOS], - x[1][INTENTOS]) , reverse=True)
         ranking_de_partida(dict_jugadores_ordenado , partidas_jugadas, juego_terminado)
