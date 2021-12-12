@@ -1,15 +1,24 @@
-import random, time
+from os import stat
+import random, time, datetime
 from Constantes import *
 
 def generar_fichas():
     # Hecha por Lucas, Omar y Conti.
     # Genera una lista de fichas y las devuelve en posiciones aleatorias.
+    """   
+    lista_fichas=[
+        ["D",False],["D",False],["E",False],["E",False],
+        ["J",False],["J",False],["Y",False],["Y",False],
+        ["A",False],["A",False],["G",False],["G",False],
+        ["X",False],["X",False],["V",False],["V",False]
+        ]
+        
+    """
+
     lista_fichas=[
     ["D",False],["D",False],["E",False],["E",False],
-    ["J",False],["J",False],["Y",False],["Y",False],
-    ["A",False],["A",False],["G",False],["G",False],
-    ["X",False],["X",False],["V",False],["V",False]
-    ]
+    ["J",False],["J",False],["Y",False],["Y",False]]
+
     random.shuffle(lista_fichas)
     return lista_fichas
 
@@ -24,7 +33,7 @@ def validacion(input_realizado,fichas):
     # Dependiendo si es una pos correcta, y si la ficha no está boca arriba.
     return ((input_realizado-1) in range(len(fichas)) and fichas[input_realizado-1][POSICION_BOOL] != True)
 
-def juego_completo(fichas):
+def partida_completa(fichas):
     # Hecha por Agustín Conti
     # Determina si el juego terminó, comprobando que todas las fichas esten "volteadas".
     Terminado=True
@@ -92,4 +101,25 @@ def revisar_ganador(diccionario, jugadores):
             resultado = 'empate'
     return resultado
 
+def juntar_datos_partida(dict_jugadores,dict_jugadores_total):
+    # Hecha por Omar Oriz, Agustin Conti.
+    # recibe diccionario de jugadores de cada partida y un diccionario que almacena los datos de todas las partidas.
+    # Actualiza el segundo en base al primero.
+    for jugador, stats in dict_jugadores.items():
 
+        if jugador not in dict_jugadores_total:
+            dict_jugadores_total[jugador] = stats
+        else:
+            dict_jugadores_total[jugador][INTENTOS] += stats[INTENTOS]
+            dict_jugadores_total[jugador][ACIERTOS] += stats[ACIERTOS]
+    
+
+def guardar_partida_en_csv(dict_jugadores_ordenado):
+    # hecha por Omar Oriz, Agustin conti.
+    # Recibe el diccionario de jugadores de cada partida y registra sus datos en el csv de ranking all-time.
+    fecha_actual = datetime.datetime.now().strftime("%x")
+    hora_actual = datetime.datetime.now().strftime("%X")
+    archivo = open('historial_all_time.txt', 'a')  # a de append para no pisar.
+    for jugador, stats in dict_jugadores_ordenado:
+        archivo.write(f'{fecha_actual},{hora_actual},{jugador},{stats[ACIERTOS]},{stats[INTENTOS]}\n')
+    archivo.close()

@@ -1,5 +1,5 @@
 from tkinter import *
-from Constantes import MAX_JUGADORES
+from Constantes import MAX_JUGADORES, ACIERTOS, INTENTOS
 from interfaz_de_registro import interfaz_registro
 
 def validaciones(usuario, contraseña):
