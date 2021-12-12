@@ -114,6 +114,3 @@ def ranking_fin_de_juego (lista_jugadores_ordenada_final,partidas_jugadas):
 
 
     raiz_ranking_fin.mainloop()
-
-
-ranking_fin_de_juego ([['Omar',[6,3,2]],['Tato',[6,3,2]]],2)
