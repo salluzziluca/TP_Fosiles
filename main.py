@@ -1,31 +1,21 @@
 import time
 from os import system
-
 from Interfaz import solicitar_nombre
 from Interaccion_usuario import *
 from Constantes import *
-from Procesamiento_del_juego import *
-    
+from Procesamiento_del_juego import *    
+
 def turno(fichas, jugador):
     # Hecha por Oriz, Conti, Zarza.
     # Define una ronda de selección de fichas. Devuelve la lista de fichas con dos de ellas dadas vuelta por el jugador y los ingresos realizados.
     n=0
-    system('cls')  #limpia pantalla
-    print('\n-------------------------------')
-    print(f'Turno de {jugador}')
-    print('-------------------------------\n')
-    mostrar_fichas(fichas)
+    mostrar_fichas(fichas,jugador)
     ingresos=[]
     while n<2:
-
         input1=input_usuario(fichas)
         ingresos.append(input1)
         voltear_ficha(fichas,input1)
-        system('cls') #limpia pantalla
-        print('\n-------------------------------')
-        print(f'Turno de {jugador}')
-        print('-------------------------------\n')
-        mostrar_fichas(fichas)
+        mostrar_fichas(fichas,jugador)
         n+=1
 
     return fichas,ingresos

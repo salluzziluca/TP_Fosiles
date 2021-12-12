@@ -1,42 +1,99 @@
 from tkinter import *
+from Constantes import MAX_JUGADORES
+from interfaz_de_registro import interfaz_registro
 
+def validaciones(usuario, contraseña):
+    #Desarollada por Luca Salluzzi
+    #Valida si el usuario y la contraseña ingresadas corresponden con alguna linea del registro .csv
+    usuarios_clave = open('usuarios.csv','r')
+    linea = usuarios_clave.readline()
+    linea = linea.rstrip('\n')
+    registro = linea.split(',')
+    valido = False
+    while (not valido) and linea:
+        if usuario == registro[0] and contraseña == registro[1]:
+            valido = True
+        else:
+            linea = usuarios_clave.readline()
+            linea = linea.rstrip('\n')
+            registro = linea.split(',')
+    usuarios_clave.close()
+    return valido
+
+def presionar_enviar(dict_jugadores, usuario, contraseña, listbox_jugadores, mensaje_login):
+        # Valentina Nieto,Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
+        #Se ejecuta al presionar el Boton.Si el usuario y la contraseña coinciden con los registros, asigna el contenido de los entry al diccionario de jugadores y a la listbox presente en memoria, ademas notifica al usuario en ambos casos.
+    
+        if validaciones(usuario, contraseña):
+            dict_jugadores[usuario] = [0,0]
+            mensaje_login.config(bg = 'yellow',fg = 'black',text='Usuario ingresado correctamente')
+            listbox_jugadores.insert(END, usuario)
+                
+        else:
+            mensaje_login.config(bg = 'yellow',fg = 'black',text = 'Usuario y contraseña no coinciden con nuestros registros')
+                
+        return None
+    
 def solicitar_nombre(dict_jugadores):
-    #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
-    #Solicita el ingreso de los nombres de los Jugadores
+    #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi, Agustín Conti, Lucas Osorio.
+    #Solicita el ingreso de los nombres de los Jugadores, muestra por pantalla el boton de registro, el de inicio de juego, el maximo de jugadores posibles, los nombres de los jugadores logueados y ademas, mensajes por pantalla del estado del login.
     raiz= Tk()
     raiz.title("Fosiles Memotest")
     raiz.resizable(0,0)
+    
     #raiz.iconbitmap()
-    raiz.geometry("310x160")
+    raiz.geometry("400x450")
     raiz.config(bg="yellow")
+    
     #frame
     miFrame=Frame(raiz)
     miFrame.pack(padx=10, pady=20)
     miFrame.config(cursor="heart")
-    #jugadores j1
-    jugador_1=Label(miFrame, text="Primer Jugador: ")
-    jugador_1.grid(row=0,column=0, padx=10, pady=10)
-    nombre1_var = StringVar()
-    jugador_1_entry=Entry(miFrame,textvariable=nombre1_var)
-    jugador_1_entry.grid(row=0,column=1,padx=10, pady=10)
-    #j2
-    jugador_2=Label(miFrame, text="Segundo Jugador: ")
-    jugador_2.grid(row=1,column=0,padx=10, pady=10)
-    nombre2_var = StringVar()
-    jugador_2_entry=Entry(miFrame,textvariable= nombre2_var)
-    jugador_2_entry.grid(row=1,column=1,padx=10, pady=10)
-    #funciones del boton
-    def presionar_enviar():
-        # Valentina Nieto,Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
-        #No recibe nada. se ejecuta al presionar el Boton. Asigna el contenido de los entry al diccionario de jugadores. Cierra la interfaz.
-        dict_jugadores[nombre1_var.get()] = [0,0]
-        dict_jugadores[nombre2_var.get()] = [0,0]
-        raiz.destroy()
-        return None
-    #Boton
-    Boton=Button(raiz, text="Enviar",command= presionar_enviar)
-    Boton.pack()
+    
+    #casilla usario
+    usuario_existente=Label(miFrame, text="Usuario: ")
+    usuario_existente.grid(row=0,column=0, padx=10, pady=10)
+    usuario_var = StringVar()
+    usuario_existente_entry=Entry(miFrame,textvariable=usuario_var)
+    usuario_existente_entry.grid(row=0,column=1,padx=10, pady=10)
+    
+    #casilla contraseña
+    contraseña=Label(miFrame, text="Contraseña: ")
+    contraseña.grid(row=1,column=0,padx=10, pady=10)
+    contraseña_var = StringVar()
+    contraseña_entry=Entry(miFrame,textvariable= contraseña_var)
+    contraseña_entry.grid(row=1,column=1,padx=10, pady=10)
+    contraseña_entry.config(show="*")
+    #Mensaje login
+    mensaje_login = Label(raiz, text = '')
+    mensaje_login.config(bg = 'yellow',fg = 'black')
+    mensaje_login.pack(padx= 50, pady=0)
+    
+    #Mensaje max jugadores 
+    mensaje_jugadores = Label(raiz, text = f'El maximo total de jugadores es {MAX_JUGADORES}')
+    mensaje_jugadores.config(bg = 'yellow',fg = 'black')
+    mensaje_jugadores.pack(padx= 50, pady=0)
+    
+    #Listbox jugadores
+    listbox_jugadores = Listbox(raiz)
+    listbox_jugadores.pack()
+    
+    #Funcion deshabilitación del botón
+    def verificar_cantidad_jugadores():
+        #Luca Salluzzi
+        #Verifica si la cantidad de usuarios logeados (listos para jugar) es igual o mayor a la constante del archivo de configuración. 
+        if len(dict_jugadores.keys()) >= (MAX_JUGADORES):
+            boton_envio['state']='disabled'
+            
+    #Boton Envio
+    boton_envio=Button(raiz, text = "Logearse",command= lambda:[presionar_enviar(dict_jugadores, usuario_var.get(), contraseña_var.get(), listbox_jugadores, mensaje_login), verificar_cantidad_jugadores()])
+    boton_envio.pack()
+    
+    # Boton Registro
+    boton_registro=Button(raiz, text ="Registrarse",command = lambda: interfaz_registro(raiz))
+    boton_registro.pack()
+    #Boton Iniciar
+    boton_inicio=Button(raiz, text = "Iniciar Partida",command = raiz.destroy)
+    boton_inicio.pack()
     raiz.mainloop()
     return None
-    
-# ACA PONEMOS LA FUNCION DE LA INTERFAZ Y LA IMPORTAMOS DESDE EL MAIN.
