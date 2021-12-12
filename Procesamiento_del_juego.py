@@ -83,24 +83,6 @@ def timer_delay(segundos):
         tiempo_transcurrido = t_actual - t_inicial
     return None
 
-def revisar_ganador(diccionario, jugadores):
-    # Hecha por Osorio y Salluzzi, Omar.
-    # Evalúa aciertos e intentos y devuelve al ganador o anuncia un empate.
-    aciertos_j1, intentos_j1= diccionario[jugadores[0]][ACIERTOS], diccionario[jugadores[0]][INTENTOS]
-    aciertos_j2, intentos_j2 = diccionario[jugadores[1]][ACIERTOS], diccionario[jugadores[1]][INTENTOS]
-    if  aciertos_j1 > aciertos_j2 :
-        resultado = f'{jugadores[0]} ganó'
-    elif aciertos_j1 < aciertos_j2:
-        resultado = f'{jugadores[1]} ganó'
-    else:
-        if intentos_j1 < intentos_j2:
-            resultado = f'{jugadores[0]} ganó'
-        elif intentos_j1 > intentos_j2:
-            resultado = f'{jugadores[1]} ganó'
-        else:
-            resultado = 'empate'
-    return resultado
-
 def juntar_datos_partida(dict_jugadores,dict_jugadores_total):
     # Hecha por Omar Oriz, Agustin Conti.
     # recibe diccionario de jugadores de cada partida y un diccionario que almacena los datos de todas las partidas.
