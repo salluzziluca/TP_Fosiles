@@ -49,10 +49,9 @@ def solicitar_nombre(dict_jugadores):
     raiz= Tk()
     raiz.title("Fosiles Memotest")
     raiz.resizable(0,0)
-    
-    #raiz.iconbitmap()
     raiz.geometry("415x400")
     raiz.config(bg="#E9F7EF")
+    raiz.iconbitmap('fosil.ico')
     
     #frame
     miFrame=Frame(raiz)
