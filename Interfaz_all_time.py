@@ -27,7 +27,7 @@ def gen_dict_all_time_ordenado():
             dict_all_time[registro[POS_NOMBRE_REGISTRO]][PARTIDAS_JUGADAS]  += 1
 
         registro,fin_archivo = leer_linea_all_time(archivo)
-
+    archivo.close()
     return sorted(dict_all_time.items(),key= lambda item: (item[1][ACIERTOS], - item[1][INTENTOS]) , reverse=True)
 
 def coordinar_scroll_con_frame(lienzo):

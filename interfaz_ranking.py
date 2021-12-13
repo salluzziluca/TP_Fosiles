@@ -55,7 +55,7 @@ def poblar_frame(frame_ranking,lista_jugadores_ordenada,trofeo_ganador):
         temp_label.grid(column= columna_actual+4 , row= fila_actual)
 
         if estadisticas[INTENTOS] > 0 :
-            temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]/estadisticas[INTENTOS]:.2f}',font=("Lucida Console", tamanio_letra),bg = '#E9F7EF')
+            temp_label = Label(frame_ranking,text=f'{(estadisticas[ACIERTOS]/estadisticas[INTENTOS])*100:.2f}%',font=("Lucida Console", tamanio_letra),bg = '#E9F7EF')
         else:
             temp_label = Label(frame_ranking,text='No tuvo Intentos',font=("Lucida Console", tamanio_letra-15),bg = '#E9F7EF')
         temp_label.grid(column= columna_actual+6 , row= fila_actual)
@@ -102,7 +102,7 @@ def ranking_de_partida (lista_jugadores_ordenada,partidas_jugadas,juego_terminad
     #---------------------------------- Botones --------------------------------------------
 
     fila_actual = ultima_fila+1
-    salir_del_juego = Button(frame_ranking,text='Terminar Juego',command = lambda: boton_salir(juego_terminado,raiz_ranking) , bg = 'pale violet red',fg = 'dark slate blue',activebackground='violetred3' )
+    salir_del_juego = Button(frame_ranking,text='Terminar Juego',command = lambda: boton_salir(juego_terminado,raiz_ranking) , bg = 'pale violet red',fg = 'dark slate blue',activebackground = 'violetred3' )
     salir_del_juego.grid(column = 1,row = fila_actual,pady=10)
     aviso_de_salir = Label(frame_ranking,text='(Mostrará los resultados finales)',bg = '#E9F7EF',fg="#85929E")
     aviso_de_salir.grid(column = 1,row = fila_actual+1,pady=0)
