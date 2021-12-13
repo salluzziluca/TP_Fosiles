@@ -34,6 +34,14 @@ def presionar_enviar(dict_jugadores, usuario, contraseña, listbox_jugadores, me
             mensaje_login.config(bg = 'yellow',fg = 'black',text = 'Usuario y contraseña no coinciden con nuestros registros')
                 
         return None
+
+def verificar_cantidad_jugadores(diccionario, boton_envio, boton_inicio):
+    #Luca Salluzzi
+    #Verifica si la cantidad de usuarios logeados (listos para jugar) es igual o mayor a la constante del archivo de configuración. 
+    if len(diccionario.keys()) >= (MAX_JUGADORES):
+        boton_envio['state']='disabled'
+    if len(diccionario.keys()) >= MINIMO_JUGADORES:
+        boton_inicio['state'] = 'active'
     
 def solicitar_nombre(dict_jugadores):
     #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi, Agustín Conti, Lucas Osorio.
@@ -78,23 +86,16 @@ def solicitar_nombre(dict_jugadores):
     #Listbox jugadores
     listbox_jugadores = Listbox(raiz)
     listbox_jugadores.pack()
-    
-    #Funcion deshabilitación del botón
-    def verificar_cantidad_jugadores():
-        #Luca Salluzzi
-        #Verifica si la cantidad de usuarios logeados (listos para jugar) es igual o mayor a la constante del archivo de configuración. 
-        if len(dict_jugadores.keys()) >= (MAX_JUGADORES):
-            boton_envio['state']='disabled'
-        if len(dict_jugadores.keys()) >= MINIMO_JUGADORES:
-            boton_inicio['state'] = 'active'
             
     #Boton Envio
-    boton_envio=Button(raiz, text = "Logearse",command= lambda:[presionar_enviar(dict_jugadores, usuario_var.get(), contraseña_var.get(), listbox_jugadores, mensaje_login), verificar_cantidad_jugadores()])
+    boton_envio=Button(raiz, text = "Logearse")
+    boton_envio.config(command= lambda:[presionar_enviar(dict_jugadores, usuario_var.get(), contraseña_var.get(), listbox_jugadores, mensaje_login), verificar_cantidad_jugadores(dict_jugadores, boton_envio, boton_inicio)])
     boton_envio.pack()
     
     # Boton Registro
     boton_registro=Button(raiz, text ="Registrarse",command = lambda: interfaz_registro(raiz))
     boton_registro.pack()
+    
     #Boton Iniciar
     boton_inicio=Button(raiz, text = "Iniciar Partida", state = DISABLED,command = raiz.destroy)
     boton_inicio.pack()
