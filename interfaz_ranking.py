@@ -57,7 +57,7 @@ def poblar_frame(frame_ranking,lista_jugadores_ordenada,trofeo_ganador):
         if estadisticas[INTENTOS] > 0 :
             temp_label = Label(frame_ranking,text=f'{estadisticas[ACIERTOS]/estadisticas[INTENTOS]:.2f}',font=("Lucida Console", tamanio_letra),bg = '#E9F7EF')
         else:
-            temp_label = Label(frame_ranking,text='No tuvo Intentos',font=("Lucida Console", tamanio_letra-10),bg = '#E9F7EF')
+            temp_label = Label(frame_ranking,text='No tuvo Intentos',font=("Lucida Console", tamanio_letra-15),bg = '#E9F7EF')
         temp_label.grid(column= columna_actual+6 , row= fila_actual)
         if tamanio_letra > 10:
             tamanio_letra -=3
