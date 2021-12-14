@@ -15,7 +15,7 @@ def leer_linea_all_time(archivo):
     return registro,fin_archivo
 
 def gen_dict_all_time_ordenado():
-    archivo = open('historial_all_time.txt','r')
+    archivo = open('CSVs/historial_all_time.csv','r')
     registro,fin_archivo = leer_linea_all_time(archivo)
     dict_all_time = {}
     while not fin_archivo:
@@ -131,7 +131,7 @@ def ranking_all_time(raiz_ranking_fin,ver_all_time):
     raiz_all_time.protocol("WM_DELETE_WINDOW", desabilitarX)
     raiz_all_time.title("RANKING ALL-TIME!")
     raiz_all_time.attributes('-topmost', True)
-    raiz_all_time.iconbitmap('laureles.ico')
+    raiz_all_time.iconbitmap('Imagenes/laureles.ico')
     raiz_all_time.resizable(0,0)
     raiz_all_time.geometry("1050x400")
     raiz_all_time.config(bg="#F2F3F4")
@@ -157,11 +157,11 @@ def ranking_all_time(raiz_ranking_fin,ver_all_time):
 
 
     #---------------------------------- Imagenes --------------------------------------------
-    trofeo_ganador = PhotoImage(file='trofeo_transparente.png')
-    laurel_derecho = PhotoImage(file='laurel_derecho.png')
-    laurel_izquierdo = PhotoImage(file='laurel_izquierdo.png')
-    medalla_plata = PhotoImage(file='medalla_silver.png')
-    medalla_bronce = PhotoImage(file='medalla_bronce.png')
+    trofeo_ganador = PhotoImage(file='Imagenes/trofeo_transparente.png')
+    laurel_derecho = PhotoImage(file='Imagenes/laurel_derecho.png')
+    laurel_izquierdo = PhotoImage(file='Imagenes/laurel_izquierdo.png')
+    medalla_plata = PhotoImage(file='Imagenes/medalla_silver.png')
+    medalla_bronce = PhotoImage(file='Imagenes/medalla_bronce.png')
 
     #---------------------------------- Poblar Frame --------------------------------------------
     ultima_fila = poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo,medalla_plata,medalla_bronce)

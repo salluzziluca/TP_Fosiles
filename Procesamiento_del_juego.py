@@ -91,16 +91,18 @@ def juntar_datos_partida(dict_jugadores,dict_jugadores_total):
             dict_jugadores_total[jugador][ACIERTOS] += stats[ACIERTOS]
     
 
-def guardar_partida_en_csv(dict_jugadores_ordenado):
+def guardar_partida_en_csv(dict_jugadores_ordenado, partidas_jugadas):
     # hecha por Omar Oriz, Agustin conti.
     # Recibe el diccionario de jugadores de cada partida y registra sus datos en el csv de ranking all-time.
     
     fecha_actual = datetime.datetime.now().strftime("%x")
     hora_actual = datetime.datetime.now().strftime("%X")
-    if not REINICIAR_ARCHIVO_PARTIDAS:
+
+    if REINICIAR_ARCHIVO_PARTIDAS and partidas_jugadas <= 1:
+        modo_apertura = 'w'
+    else: 
         modo_apertura = 'a'
-    else: modo_apertura = 'w'
-    archivo = open('historial_all_time.txt', modo_apertura)
+    archivo = open('CSVs/historial_all_time.csv', modo_apertura)
     for jugador, stats in dict_jugadores_ordenado:
         archivo.write(f'{fecha_actual},{hora_actual},{jugador},{stats[ACIERTOS]},{stats[INTENTOS]}\n')
     archivo.close()

@@ -1,4 +1,4 @@
-from Constantes_config import *
+from config.Constantes_config import *
 
 POSICION_LETRA = 0
 POSICION_BOOL=1

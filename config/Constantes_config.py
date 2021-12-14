@@ -1,5 +1,7 @@
 def leer_config():
-    config = open ("configuracion.csv","r")
+    # Hecha por Conti 
+    # Lee el csv de configuracion y retorna una tupla con lo que leyó
+    config = open ("config/configuracion.csv", "r")
     variables = []
     linea = config.readline()
     linea = linea.replace(","," ").split()

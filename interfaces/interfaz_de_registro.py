@@ -5,7 +5,7 @@ def usuario_existente(nombre_jugador):
     #Recibe un str (nombre del jugador) y verifica si se encuentra registrado en el archivo de usuarios.
     #Devuelve true si lo encuentra, false caso contrario.
     # Hecha por Omar Oriz.
-    usuarios_clave = open('usuarios.csv','r')
+    usuarios_clave = open('CSVs/usuarios.csv','r')
     linea = usuarios_clave.readline()
     registro = linea.split(',')
     iguales= False
@@ -21,7 +21,7 @@ def usuario_existente(nombre_jugador):
 def guardar_usuario_nuevo(usuario,contrasenia):
     #Recibe nombre de usuario y contraseña. Abre el archivo de usuarios y guarda allí la información (usuario,clave).
     # Hecha por Omar Oriz.
-    usuarios_clave = open('usuarios.csv','a')
+    usuarios_clave = open('CSVs/usuarios.csv','a')
     usuarios_clave.write(f'\n{usuario},{contrasenia}')
     usuarios_clave.close()
  
@@ -138,7 +138,7 @@ def interfaz_registro(raiz_importada):
     raiz_registro.title("Registro de Jugador")
     raiz_registro.resizable(0,0)
     raiz_registro.geometry("515x315")
-    raiz_registro.iconbitmap("fosil.ico")
+    raiz_registro.iconbitmap("Imagenes/fosil.ico")
     raiz_registro.config(bg="#d4e6f1")
     #---------------------------------- frame--------------------------------------------
     frame_registro=Frame(raiz_registro,bg="#eaf2f8")
@@ -167,8 +167,8 @@ def interfaz_registro(raiz_importada):
     mi_clave_entry.grid(row=2,column=1)
 
     #---------------------------------- Mostrar contraseña--------------------------------------------
-    ojo_abierto = PhotoImage(file='ojo_abierto.png')
-    ojo_tachado = PhotoImage(file='ojo_tachado.png')
+    ojo_abierto = PhotoImage(file='Imagenes/ojo_abierto.png')
+    ojo_tachado = PhotoImage(file='Imagenes/ojo_tachado.png')
     show_contra = Button(frame_registro,image= ojo_abierto,command = lambda: presionar_ojo_abierto(show_contra,ojo_abierto,ojo_tachado,mi_clave_entry),bg="#d1f2eb")
     show_contra.grid(row = 2,column = 2 )
     
@@ -201,7 +201,3 @@ def interfaz_registro(raiz_importada):
 
 
     raiz_registro.mainloop()
-    return None
-
-########################################
-

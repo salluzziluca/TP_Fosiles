@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter.font import Font
 from Constantes import *
 
 def boton_salir(juego_terminado,raiz_ranking):
@@ -73,7 +72,7 @@ def ranking_de_partida (lista_jugadores_ordenada,partidas_jugadas,juego_terminad
     raiz_ranking = Tk()
     raiz_ranking.title("Ranking de partida")
     raiz_ranking.attributes('-topmost', True)
-    raiz_ranking.iconbitmap('fosil.ico')
+    raiz_ranking.iconbitmap('Imagenes/fosil.ico')
     raiz_ranking.resizable(0,0)
     raiz_ranking.geometry("740x400")
     raiz_ranking.config(bg="#E9F7EF")
@@ -96,7 +95,7 @@ def ranking_de_partida (lista_jugadores_ordenada,partidas_jugadas,juego_terminad
     #---------------------------------- relacionar el frame con la barra de scroll.--------------------------------------------
     frame_ranking.bind("<Configure>", lambda event, lienzo=lienzo: coordinar_scroll_con_frame(lienzo))
     #---------------------------------- Imagenes --------------------------------------------
-    trofeo_ganador = PhotoImage(file='primer_puesto.png')
+    trofeo_ganador = PhotoImage(file='Imagenes/primer_puesto.png')
     #---------------------------------- Poblar Frame --------------------------------------------
     ultima_fila = poblar_frame(frame_ranking,lista_jugadores_ordenada,trofeo_ganador)
     #---------------------------------- Botones --------------------------------------------

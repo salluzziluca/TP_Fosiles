@@ -1,6 +1,6 @@
 from tkinter import *
 from Constantes import *
-from Interfaz_all_time import *
+from interfaces.Interfaz_all_time import *
 
 def coordinar_scroll_con_frame(lienzo):
     # resetear la region de scroll para encompazar el frame
@@ -80,7 +80,7 @@ def ranking_fin_de_juego (lista_jugadores_ordenada_final,partidas_jugadas):
     raiz_ranking_fin = Tk()
     raiz_ranking_fin.title("RESULTADOS FINALES!")
     raiz_ranking_fin.attributes('-topmost', True)
-    raiz_ranking_fin.iconbitmap('fin_race.ico')
+    raiz_ranking_fin.iconbitmap('Imagenes/fin_race.ico')
     raiz_ranking_fin.resizable(0,1)
     raiz_ranking_fin.geometry("950x300")
     raiz_ranking_fin.config(bg="#D4E6F1")
@@ -104,7 +104,7 @@ def ranking_fin_de_juego (lista_jugadores_ordenada_final,partidas_jugadas):
     frame_ranking.bind("<Configure>", lambda event, lienzo=lienzo: coordinar_scroll_con_frame(lienzo))
 
     #---------------------------------- Imagenes --------------------------------------------
-    medalla_dorada = PhotoImage(file='medalla_dorada_cinta1.png')
+    medalla_dorada = PhotoImage(file='Imagenes/medalla_dorada_cinta1.png')
     #---------------------------------- Poblar Frame --------------------------------------------
     ultima_fila = poblar_frame(frame_ranking , medalla_dorada,partidas_jugadas,lista_jugadores_ordenada_final)
 

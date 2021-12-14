@@ -1,13 +1,13 @@
 from tkinter import *
 from tkinter import font
 from Constantes import MINIMO_JUGADORES
-from Constantes_config import MAX_JUGADORES
-from interfaz_de_registro import interfaz_registro
+from config.Constantes_config import MAX_JUGADORES
+from interfaces.interfaz_de_registro import interfaz_registro
 
 def validaciones(usuario, contraseña):
     #Valida si el usuario y la contraseña ingresadas corresponden con alguna linea del registro .csv
     #Hecha por Luca Salluzzi
-    usuarios_clave = open('usuarios.csv','r')
+    usuarios_clave = open('CSVs/usuarios.csv','r')
     linea = usuarios_clave.readline()
     linea = linea.rstrip('\n')
     registro = linea.split(',')
@@ -90,7 +90,7 @@ def solicitar_nombre(dict_jugadores):
     raiz.resizable(0,0)
     raiz.geometry("415x420")
     raiz.config(bg="#E9F7EF")
-    raiz.iconbitmap('fosil.ico')
+    raiz.iconbitmap('Imagenes/fosil.ico')
     
     fuente_elegida = ('Lucida Console', 10)
     #frame
@@ -115,8 +115,8 @@ def solicitar_nombre(dict_jugadores):
     contraseña_entry.config(show="*")
     
     #---------------------------------- Mostrar contraseña--------------------------------------------
-    ojo_abierto = PhotoImage(file='ojo_abierto.png')
-    ojo_tachado = PhotoImage(file='ojo_tachado.png')
+    ojo_abierto = PhotoImage(file='Imagenes/ojo_abierto.png')
+    ojo_tachado = PhotoImage(file='Imagenes/ojo_tachado.png')
     show_contra = Button(miFrame,image= ojo_abierto,command = lambda: presionar_ojo_abierto(show_contra,ojo_abierto,ojo_tachado,contraseña_entry),bg="#d1f2eb")
     show_contra.grid(row = 1, column = 2)
     
