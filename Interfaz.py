@@ -5,8 +5,8 @@ from Constantes_config import MAX_JUGADORES
 from interfaz_de_registro import interfaz_registro
 
 def validaciones(usuario, contraseña):
-    #Desarollada por Luca Salluzzi
     #Valida si el usuario y la contraseña ingresadas corresponden con alguna linea del registro .csv
+    #Hecha por Luca Salluzzi
     usuarios_clave = open('usuarios.csv','r')
     linea = usuarios_clave.readline()
     linea = linea.rstrip('\n')
@@ -23,9 +23,8 @@ def validaciones(usuario, contraseña):
     return valido
 
 def presionar_enviar(dict_jugadores, usuario, contraseña, listbox_jugadores, mensaje_login):
-        # Valentina Nieto,Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
         #Se ejecuta al presionar el Boton.Si el usuario y la contraseña coinciden con los registros, asigna el contenido de los entry al diccionario de jugadores y a la listbox presente en memoria, ademas notifica al usuario en ambos casos.
-    
+        # Hecha por Valentina Nieto,Oriz Omar, Luca Salluzzi,Agustín Conti,Lucas Osorio.
         if validaciones(usuario, contraseña) and (usuario not in dict_jugadores.keys()):
             dict_jugadores[usuario] = [0,0]
             mensaje_login.config(bg = '#E9F7EF',fg = 'black',text='Usuario ingresado correctamente')
@@ -38,8 +37,8 @@ def presionar_enviar(dict_jugadores, usuario, contraseña, listbox_jugadores, me
         return None
 
 def verificar_cantidad_jugadores(diccionario, boton_envio, boton_inicio):
-    #Luca Salluzzi
     #Verifica si la cantidad de usuarios logeados (listos para jugar) es igual o mayor a la constante del archivo de configuración. 
+    #Hecha por Luca Salluzzi
     if len(diccionario.keys()) >= (MAX_JUGADORES):
         boton_envio['state']='disabled'
     if len(diccionario.keys()) >= MINIMO_JUGADORES:
@@ -84,6 +83,7 @@ def cerrar_juego_por_login(dict_jugadores,raiz):
 def solicitar_nombre(dict_jugadores):
     #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi, Agustín Conti, Lucas Osorio.
     #Solicita el ingreso de los nombres de los Jugadores, muestra por pantalla el boton de registro, el de inicio de juego, el maximo de jugadores posibles, los nombres de los jugadores logueados y ademas, mensajes por pantalla del estado del login.
+    #---------------------------------- raíz--------------------------------------------
     raiz= Tk()
     raiz.title("Fosiles Memotest")
     raiz.protocol("WM_DELETE_WINDOW", lambda: cerrar_juego_por_login(dict_jugadores,raiz))
@@ -114,7 +114,7 @@ def solicitar_nombre(dict_jugadores):
     contraseña_entry.grid(row=1,column=1,padx=10, pady=10)
     contraseña_entry.config(show="*")
     
-    #Mostrar contraseña
+    #---------------------------------- Mostrar contraseña--------------------------------------------
     ojo_abierto = PhotoImage(file='ojo_abierto.png')
     ojo_tachado = PhotoImage(file='ojo_tachado.png')
     show_contra = Button(miFrame,image= ojo_abierto,command = lambda: presionar_ojo_abierto(show_contra,ojo_abierto,ojo_tachado,contraseña_entry),bg="#d1f2eb")
