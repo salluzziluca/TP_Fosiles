@@ -37,6 +37,8 @@ def coordinar_scroll_con_frame(lienzo):
 def poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo,medalla_plata,medalla_bronce):
     # Recibe el frame, la lista de j. ordenada y la imagen trofeo. Se encarga de mostrar en la interfaz la tabla de ranking 
     # con todas sus estadísticas.
+
+
     #---------------------------------- label fijos--------------------------------------------
     espacio = Label(frame_ranking,text='               ',bg='#F2F3F4',pady=15,padx=10)
     espacio.grid(column=0,row=0)
@@ -70,6 +72,8 @@ def poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo,
 
     medalla_b = Label(frame_ranking,image= medalla_bronce,bg= '#F2F3F4',height=50,width=50)
     medalla_b.grid(column= 0,row= 3)
+
+
     #---------------------------------- label generados--------------------------------------------
     columna_actual = 2
     fila_actual = 1
@@ -128,6 +132,7 @@ def ranking_all_time(raiz_ranking_fin,ver_all_time):
     raiz_all_time.resizable(0,0)
     raiz_all_time.geometry("1050x400")
     raiz_all_time.config(bg="#F2F3F4")
+
     #---------------------------------- Scroll--------------------------------------------
     barra_scroll = Scrollbar(raiz_all_time,orient="vertical",)
     #---------------------------------- Lienzo--------------------------------------------
@@ -138,23 +143,32 @@ def ranking_all_time(raiz_ranking_fin,ver_all_time):
     #---------------------------------- Configuracion del scroll--------------------------------------------
     barra_scroll.config(command=lienzo.yview)
     barra_scroll.pack(side="right", fill="y")
+
     #---------------------------------- Configuracion del lienzo--------------------------------------------
     lienzo.configure(yscrollcommand=barra_scroll.set, bg = '#F2F3F4') # parametro de configuracion yscrollcommand seteando la  barra_scroll como scroller.
     lienzo.pack(side="left", fill="both", expand=True)
     lienzo.create_window((1,1), window=frame_ranking, anchor="n")
+
     #---------------------------------- relacionar el frame con la barra de scroll.--------------------------------------------
     frame_ranking.bind("<Configure>", lambda event, lienzo=lienzo: coordinar_scroll_con_frame(lienzo))
+
+
     #---------------------------------- Imagenes --------------------------------------------
     trofeo_ganador = PhotoImage(file='trofeo_transparente.png')
     laurel_derecho = PhotoImage(file='laurel_derecho.png')
     laurel_izquierdo = PhotoImage(file='laurel_izquierdo.png')
     medalla_plata = PhotoImage(file='medalla_silver.png')
     medalla_bronce = PhotoImage(file='medalla_bronce.png')
+
     #---------------------------------- Poblar Frame --------------------------------------------
     ultima_fila = poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo,medalla_plata,medalla_bronce)
-    #---------------------------------- Botones --------------------------------------------
 
+
+    #---------------------------------- Botones --------------------------------------------
     fila_actual = ultima_fila+1
     salir_del_juego = Button(frame_ranking,text='Cerrar ventana',command = lambda: cerrar_all_time(ver_all_time,raiz_all_time) , bg = 'pale violet red',fg = 'dark slate blue',activebackground='violetred3' )
     salir_del_juego.grid(column = 10,row = fila_actual,pady= 10)  
+
+
+    
     raiz_all_time.mainloop()

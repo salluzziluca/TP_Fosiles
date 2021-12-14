@@ -156,6 +156,8 @@ def interfaz_registro(raiz_importada):
     var_usuario_nuevo=StringVar()
     usario_nuevo_entry=Entry(frame_registro, textvariable = var_usuario_nuevo,font=("Lucida console", 11),bg="#eaf2f8",fg= "#273746",cursor="heart")
     usario_nuevo_entry.grid(row=0,column=1)
+
+
     #---------------------------------- contraseña--------------------------------------------
     mi_clave=Label(frame_registro, text="Clave: ",font=("Lucida console", 11),bg="#eaf2f8")
     mi_clave.grid(row=2,column=0)
@@ -163,6 +165,7 @@ def interfaz_registro(raiz_importada):
     mi_clave_entry=Entry(frame_registro, textvariable=var_pass,font=("Lucida console", 11),bg="#eaf2f8",fg= "#273746",cursor="heart")
     mi_clave_entry.config(show="*")
     mi_clave_entry.grid(row=2,column=1)
+
     #---------------------------------- Show contraseña--------------------------------------------
     ojo_abierto = PhotoImage(file='ojo_abierto.png')
     ojo_tachado = PhotoImage(file='ojo_tachado.png')
@@ -176,9 +179,12 @@ def interfaz_registro(raiz_importada):
     mi_clave_re_entry=Entry(frame_registro, textvariable = var_pass_re,font=("Lucida console", 11),bg="#eaf2f8",fg= "#273746",cursor="heart")
     mi_clave_re_entry.config(show="*")
     mi_clave_re_entry.grid(row=4,column=1)
+
     #---------------------------------- Show contraseña--------------------------------------------
     show_contra_re = Button(frame_registro,image= ojo_abierto,command = lambda: presionar_ojo_abierto(show_contra_re,ojo_abierto,ojo_tachado,mi_clave_re_entry),bg="#d1f2eb")
     show_contra_re.grid(row = 4,column = 2 )
+
+
 
     #---------------------------------- Label dador de resultado--------------------------------------------
     msg_final=Label(raiz_registro, text='')

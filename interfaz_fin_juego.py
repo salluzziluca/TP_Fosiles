@@ -94,18 +94,22 @@ def ranking_fin_de_juego (lista_jugadores_ordenada_final,partidas_jugadas):
     #---------------------------------- Configuracion del scroll--------------------------------------------
     barra_scroll.config(command=lienzo.yview)
     barra_scroll.pack(side="right", fill="y")
+
     #---------------------------------- Configuracion del lienzo--------------------------------------------
     lienzo.configure(yscrollcommand=barra_scroll.set, bg = '#D4E6F1') # parametro de configuracion yscrollcommand seteando la  barra_scroll como scroller.
     lienzo.pack(side="left", fill="both", expand=True)
     lienzo.create_window((1,1), window=frame_ranking, anchor="n")
+
     #---------------------------------- relacionar el frame con la barra de scroll.--------------------------------------------
     frame_ranking.bind("<Configure>", lambda event, lienzo=lienzo: coordinar_scroll_con_frame(lienzo))
+
     #---------------------------------- Imagenes --------------------------------------------
     medalla_dorada = PhotoImage(file='medalla_dorada_cinta1.png')
     #---------------------------------- Poblar Frame --------------------------------------------
     ultima_fila = poblar_frame(frame_ranking , medalla_dorada,partidas_jugadas,lista_jugadores_ordenada_final)
-    #---------------------------------- Botones --------------------------------------------
 
+
+    #---------------------------------- Botones --------------------------------------------
     fila_actual = ultima_fila+1
     salir_del_juego = Button(frame_ranking,text='Salir del juego',command = raiz_ranking_fin.destroy , bg = 'pale violet red',
     fg = 'dark slate blue',activebackground='violetred3' )
