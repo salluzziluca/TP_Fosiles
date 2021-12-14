@@ -17,7 +17,10 @@ def generar_fichas():
 def elegir_primero(orden_jugadores):
     # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi
     # Elije el jugador que va a empezar aleatoriamente
-    return random.choice(orden_jugadores)
+    try:
+        return random.choice(orden_jugadores)
+    except IndexError:
+        raise Exception('No se ingresó ningun jugador')
 
 def validacion(input_realizado,fichas):
     # Hecho por Omar Oriz.

@@ -42,6 +42,18 @@ def verificar_cantidad_jugadores(diccionario, boton_envio, boton_inicio):
         boton_envio['state']='disabled'
     if len(diccionario.keys()) >= MINIMO_JUGADORES:
         boton_inicio['state'] = 'active'
+        
+def presionar_ojo_abierto(show_contra,ojo_abierto,ojo_tachado,mi_clave_entry):
+    #intercambia funcion e imagen de un mismo botón.
+    # Hecha por Omar Oriz, Valentina Nieto.
+    mi_clave_entry.config(show="")
+    show_contra.config(image = ojo_tachado,command = lambda: presionar_ojo_tachado(show_contra,ojo_abierto,ojo_tachado,mi_clave_entry),bg="#f1948a")
+
+def presionar_ojo_tachado(show_contra,ojo_abierto,ojo_tachado,mi_clave_entry):
+    #intercambia funcion e imagen de un mismo botón.
+    # Hecha por Omar Oriz, Valentina Nieto.
+    mi_clave_entry.config(show="*")
+    show_contra.config(image = ojo_abierto, command = lambda:presionar_ojo_abierto(show_contra,ojo_abierto,ojo_tachado,mi_clave_entry),bg="#d1f2eb")
     
 def solicitar_nombre(dict_jugadores):
     #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi, Agustín Conti, Lucas Osorio.
@@ -74,6 +86,13 @@ def solicitar_nombre(dict_jugadores):
     contraseña_entry=Entry(miFrame,textvariable= contraseña_var)
     contraseña_entry.grid(row=1,column=1,padx=10, pady=10)
     contraseña_entry.config(show="*")
+    
+    #Mostrar contraseña
+    ojo_abierto = PhotoImage(file='ojo_abierto.png')
+    ojo_tachado = PhotoImage(file='ojo_tachado.png')
+    show_contra = Button(miFrame,image= ojo_abierto,command = lambda: presionar_ojo_abierto(show_contra,ojo_abierto,ojo_tachado,contraseña_entry),bg="#d1f2eb")
+    show_contra.grid(row = 1, column = 2, padx= 10 )
+    
     #Mensaje login
     mensaje_login = Label(raiz, text = '', height=2, width=30)
     mensaje_login.config(bg = '#E9F7EF',fg = 'black')
