@@ -23,7 +23,7 @@ Terminadas las etapas 2,3,4.
 Queda por pensar la etapa 5.
 
 
-14/12/2021   COMMIT EN MAIN. CHANGELOG:
+## 14/12/2021   COMMIT EN MAIN. CHANGELOG:
 
 ### Ahora los usuarios continuan logeados después de una partida, si eligen jugar otra (boton "nueva partida")
 - Los usuarios que ya se encuentra logeados aparecen en el listbox.
