@@ -1,6 +1,5 @@
-from os import stat
 import random, time, datetime
-from Constantes import *
+from config.Constantes_config import *
 
 def generar_fichas():
     # Hecha por Conti.

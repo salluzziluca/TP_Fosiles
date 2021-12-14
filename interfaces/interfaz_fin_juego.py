@@ -1,5 +1,5 @@
 from tkinter import *
-from Constantes import *
+from config.Constantes_config import *
 from interfaces.Interfaz_all_time import *
 
 def coordinar_scroll_con_frame(lienzo):

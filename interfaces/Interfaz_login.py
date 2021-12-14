@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import font
-from Constantes import MINIMO_JUGADORES
-from config.Constantes_config import MAX_JUGADORES
+from config.Constantes_config import *
 from interfaces.interfaz_de_registro import interfaz_registro
 
 def validaciones(usuario, contraseña):

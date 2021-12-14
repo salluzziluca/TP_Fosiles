@@ -1,5 +1,5 @@
 from tkinter import *
-from Constantes import *
+from config.Constantes_config import *
 
 def boton_salir(juego_terminado,raiz_ranking):
     juego_terminado.append(1)

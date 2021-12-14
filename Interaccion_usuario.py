@@ -1,4 +1,4 @@
-from Constantes import *
+from config.Constantes_config import *
 from Procesamiento_del_juego import validacion
 from os import system
 import time

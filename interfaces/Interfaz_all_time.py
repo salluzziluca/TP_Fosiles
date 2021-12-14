@@ -1,6 +1,5 @@
-from os import pathsep
 from tkinter import *
-from Constantes import *
+from config.Constantes_config import *
 
 def leer_linea_all_time(archivo):
     fin_archivo = False

@@ -1,4 +1,4 @@
-from os import write
+
 from tkinter import*
 #################  back #######################
 def usuario_existente(nombre_jugador):
