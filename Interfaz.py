@@ -68,8 +68,7 @@ def solicitar_nombre(dict_jugadores):
     #frame
     miFrame=Frame(raiz)
     miFrame.grid(in_=raiz, row=2, column=0, columnspan=3, sticky=NSEW, padx= 40)
-    miFrame.grid_rowconfigure(1, weight=1)
-    miFrame.grid_columnconfigure(1, weight=1)
+
     miFrame.config(cursor="heart", bg= '#E9F7EF')
    
     #casilla usario
@@ -91,7 +90,7 @@ def solicitar_nombre(dict_jugadores):
     ojo_abierto = PhotoImage(file='ojo_abierto.png')
     ojo_tachado = PhotoImage(file='ojo_tachado.png')
     show_contra = Button(miFrame,image= ojo_abierto,command = lambda: presionar_ojo_abierto(show_contra,ojo_abierto,ojo_tachado,contraseña_entry),bg="#d1f2eb")
-    show_contra.grid(row = 1, column = 2, padx= 10 )
+    show_contra.grid(row = 1, column = 2)
     
     #Mensaje login
     mensaje_login = Label(raiz, text = '', height=2, width=30)
