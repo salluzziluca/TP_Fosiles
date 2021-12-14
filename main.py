@@ -40,14 +40,12 @@ def main():
         
         solicitar_nombre(dict_jugadores) # función de interfaz hecha con tkinter. incluye jugadores al diccionario.
         
-        if (not dict_jugadores):        # Si del login se sale sin jugadores logeados, el juego tiene que terminar.
-            print('ENTRE EN NO DICC')
+        if (not dict_jugadores): # Si del login se sale sin jugadores logeados, el juego tiene que terminar.
             partida_terminada = True
             juego_terminado.append(1)
             cerrar_voluntariamente = True
 
         if dict_jugadores:
-            print('ENTRE')
             orden_jugadores=list(dict_jugadores.keys()) 
             jugador= elegir_primero(orden_jugadores) #elección aleatoria del primer jugador.
             fichas=generar_fichas() # Generación de fichas, al azar.

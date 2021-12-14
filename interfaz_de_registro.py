@@ -166,7 +166,7 @@ def interfaz_registro(raiz_importada):
     mi_clave_entry.config(show="*")
     mi_clave_entry.grid(row=2,column=1)
 
-    #---------------------------------- Show contraseña--------------------------------------------
+    #---------------------------------- Mostrar contraseña--------------------------------------------
     ojo_abierto = PhotoImage(file='ojo_abierto.png')
     ojo_tachado = PhotoImage(file='ojo_tachado.png')
     show_contra = Button(frame_registro,image= ojo_abierto,command = lambda: presionar_ojo_abierto(show_contra,ojo_abierto,ojo_tachado,mi_clave_entry),bg="#d1f2eb")
