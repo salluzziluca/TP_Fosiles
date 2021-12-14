@@ -122,10 +122,13 @@ def cerrar_all_time(ver_all_time,raiz_all_time):
     raiz_all_time.destroy()
     ver_all_time.config(state = NORMAL,bg = 'gold')
 
+def desabilitarX():
+    pass
 def ranking_all_time(raiz_ranking_fin,ver_all_time):
 
     #---------------------------------- raíz--------------------------------------------
     raiz_all_time = Toplevel(raiz_ranking_fin)
+    raiz_all_time.protocol("WM_DELETE_WINDOW", desabilitarX)
     raiz_all_time.title("RANKING ALL-TIME!")
     raiz_all_time.attributes('-topmost', True)
     raiz_all_time.iconbitmap('laureles.ico')
