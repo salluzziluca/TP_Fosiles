@@ -1,5 +1,5 @@
 import time
-from os import system
+from os import system, truncate
 from interfaz_ranking import ranking_de_partida
 from interfaz_fin_juego import *
 from Interfaz import *
@@ -30,16 +30,29 @@ def main():
     juego_terminado = []
     partidas_jugadas= 0
     dict_jugadores_total = {}
+    dict_jugadores={}
+    cerrar_voluntariamente = False
 
     while (not juego_terminado) and (partidas_jugadas <= MAX_PARTIDAS): # Ciclo de juego general.
-        partidas_jugadas += 1
+        
         partida_terminada=False
         tiempo_inicio=time.time()
-        dict_jugadores={}
+        
         solicitar_nombre(dict_jugadores) # función de interfaz hecha con tkinter. incluye jugadores al diccionario.
-        orden_jugadores=list(dict_jugadores.keys()) 
-        jugador= elegir_primero(orden_jugadores) #elección aleatoria del primer jugador.
-        fichas=generar_fichas() # Generación de fichas, al azar.
+        
+        if (not dict_jugadores):        # Si del login se sale sin jugadores logeados, el juego tiene que terminar.
+            print('ENTRE EN NO DICC')
+            partida_terminada = True
+            juego_terminado.append(1)
+            cerrar_voluntariamente = True
+
+        if dict_jugadores:
+            print('ENTRE')
+            orden_jugadores=list(dict_jugadores.keys()) 
+            jugador= elegir_primero(orden_jugadores) #elección aleatoria del primer jugador.
+            fichas=generar_fichas() # Generación de fichas, al azar.
+
+            partidas_jugadas += 1
 
         while not partida_terminada: # Ciclo de partidas
             
@@ -59,12 +72,15 @@ def main():
             if partida_terminada:
                 mensaje_final(tiempo_inicio)
 
-        dict_jugadores_ordenado = sorted(dict_jugadores.items(),key= lambda x: (x[1][ACIERTOS], - x[1][INTENTOS]) , reverse=True)
-        ranking_de_partida(dict_jugadores_ordenado , partidas_jugadas, juego_terminado)
-        juntar_datos_partida(dict_jugadores,dict_jugadores_total)
-        guardar_partida_en_csv(dict_jugadores_ordenado)
-    
-    ranking_fin_de_juego(sorted(dict_jugadores_total.items(),key= lambda x: (x[1][ACIERTOS], - x[1][INTENTOS]) , reverse=True) , partidas_jugadas)
+        if not cerrar_voluntariamente: # No se ejecuta si el jugador quiere cerrar el juego.
+            dict_jugadores_ordenado = sorted(dict_jugadores.items(),key= lambda x: (x[1][ACIERTOS], - x[1][INTENTOS]) , reverse=True)
+            ranking_de_partida(dict_jugadores_ordenado , partidas_jugadas, juego_terminado)
+            juntar_datos_partida(dict_jugadores,dict_jugadores_total)
+            guardar_partida_en_csv(dict_jugadores_ordenado)
+            resets_stats_jugadores(dict_jugadores)
+        
+    if dict_jugadores_total: # se ejecuta solo si se jugó al menos 1 partida.
+        ranking_fin_de_juego(sorted(dict_jugadores_total.items(),key= lambda x: (x[1][ACIERTOS], - x[1][INTENTOS]) , reverse=True) , partidas_jugadas)
 
 main()
 

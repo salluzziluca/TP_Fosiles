@@ -104,3 +104,9 @@ def guardar_partida_en_csv(dict_jugadores_ordenado):
     for jugador, stats in dict_jugadores_ordenado:
         archivo.write(f'{fecha_actual},{hora_actual},{jugador},{stats[ACIERTOS]},{stats[INTENTOS]}\n')
     archivo.close()
+
+def resets_stats_jugadores(dict_jugadores):
+    # Recibe dict_jugadores. Resetea todas las estadísticas de la partida.
+    # Hecha por Oriz Omar.
+    for jugador in dict_jugadores.keys():
+        dict_jugadores[jugador] = [0,0]
