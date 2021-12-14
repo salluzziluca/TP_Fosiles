@@ -1,4 +1,5 @@
 from Constantes_config import *
+
 POSICION_LETRA = 0
 POSICION_BOOL=1
 INGRESO1 = 0
