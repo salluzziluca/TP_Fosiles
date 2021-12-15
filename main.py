@@ -18,7 +18,6 @@ def turno(fichas, jugador):
         voltear_ficha(fichas, input1)
         mostrar_fichas(fichas, jugador)
         n += 1
-
     return fichas, ingresos
 
 def ciclo_de_partida(partida_terminada, dict_jugadores, orden_jugadores, tiempo_inicio, fichas, jugador):
@@ -26,7 +25,7 @@ def ciclo_de_partida(partida_terminada, dict_jugadores, orden_jugadores, tiempo_
     # Modularizada por Omar Oriz, Agustin Conti.
     while not partida_terminada: # Ciclo de partida
         
-        fichas,ingresos = turno(fichas, jugador)
+        fichas, ingresos = turno(fichas, jugador)
         dict_jugadores[jugador][INTENTOS] += 1
 
         if acierto(fichas, ingresos):
@@ -37,13 +36,14 @@ def ciclo_de_partida(partida_terminada, dict_jugadores, orden_jugadores, tiempo_
             fichas = voltear_fichas_para_abajo(fichas, ingresos)
             jugador = cambiar_jugador(orden_jugadores.index(jugador), orden_jugadores)
             timer_delay(1.75)
+            
         partida_terminada = partida_completa(fichas)
 
         if partida_terminada:
             mensaje_final(tiempo_inicio)
 
-def post_partida(dict_jugadores,partidas_jugadas,juego_terminado,dict_jugadores_total):
-    # recibe parametros para repartir en otras funciones. organiza y ejecuta las tareas posteriores a una partida.
+def post_partida(dict_jugadores, partidas_jugadas, juego_terminado, dict_jugadores_total):
+    # Recibe parametros para repartir en otras funciones. organiza y ejecuta las tareas posteriores a una partida.
     # Modularizada por Omar Oriz, Agustin Conti.
     dict_jugadores_ordenado = sorted(dict_jugadores.items(), key = lambda x: (x[1][ACIERTOS], - x[1][INTENTOS]), reverse = True)
     ranking_de_partida(dict_jugadores_ordenado, partidas_jugadas, juego_terminado)
@@ -52,9 +52,9 @@ def post_partida(dict_jugadores,partidas_jugadas,juego_terminado,dict_jugadores_
     resets_stats_jugadores(dict_jugadores)
 
 def estado_de_partida(dict_jugadores, partida_terminada, juego_terminado, cerrar_voluntariamente, orden_jugadores, jugador, fichas, partidas_jugadas):
-    # evalua las condiciones para el inicio (o no) de la partida.
+    # Evalua las condiciones para el inicio (o no) de la partida.
     # Modularizada por Omar Oriz, Agustin Conti.
-    if (not dict_jugadores): # Si del login se sale sin jugadores logeados, el juego tiene que terminar.
+    if not dict_jugadores: # Si del login se sale sin jugadores logeados, el juego tiene que terminar.
         partida_terminada = True
         juego_terminado.append(1)
         cerrar_voluntariamente = True
@@ -93,6 +93,6 @@ def main():
 
         
     if dict_jugadores_total: # se ejecuta solo si se jugó al menos 1 partida.
-        ranking_fin_de_juego(sorted(dict_jugadores_total.items(), key= lambda x: (x[1][ACIERTOS],- x[1][INTENTOS]), reverse = True), partidas_jugadas)
+        ranking_fin_de_juego(sorted(dict_jugadores_total.items(), key = lambda x: (x[1][ACIERTOS],- x[1][INTENTOS]), reverse = True), partidas_jugadas)
 
 main()
