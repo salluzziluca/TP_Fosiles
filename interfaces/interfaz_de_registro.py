@@ -8,7 +8,7 @@ def usuario_existente(nombre_jugador):
     usuarios_clave = open('CSVs/usuarios.csv','r')
     linea = usuarios_clave.readline()
     registro = linea.split(',')
-    iguales= False
+    iguales = False
     while (not iguales) and linea:
         if nombre_jugador == registro[0]:
             iguales = True
@@ -53,7 +53,6 @@ def pass_valida(contrasenia):
     if (8 <= len(contrasenia) <= 12):
         valido = True
         vocales_acentuadas = ['á','é','í','ó','ú','Á','É','Í','Ó','Ú']
-        #requisitos = ['mayus','lower','num','-','_']
         pos,pos_max = 0,(len(contrasenia)-1)
         mayus_ok,lower_ok,digit,guion_medio,guion_bajo = False,False,False,False,False
         while valido and pos <= pos_max :

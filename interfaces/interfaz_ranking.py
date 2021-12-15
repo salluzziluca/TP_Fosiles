@@ -2,6 +2,7 @@ from tkinter import *
 from config.Constantes_config import *
 
 def boton_salir(juego_terminado,raiz_ranking):
+    # cierra la interfaz. Se conecta con el main para terminar el juego.
     juego_terminado.append(1)
     raiz_ranking.destroy()
 

@@ -1,23 +1,32 @@
 from tkinter import *
-from tkinter import font
 from config.Constantes_config import *
+from interfaces.Interfaz_all_time import leer_linea_all_time
 from interfaces.interfaz_de_registro import interfaz_registro
 
+def leer_linea(usuarios_clave):
+    # Lee una linea del archivo y la devuelve en formato compatible con el resto del codigo.
+    # Hecha por Omar Oriz, Agustin Conti.
+    linea = usuarios_clave.readline()
+    fin_archivo = False
+    registro = ['usuario','clave']
+    if linea:
+        linea = linea.rstrip('\n')
+        registro = linea.split(',')
+    else: 
+        fin_archivo = True
+    return registro,fin_archivo
 def validaciones(usuario, contraseña):
     #Valida si el usuario y la contraseña ingresadas corresponden con alguna linea del registro .csv
     #Hecha por Luca Salluzzi
     usuarios_clave = open('CSVs/usuarios.csv','r')
-    linea = usuarios_clave.readline()
-    linea = linea.rstrip('\n')
-    registro = linea.split(',')
+    registro,fin_archivo = leer_linea(usuarios_clave)
     valido = False
-    while (not valido) and linea:
+    while (not valido) and not fin_archivo:
         if usuario == registro[0] and contraseña == registro[1]:
             valido = True
         else:
-            linea = usuarios_clave.readline()
-            linea = linea.rstrip('\n')
-            registro = linea.split(',')
+            registro,fin_archivo = leer_linea(usuarios_clave)
+
     usuarios_clave.close()
     return valido
 
@@ -32,15 +41,14 @@ def presionar_enviar(dict_jugadores, usuario, contraseña, listbox_jugadores, me
             mensaje_login.config(bg = '#E9F7EF',fg = 'black',text='El Usuario ya se encuentra\nlogeado')
         else:
             mensaje_login.config(bg = '#E9F7EF',fg = 'black',text = 'Usuario y contraseña \nno coinciden con nuestros \nregistros')
-                
-        return None
 
 def verificar_cantidad_jugadores(diccionario, boton_envio, boton_inicio):
     #Verifica si la cantidad de usuarios logeados (listos para jugar) es igual o mayor a la constante del archivo de configuración. 
     #Hecha por Luca Salluzzi
-    if len(diccionario.keys()) >= (MAX_JUGADORES):
+    longitud = len(diccionario.keys())
+    if longitud >= MAX_JUGADORES:
         boton_envio['state']='disabled'
-    if len(diccionario.keys()) >= MINIMO_JUGADORES:
+    if longitud >= MINIMO_JUGADORES:
         boton_inicio['state'] = 'active'
         
 def presionar_ojo_abierto(show_contra,ojo_abierto,ojo_tachado,mi_clave_entry):
@@ -79,7 +87,7 @@ def cerrar_juego_por_login(dict_jugadores,raiz):
     dict_jugadores.clear()
     raiz.destroy()
 
-def solicitar_nombre(dict_jugadores):
+def login_y_registro(dict_jugadores):
     #Hecho por Valentina Nieto y Camila Zarza, Oriz Omar, Luca Salluzzi, Agustín Conti, Lucas Osorio.
     #Solicita el ingreso de los nombres de los Jugadores, muestra por pantalla el boton de registro, el de inicio de juego, el maximo de jugadores posibles, los nombres de los jugadores logueados y ademas, mensajes por pantalla del estado del login.
     #---------------------------------- raíz--------------------------------------------
@@ -90,12 +98,12 @@ def solicitar_nombre(dict_jugadores):
     raiz.geometry("415x420")
     raiz.config(bg="#E9F7EF")
     raiz.iconbitmap('Imagenes/fosil.ico')
-    
+    #---------------------------------- Fuente de la interfaz --------------------------------------------
     fuente_elegida = ('Lucida Console', 10)
-    #frame
+
+    #---------------------------------- Frame de usuario contraseña --------------------------------------------
     miFrame=Frame(raiz)
     miFrame.grid(in_=raiz, row=2, column=0, columnspan=3, sticky=NW, padx= 40)
-
     miFrame.config(cursor="heart", bg= '#E9F7EF')
    
     #casilla usario
@@ -119,7 +127,7 @@ def solicitar_nombre(dict_jugadores):
     show_contra = Button(miFrame,image= ojo_abierto,command = lambda: presionar_ojo_abierto(show_contra,ojo_abierto,ojo_tachado,contraseña_entry),bg="#d1f2eb")
     show_contra.grid(row = 1, column = 2)
     
-    # Frame para mensajes.
+    #---------------------------------- Frame para mensajes.--------------------------------------------
     frame_mensajes = Frame (raiz,bg= '#E9F7EF')
     frame_mensajes.grid( padx= 50,sticky=NW)
     #Mensaje login
@@ -133,7 +141,7 @@ def solicitar_nombre(dict_jugadores):
     mensaje_jugadores.grid(row=1, column=1, padx=10, pady=10)
     
 
-    #Frame para Listbox y boton desloguear.
+    #--------------------------------------------Frame para Listbox y boton desloguear.--------------------------------------------
     frame_list_deslog = Frame (raiz,bg= '#E9F7EF')
     frame_list_deslog.grid( padx= 63,sticky=NW)
     #Listbox jugadores
@@ -145,11 +153,14 @@ def solicitar_nombre(dict_jugadores):
     listbox_jugadores.grid(row=5, column=1, pady=10,padx=20)
     
     
-    # Frame Botones Registro e iniciar.
+    #-------------------------------------------- Frame Botones Registro e iniciar.--------------------------------------------
     Frame_botones = Frame(raiz,bg= '#E9F7EF')
     Frame_botones.grid(padx=5,sticky=NW,pady=20)
     #Boton Envio
-    longitud_diccionario = len(dict_jugadores) # Para control de estado de botones en partidas sucesivas.
+    print (dict_jugadores)
+    print(MAX_JUGADORES)
+    longitud_diccionario = len(dict_jugadores.keys()) # Para control de estado de botones en partidas sucesivas.
+    print(longitud_diccionario)
     boton_envio=Button(Frame_botones, text = "Logearse",font=fuente_elegida)
     boton_envio.config(command= lambda:[presionar_enviar(dict_jugadores, usuario_var.get(), contraseña_var.get(), listbox_jugadores, mensaje_login), verificar_cantidad_jugadores(dict_jugadores, boton_envio, boton_inicio)])
     if longitud_diccionario  >= MAX_JUGADORES:  # Para control de estado de botones en partidas sucesivas.
@@ -162,11 +173,11 @@ def solicitar_nombre(dict_jugadores):
     
     #Boton Iniciar
     boton_inicio=Button(Frame_botones, text = "Iniciar Partida", state = DISABLED,command = raiz.destroy,font=fuente_elegida)
-    if longitud_diccionario >= MAX_JUGADORES:   # Para control de estado de botones en partidas sucesivas.
+    if longitud_diccionario <= MAX_JUGADORES:   # Para control de estado de botones en partidas sucesivas.
         boton_inicio.config(state= NORMAL)
     boton_inicio.grid(row=6, column=2, padx=5, pady=10,sticky=E)
 
-    #Boton Desloguear
+    #Boton Desloguear , va en el mismo frame que el listbox, no el de botones.
     boton_desloguear = Button(frame_list_deslog,text= "Desloguear\nJugador",font=fuente_elegida)
     boton_desloguear.config(command= lambda: presionar_desloguear(dict_jugadores,listbox_jugadores,boton_envio,boton_inicio) )
     boton_desloguear.grid(row=5, column=2, pady=10)

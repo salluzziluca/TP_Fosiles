@@ -34,7 +34,7 @@ def poblar_frame(frame_ranking , medalla_dorada,partidas_jugadas,lista_jugadores
     #---------------------------------- label generados--------------------------------------------
     columna_actual = 1
     fila_actual = 1
-    lugar = 2
+    lugar = 2 # la numeracion empieza por el cuarto lugar (trofeos)
     tamanio_letra = 26
             
     for jugador,estadisticas in lista_jugadores_ordenada_final:

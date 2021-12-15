@@ -2,6 +2,8 @@ from tkinter import *
 from config.Constantes_config import *
 
 def leer_linea_all_time(archivo):
+    #recive el archivo csv, lee una linea del mismo y la devuelve con formato acorde.
+    # Hecha por Oriz Omar, Agustin Conti.
     fin_archivo = False
     linea = archivo.readline()
     registro = ['NAN','NAN','NAN',0,0]
@@ -14,6 +16,8 @@ def leer_linea_all_time(archivo):
     return registro,fin_archivo
 
 def gen_dict_all_time_ordenado():
+    # Lee el historial all time y genera un diccionario ordenado a partir de este.
+    # Hecha por Oriz Omar, Agustin Conti.
     archivo = open('CSVs/historial_all_time.csv','r')
     registro,fin_archivo = leer_linea_all_time(archivo)
     dict_all_time = {}
@@ -30,13 +34,14 @@ def gen_dict_all_time_ordenado():
     return sorted(dict_all_time.items(),key= lambda item: (item[1][ACIERTOS], - item[1][INTENTOS]) , reverse=True)
 
 def coordinar_scroll_con_frame(lienzo):
-    # resetear la region de scroll para encompazar el frame
+    # resetear la region de scroll para encompazar el frame.
+    # Hecha por Oriz Omar, Agustin Conti.
     lienzo.configure(scrollregion=lienzo.bbox("all"))
 
 def poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo,medalla_plata,medalla_bronce):
     # Recibe el frame, la lista de j. ordenada y la imagen trofeo. Se encarga de mostrar en la interfaz la tabla de ranking 
     # con todas sus estadísticas.
-
+    # Hecha por Oriz Omar, Agustin Conti.
 
     #---------------------------------- label fijos--------------------------------------------
     espacio = Label(frame_ranking,text='               ',bg='#F2F3F4',pady=15,padx=10)
@@ -76,10 +81,11 @@ def poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo,
     #---------------------------------- label generados--------------------------------------------
     columna_actual = 2
     fila_actual = 1
-    lugar = 4
+    lugar = 4  # la numeracion empieza por el cuarto lugar (trofeos)
     tamanio_letra = 30
-    posicion = 0
+    posicion = 0 #(de la lista de jugadores ordenada final.)
     lista_jugadores_ordenada_final = gen_dict_all_time_ordenado()
+
     for jugador,estadisticas in lista_jugadores_ordenada_final:
 
         if posicion >=3 and columna_actual==0:
@@ -108,23 +114,30 @@ def poblar_frame(frame_ranking , trofeo_ganador,laurel_derecho,laurel_izquierdo,
         
         
         if tamanio_letra > 10:
-            tamanio_letra -=3
-        fila_actual += 1
-        if posicion >=2:
+            tamanio_letra -= 3
+
+        if posicion >= 2:
             columna_actual = 0
         else:
             columna_actual = 2
+
+        fila_actual += 1
         posicion += 1
+        
     return fila_actual
 
 def cerrar_all_time(ver_all_time,raiz_all_time):
+    # recibe el boton ver all time y la raiz de all time. cierra la interfaz y habilita el botón.
+    # Hecha por Oriz Omar.
     raiz_all_time.destroy()
     ver_all_time.config(state = NORMAL,bg = 'gold')
 
 def desabilitarX():
+    # Hecha por Oriz Omar.
     pass
 def ranking_all_time(raiz_ranking_fin,ver_all_time):
-
+    # Interfaz del ranking all time almacenado en el Csv.
+    # Hecha por Omar Oriz, Agustin Conti.
     #---------------------------------- raíz--------------------------------------------
     raiz_all_time = Toplevel(raiz_ranking_fin)
     raiz_all_time.protocol("WM_DELETE_WINDOW", desabilitarX)
