@@ -37,12 +37,12 @@ def poblar_frame(frame_ranking , medalla_dorada,partidas_jugadas,lista_jugadores
     lugar = 2 # la numeracion empieza por el cuarto lugar (trofeos)
     tamanio_letra = 26
             
-    for jugador,estadisticas in lista_jugadores_ordenada_final:
+    for jugador, estadisticas in lista_jugadores_ordenada_final:
 
         if columna_actual == 0:
             temp_label = Label(frame_ranking,text=f'{lugar}º',font=("Lucida Console", tamanio_letra),bg = '#D4E6F1', borderwidth="1",relief="solid")
             temp_label.grid(column= columna_actual , row= fila_actual)
-            columna_actual +=1
+            columna_actual += 1
             lugar += 1 
 
         temp_label = Label(frame_ranking,text=f'{jugador}',font=("Lucida Console", tamanio_letra),bg = '#D4E6F1')
@@ -65,35 +65,35 @@ def poblar_frame(frame_ranking , medalla_dorada,partidas_jugadas,lista_jugadores
         
         
         if tamanio_letra > 10:
-            tamanio_letra -=3
+            tamanio_letra -= 3
         fila_actual += 1
         columna_actual = 0
     return fila_actual
 
-def boton_all_time(raiz_ranking_fin,ver_all_time):
-    ver_all_time.config(state = DISABLED,bg='grey')
-    ranking_all_time(raiz_ranking_fin,ver_all_time) 
+def boton_all_time(raiz_ranking_fin, ver_all_time):
+    ver_all_time.config(state = DISABLED, bg = 'grey')
+    ranking_all_time(raiz_ranking_fin, ver_all_time) 
 
 
-def ranking_fin_de_juego (lista_jugadores_ordenada_final,partidas_jugadas):
+def ranking_fin_de_juego (lista_jugadores_ordenada_final, partidas_jugadas):
     #---------------------------------- raíz--------------------------------------------
     raiz_ranking_fin = Tk()
     raiz_ranking_fin.title("RESULTADOS FINALES!")
     raiz_ranking_fin.attributes('-topmost', True)
     raiz_ranking_fin.iconbitmap('Imagenes/fin_race.ico')
-    raiz_ranking_fin.resizable(0,1)
+    raiz_ranking_fin.resizable(0, 1)
     raiz_ranking_fin.geometry("950x300")
     raiz_ranking_fin.config(bg="#D4E6F1")
     #---------------------------------- Scroll--------------------------------------------
-    barra_scroll = Scrollbar(raiz_ranking_fin,orient="vertical",)
+    barra_scroll = Scrollbar(raiz_ranking_fin,orient = "vertical",)
     #---------------------------------- Lienzo--------------------------------------------
     lienzo = Canvas(raiz_ranking_fin)
     #---------------------------------- frame--------------------------------------------
     frame_ranking = Frame(lienzo)
     frame_ranking.config(bg='#D4E6F1')
     #---------------------------------- Configuracion del scroll--------------------------------------------
-    barra_scroll.config(command=lienzo.yview)
-    barra_scroll.pack(side="right", fill="y")
+    barra_scroll.config(command = lienzo.yview)
+    barra_scroll.pack(side = "right", fill = "y")
 
     #---------------------------------- Configuracion del lienzo--------------------------------------------
     lienzo.configure(yscrollcommand=barra_scroll.set, bg = '#D4E6F1') # parametro de configuracion yscrollcommand seteando la  barra_scroll como scroller.
@@ -110,7 +110,7 @@ def ranking_fin_de_juego (lista_jugadores_ordenada_final,partidas_jugadas):
 
 
     #---------------------------------- Botones --------------------------------------------
-    fila_actual = ultima_fila+1
+    fila_actual = ultima_fila + 1
     salir_del_juego = Button(frame_ranking,text='Salir del juego',command = raiz_ranking_fin.destroy , bg = 'pale violet red',
     fg = 'dark slate blue',activebackground='violetred3' )
     salir_del_juego.grid(column = 9,row = fila_actual,pady= 10)  

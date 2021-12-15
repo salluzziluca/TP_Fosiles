@@ -5,7 +5,7 @@ def generar_fichas():
     # Hecha por Conti.
     # Genera una lista de fichas del tamaño puesto en la configuracion y las devuelve en posiciones aleatorias.
     lista_fichas = []
-    caracteres_posibles = [chr(x) for x in range(65, 91)]
+    caracteres_posibles = [chr(x) for x in range(65, 91)] # Lista de letras en mayúsculas
     while len(lista_fichas) < CANTIDAD_FICHAS:
         letra = caracteres_posibles.pop(random.randint(0, len(caracteres_posibles)-1))
         lista_fichas.append([letra, False])
@@ -30,35 +30,34 @@ def validacion(input_realizado,fichas):
 def partida_completa(fichas):
     # Hecha por Agustín Conti
     # Determina si el juego terminó, comprobando que todas las fichas esten "volteadas".
-    Terminado=True
-    pos_maxima=len(fichas)-1
-    pos_actual=0
-    while Terminado and pos_actual <=pos_maxima:
+    terminado = True
+    pos_maxima = len(fichas)-1
+    pos_actual = 0
+    while terminado and pos_actual <= pos_maxima:
         if not fichas[pos_actual][POSICION_BOOL]:
-            Terminado=False
-        pos_actual+=1    
-    return Terminado
+            terminado = False
+        pos_actual += 1    
+    return terminado
 
-def voltear_ficha(lista_fichas,ingreso):
+def voltear_ficha(lista_fichas, ingreso):
     # Hecha por Omar Oriz.
     # Recibe una lista de fichas y un input y devuelve la lista cambiada con la ficha (de pos. ingreso-1) volteada boca arriba.
-    lista_fichas[ingreso-1][POSICION_BOOL]=True
-    return None
+    lista_fichas[ingreso-1][POSICION_BOOL] = True
 
-def voltear_fichas_para_abajo(lista_fichas,ingresos):
+def voltear_fichas_para_abajo(lista_fichas, ingresos):
     # Hecha por Omar Oriz.
     # Recibe una lista de fichas y una lista con ambos inputs del jugador y devuelve la lista de fichas con esas fichas boca abajo.
-    lista_fichas[(ingresos[INGRESO1]-1)][POSICION_BOOL]=False
-    lista_fichas[(ingresos[INGRESO2]-1)][POSICION_BOOL]=False
+    lista_fichas[(ingresos[INGRESO1]-1)][POSICION_BOOL] = False
+    lista_fichas[(ingresos[INGRESO2]-1)][POSICION_BOOL] = False
     return lista_fichas
 
-def cambiar_jugador(jugador_anterior_pos,lista_jugadores):
+def cambiar_jugador(jugador_anterior_pos, lista_jugadores):
     # Hecha por Oriz, Conti, Zarza, Osorio, Valen, Salluzzi
     # Devuelve el siguiente jugador en la lista de jugadores
     if jugador_anterior_pos != (len(lista_jugadores)-1):
-        jugador_siguiente= lista_jugadores[jugador_anterior_pos+1]
+        jugador_siguiente = lista_jugadores[jugador_anterior_pos+1]
     else:
-        jugador_siguiente= lista_jugadores[0]
+        jugador_siguiente = lista_jugadores[0]
     
     return jugador_siguiente
 
@@ -75,14 +74,12 @@ def timer_delay(segundos):
     while tiempo_transcurrido < segundos:
         t_actual = time.time()
         tiempo_transcurrido = t_actual - t_inicial
-    return None
 
-def juntar_datos_partida(dict_jugadores,dict_jugadores_total):
+def juntar_datos_partida(dict_jugadores, dict_jugadores_total):
     # Hecha por Omar Oriz, Agustin Conti.
     # recibe diccionario de jugadores de cada partida y un diccionario que almacena los datos de todas las partidas.
     # Actualiza el segundo en base al primero.
     for jugador, stats in dict_jugadores.items():
-
         if jugador not in dict_jugadores_total:
             dict_jugadores_total[jugador] = stats
         else:
@@ -91,9 +88,8 @@ def juntar_datos_partida(dict_jugadores,dict_jugadores_total):
     
 
 def guardar_partida_en_csv(dict_jugadores_ordenado, partidas_jugadas):
-    # hecha por Omar Oriz, Agustin conti.
+    # Hecha por Omar Oriz, Agustin conti.
     # Recibe el diccionario de jugadores de cada partida y registra sus datos en el csv de ranking all-time.
-    
     fecha_actual = datetime.datetime.now().strftime("%x")
     hora_actual = datetime.datetime.now().strftime("%X")
 
