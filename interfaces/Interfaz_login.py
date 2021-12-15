@@ -1,7 +1,5 @@
-from os import stat
 from tkinter import *
 from config.Constantes_config import *
-from interfaces.Interfaz_all_time import leer_linea_all_time
 from interfaces.interfaz_de_registro import interfaz_registro
 
 def leer_linea(usuarios_clave):
