@@ -1,3 +1,4 @@
+from os import stat
 from tkinter import *
 from config.Constantes_config import *
 from interfaces.Interfaz_all_time import leer_linea_all_time
@@ -45,11 +46,9 @@ def presionar_enviar(dict_jugadores, usuario, contraseña, listbox_jugadores, me
 def verificar_cantidad_jugadores(diccionario, boton_envio, boton_inicio):
     #Verifica si la cantidad de usuarios logeados (listos para jugar) es igual o mayor a la constante del archivo de configuración. 
     #Hecha por Luca Salluzzi
-    longitud = len(diccionario.keys())
-    if longitud >= MAX_JUGADORES:
-        boton_envio['state']='disabled'
-    if longitud >= MINIMO_JUGADORES:
-        boton_inicio['state'] = 'active'
+    if len(diccionario.keys()) >= MAX_JUGADORES:
+        boton_envio.config(state = DISABLED)
+
         
 def presionar_ojo_abierto(show_contra,ojo_abierto,ojo_tachado,mi_clave_entry):
     #intercambia funcion e imagen de un mismo botón.
@@ -157,10 +156,8 @@ def login_y_registro(dict_jugadores):
     Frame_botones = Frame(raiz,bg= '#E9F7EF')
     Frame_botones.grid(padx=5,sticky=NW,pady=20)
     #Boton Envio
-    print (dict_jugadores)
-    print(MAX_JUGADORES)
     longitud_diccionario = len(dict_jugadores.keys()) # Para control de estado de botones en partidas sucesivas.
-    print(longitud_diccionario)
+
     boton_envio=Button(Frame_botones, text = "Logearse",font=fuente_elegida)
     boton_envio.config(command= lambda:[presionar_enviar(dict_jugadores, usuario_var.get(), contraseña_var.get(), listbox_jugadores, mensaje_login), verificar_cantidad_jugadores(dict_jugadores, boton_envio, boton_inicio)])
     if longitud_diccionario  >= MAX_JUGADORES:  # Para control de estado de botones en partidas sucesivas.
