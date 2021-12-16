@@ -111,7 +111,6 @@ def presionar_boton_registrarse(var_usuario_nuevo,var_pass,var_pass_re,msg_final
     interaccion_usuario(es_valido,msg_final,usario_nuevo_entry,mi_clave_entry,mi_clave_re_entry)
     if es_valido[0] and es_valido[1] and es_valido[2]:
         guardar_usuario_nuevo(usuario_nuevo,contrasenia) # si es válido se guarda en el archivo de usuarios.
-    return None
 
 def presionar_ojo_abierto(show_contra,ojo_abierto,ojo_tachado,mi_clave_entry):
     #intercambia funcion e imagen de un mismo botón.

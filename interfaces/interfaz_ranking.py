@@ -3,16 +3,19 @@ from config.Constantes_config import *
 
 def boton_salir(juego_terminado,raiz_ranking):
     # cierra la interfaz. Se conecta con el main para terminar el juego.
+    # Hecha por Omar Oriz.
     juego_terminado.append(1)
     raiz_ranking.destroy()
 
 def coordinar_scroll_con_frame(lienzo):
     # resetear la region de scroll para encompazar el frame
+    # Hecha por Omar Oriz.
     lienzo.configure(scrollregion=lienzo.bbox("all"))
 
 def poblar_frame(frame_ranking,lista_jugadores_ordenada,trofeo_ganador):
     # Recibe el frame, la lista de j. ordenada y la imagen trofeo. Se encarga de mostrar en la interfaz la tabla de ranking 
     # con todas sus estadísticas.
+    # Hecha por Omar Oriz.
     #---------------------------------- label fijos--------------------------------------------
     espacio = Label(frame_ranking,text='            ',bg='#E9F7EF',pady=15,padx=10)
     espacio.grid(column=0,row=0)
@@ -68,7 +71,9 @@ def poblar_frame(frame_ranking,lista_jugadores_ordenada,trofeo_ganador):
 
 
 def ranking_de_partida (lista_jugadores_ordenada,partidas_jugadas,juego_terminado):
-   
+    # Iterfaz posterior a cada partida.
+    # Recibe la lista de jugadores ordenada, las partidas que se jugaron y una lista vacía.
+    # Hecha por Omar Oriz.
     #---------------------------------- raíz--------------------------------------------
     raiz_ranking = Tk()
     raiz_ranking.title("Ranking de partida")
@@ -99,6 +104,7 @@ def ranking_de_partida (lista_jugadores_ordenada,partidas_jugadas,juego_terminad
     trofeo_ganador = PhotoImage(file='Imagenes/primer_puesto.png')
     #---------------------------------- Poblar Frame --------------------------------------------
     ultima_fila = poblar_frame(frame_ranking,lista_jugadores_ordenada,trofeo_ganador)
+    
     #---------------------------------- Botones --------------------------------------------
 
     fila_actual = ultima_fila+1
