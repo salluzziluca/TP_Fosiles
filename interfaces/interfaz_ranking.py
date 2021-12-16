@@ -1,18 +1,18 @@
 from tkinter import *
 from config.Constantes_config import *
 
-def boton_salir(juego_terminado,raiz_ranking):
-    # cierra la interfaz. Se conecta con el main para terminar el juego.
-    # Hecha por Omar Oriz.
+def boton_salir(juego_terminado, raiz_ranking):
+    # Cierra la interfaz. Se conecta con el main para terminar el juego.
+    # Hecha por Omar Oriz y Conti
     juego_terminado.append(1)
     raiz_ranking.destroy()
 
 def coordinar_scroll_con_frame(lienzo):
-    # resetear la region de scroll para encompazar el frame
-    # Hecha por Omar Oriz.
-    lienzo.configure(scrollregion=lienzo.bbox("all"))
+    # Resetear la region de scroll para encompazar el frame
+    # Hecha por Omar Oriz
+    lienzo.configure(scrollregion = lienzo.bbox("all"))
 
-def poblar_frame(frame_ranking,lista_jugadores_ordenada,trofeo_ganador):
+def poblar_frame(frame_ranking, lista_jugadores_ordenada, trofeo_ganador):
     # Recibe el frame, la lista de j. ordenada y la imagen trofeo. Se encarga de mostrar en la interfaz la tabla de ranking 
     # con todas sus estadísticas.
     # Hecha por Omar Oriz.
@@ -41,11 +41,10 @@ def poblar_frame(frame_ranking,lista_jugadores_ordenada,trofeo_ganador):
     lugar = 2
     tamanio_letra = 30
     for jugador,estadisticas in lista_jugadores_ordenada:
-
         if columna_actual == 0:
             temp_label = Label(frame_ranking,text=f'{lugar}º',font=("Lucida Console", tamanio_letra),bg = '#E9F7EF', borderwidth="1",relief="solid")
             temp_label.grid(column= columna_actual , row= fila_actual)
-            columna_actual +=1
+            columna_actual += 1
             lugar += 1 
 
         temp_label = Label(frame_ranking,text=f'{jugador}',font=("Lucida Console", tamanio_letra),bg = '#E9F7EF')
@@ -61,14 +60,16 @@ def poblar_frame(frame_ranking,lista_jugadores_ordenada,trofeo_ganador):
             temp_label = Label(frame_ranking,text=f'{(estadisticas[ACIERTOS]/estadisticas[INTENTOS])*100:.2f}%',font=("Lucida Console", tamanio_letra),bg = '#E9F7EF')
         else:
             temp_label = Label(frame_ranking,text='No tuvo Intentos',font=("Lucida Console", tamanio_letra-15),bg = '#E9F7EF')
+
         temp_label.grid(column= columna_actual+6 , row= fila_actual)
+
         if tamanio_letra > 10:
             tamanio_letra -=3
+
         fila_actual += 1
         columna_actual = 0
+
     return fila_actual
-
-
 
 def ranking_de_partida (lista_jugadores_ordenada,partidas_jugadas,juego_terminado):
     # Iterfaz posterior a cada partida.
@@ -123,6 +124,5 @@ def ranking_de_partida (lista_jugadores_ordenada,partidas_jugadas,juego_terminad
         
         max_partidas_alcanzadas = Label(frame_ranking,text='Max. partidas alcanzada.',fg= 'red',font=("Lucida Console", 10),bg = '#E9F7EF', borderwidth="1",pady=7)
         max_partidas_alcanzadas.grid(column = 7, row= fila_actual+1 )
-
 
     raiz_ranking.mainloop()
