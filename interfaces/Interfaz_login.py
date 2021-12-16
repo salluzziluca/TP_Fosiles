@@ -67,8 +67,7 @@ def continuan_logeados(dict_jugadores, listbox_jugadores):
         listbox_jugadores.insert(END, jugador)
 
 def presionar_desloguear(dict_jugadores, listbox_jugadores, boton_envio, boton_inicio):
-    # Recibe dict con jugadores logeados, el widget listbox y botones. Elimina al jugador del diccionario de jugadores.
-    # Elimina al jugador de la listbox. Controla el estado de los botones que estas acciones conllevan.
+    # Elimina al jugador del diccionario de jugadores y de la listbox. Controla el estado de los botones que estas acciones conllevan.
     # Hecha por Omar Oriz.
     seleccionado = listbox_jugadores.get(ANCHOR)
     if seleccionado:
