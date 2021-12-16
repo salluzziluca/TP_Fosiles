@@ -82,7 +82,7 @@ def main():
         
         login_y_registro(dict_jugadores) # Interfaz tkinter. Login , deslogueo y registro de jugadores.
         
-        orden_jugadores, jugador, fichas, partidas_jugadas = [None, None, None, 0] #Declarado before assingment
+        orden_jugadores, jugador, fichas= (None, None, None) #Declarado before assingment
         # evalua las condiciones para el inicio (o no) de la partida.
         partida_terminada, cerrar_voluntariamente, orden_jugadores, jugador, fichas, partidas_jugadas = estado_de_partida(dict_jugadores, partida_terminada, juego_terminado, cerrar_voluntariamente, orden_jugadores, jugador, fichas, partidas_jugadas)
         
@@ -96,3 +96,4 @@ def main():
         ranking_fin_de_juego(sorted(dict_jugadores_total.items(), key = lambda x: (x[1][ACIERTOS],- x[1][INTENTOS]), reverse = True), partidas_jugadas)
 
 main()
+
