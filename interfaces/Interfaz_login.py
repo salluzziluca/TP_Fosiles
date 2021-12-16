@@ -2,19 +2,6 @@ from tkinter import *
 from config.Constantes_config import *
 from interfaces.interfaz_de_registro import interfaz_registro
 
-def leer_linea(usuarios_clave):
-    # Lee una linea del archivo y la devuelve en formato compatible con el resto del codigo.
-    # Hecha por Omar Oriz, Agustin Conti.
-    linea = usuarios_clave.readline()
-    fin_archivo = False
-    registro = ['usuario','clave']
-    if linea:
-        linea = linea.rstrip('\n')
-        registro = linea.split(',')
-    else: 
-        fin_archivo = True
-    return registro, fin_archivo
-
 def validaciones(usuario, contraseña):
     #Valida si el usuario y la contraseña ingresadas corresponden con alguna linea del registro .csv
     #Hecha por Luca Salluzzi
@@ -29,6 +16,19 @@ def validaciones(usuario, contraseña):
 
     usuarios_clave.close()
     return valido
+
+def leer_linea(usuarios_clave):
+    # Lee una linea del archivo y la devuelve en formato compatible con el resto del codigo.
+    # Hecha por Omar Oriz, Agustin Conti.
+    linea = usuarios_clave.readline()
+    fin_archivo = False
+    registro = ['usuario','clave']
+    if linea:
+        linea = linea.rstrip('\n')
+        registro = linea.split(',')
+    else: 
+        fin_archivo = True
+    return registro, fin_archivo
 
 def presionar_enviar(dict_jugadores, usuario, contraseña, listbox_jugadores, mensaje_login):
         #Se ejecuta al presionar el Boton.Si el usuario y la contraseña coinciden con los registros, asigna el contenido de los entry al diccionario de jugadores y a la listbox presente en memoria, ademas notifica al usuario en ambos casos.
@@ -73,8 +73,11 @@ def presionar_desloguear(dict_jugadores, listbox_jugadores, boton_envio, boton_i
     seleccionado = listbox_jugadores.get(ANCHOR)
     if seleccionado:
         del dict_jugadores[seleccionado]
+        
     listbox_jugadores.delete(ANCHOR)
+    
     boton_envio.config(state = NORMAL)
+    
     if len(dict_jugadores) >= MAX_JUGADORES:
         boton_inicio.config(state = DISABLED)
 
@@ -103,14 +106,14 @@ def login_y_registro(dict_jugadores):
     miFrame.grid(in_=raiz, row=2, column=0, columnspan=3, sticky=NW, padx= 40)
     miFrame.config(cursor="heart", bg= '#E9F7EF')
    
-    #casilla usario
+    #---------------------------------- casilla usuario--------------------------------------------
     usuario_existente = Label(miFrame, text="Usuario: ", bg= '#E9F7EF',font=fuente_elegida)
     usuario_existente.grid(row=0,column=0, padx=0, pady=0)
     usuario_var = StringVar()
     usuario_existente_entry = Entry(miFrame,textvariable=usuario_var,font=fuente_elegida)
     usuario_existente_entry.grid(row=0,column=1,padx=10, pady=10)
     
-    #casilla contraseña
+    #---------------------------------- casilla contraseña--------------------------------------------
     contraseña = Label(miFrame, text="Contraseña: ", bg= '#E9F7EF',font=fuente_elegida)
     contraseña.grid(row=1,column=0,padx=0, pady=10)
     contraseña_var = StringVar()
@@ -137,7 +140,7 @@ def login_y_registro(dict_jugadores):
     mensaje_jugadores.config(bg = '#E9F7EF',fg = 'black')
     mensaje_jugadores.grid(row=1, column=1, padx=10, pady=10)
 
-    #--------------------------------------------Frame para Listbox y boton desloguear.--------------------------------------------
+    #--------------------------------------------Frame para Listbox y boton desloguear---------------------------------------
     frame_list_deslog = Frame (raiz,bg= '#E9F7EF')
     frame_list_deslog.grid( padx= 63,sticky=NW)
     #Listbox jugadores
@@ -149,7 +152,7 @@ def login_y_registro(dict_jugadores):
     listbox_jugadores.config(selectbackground="#E9F7EF",selectforeground="black",border= 2,font=('Lucida Console',10))
     listbox_jugadores.grid(row=5, column=1, pady=10,padx=20)
     
-    #-------------------------------------------- Frame Botones Registro e iniciar.--------------------------------------------
+    #-------------------------------------------- Frame Botones Registro e iniciar.----------------------------------------
     Frame_botones = Frame(raiz,bg= '#E9F7EF')
     Frame_botones.grid(padx=5,sticky=NW,pady=20)
     #Boton Envio
@@ -161,17 +164,18 @@ def login_y_registro(dict_jugadores):
         boton_envio.config(state= DISABLED)
     boton_envio.grid(row=6, column=0, padx=5, pady=10,sticky=W)
     
-    # Boton Registro
+    #-------------------------------------------- Boton Registro----------------------------------------
+    Frame_botones = Frame(raiz,bg= '#E9F7EF')
     boton_registro = Button(Frame_botones, text ="Registrarse",command = lambda: interfaz_registro(raiz),font=fuente_elegida)
     boton_registro.grid(row=6, column=1, padx=40, pady=10,sticky=S)
     
-    #Boton Iniciar
+    #-------------------------------------------- Boton iniciar----------------------------------------
     boton_inicio = Button(Frame_botones, text = "Iniciar Partida", state = DISABLED,command = raiz.destroy,font=fuente_elegida)
     if longitud_diccionario <= MAX_JUGADORES:   # Para control de estado de botones en partidas sucesivas.
         boton_inicio.config(state= NORMAL)
     boton_inicio.grid(row=6, column=2, padx=5, pady=10,sticky=E)
 
-    #Boton Desloguear , va en el mismo frame que el listbox, no el de botones.
+    #-------------------------------------------- Boton Desloguear----------------------------------------
     boton_desloguear = Button(frame_list_deslog,text= "Desloguear\nJugador",font=fuente_elegida)
     boton_desloguear.config(command= lambda: presionar_desloguear(dict_jugadores,listbox_jugadores,boton_envio,boton_inicio) )
     boton_desloguear.grid(row=5, column=2, pady=10)
