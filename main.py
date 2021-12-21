@@ -98,5 +98,3 @@ def main():
         ranking_fin_de_juego(sorted(dict_jugadores_total.items(),key= lambda x: (x[1][ACIERTOS],- x[1][INTENTOS]), reverse=True) , partidas_jugadas)
 
 main()
-
-
