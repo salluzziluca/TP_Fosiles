@@ -164,7 +164,6 @@ def login_y_registro(dict_jugadores):
     boton_envio.grid(row=6, column=0, padx=5, pady=10,sticky=W)
     
     #-------------------------------------------- Boton Registro----------------------------------------
-    Frame_botones = Frame(raiz,bg= '#E9F7EF')
     boton_registro = Button(Frame_botones, text ="Registrarse",command = lambda: interfaz_registro(raiz),font=fuente_elegida)
     boton_registro.grid(row=6, column=1, padx=40, pady=10,sticky=S)
     
