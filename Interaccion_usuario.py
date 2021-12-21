@@ -4,40 +4,41 @@ from os import system
 import time
 
 
-def mostrar_fichas(fichas, jugador):
+def mostrar_fichas(fichas,jugador):
     # Hecha por Luca Salluzzi, Omar, Lucas, Conti.
     # Muestra por pantalla (segun si la ficha esta o no dada vuelta) la letra o la posicion de la ficha. Luego, se ejecuta un salto de linea
     # cada cuarta posicion y al final del ciclo.
     n_posicion = 1
-    contador = 0
+    contador=0
     system('cls')  #limpia pantalla
     print('\n-------------------------------')
     print(f'Turno de {jugador}')
     print('-------------------------------\n')
     for ficha in fichas:
-        if contador == 4:
+        if contador==4:
             print('\n\n')
-            contador = 0
+            contador=0
         if ficha[POSICION_BOOL]:
-            print(f' {ficha[POSICION_LETRA]}', end = '    ')
+            print(f' {ficha[POSICION_LETRA]}', end='    ')
         else:
             if n_posicion < 10:                           # Condicionales para rectificar imagen de fichas en consola.
-                print(f' {n_posicion}', end = '    ')
+                print(f' {n_posicion}', end='    ')
             else:
-                print(f'{n_posicion}', end = '    ')
-        n_posicion += 1
-        contador += 1
+                print(f'{n_posicion}', end='    ')
+        n_posicion+=1
+        contador+=1
     print('\n')
+    return None
 
 def input_usuario(fichas):
     # Hecha por Camila Zarza, Oriz.
     # Pide al usuario un ingreso numerico, devuelve ese numero.
-    entero = False
+    entero=False
     while not entero:
         try:
-            input_realizado = int(input("Posición: "))
-            if validacion(input_realizado, fichas):
-                entero = True
+            input_realizado=int(input("Posición: "))
+            if validacion(input_realizado,fichas):
+                entero=True
             else:
                 print('Número ingresado inválido.')
         except ValueError:
